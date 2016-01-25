@@ -7,9 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB954B7E1C55AFC7003A050B /* RZFManifestManager+UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */; };
+		AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */; };
+		AB954B811C55D7D6003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954B801C55D7D6003A050B /* Examples */; };
+		AB954B821C55D7D6003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954B801C55D7D6003A050B /* Examples */; };
 		ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA483FA1C544C1F002CDCB2 /* FreshAir.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484021C544C1F002CDCB2 /* FreshAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; };
 		ABA484071C544C1F002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
+		ABA484131C544C51002CDCB2 /* RZFManifestEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484111C544C51002CDCB2 /* RZFManifestEntry.h */; };
+		ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */; };
+		ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484151C544CBD002CDCB2 /* RZFManifest.h */; };
+		ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484161C544CBD002CDCB2 /* RZFManifest.m */; };
+		ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */; };
+		ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */; };
+		ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */; };
+		ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484291C546AC0002CDCB2 /* RZFFileHash.h */; };
+		ABA4842F1C546CDB002CDCB2 /* RZFPresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4842D1C546CDB002CDCB2 /* RZFPresentation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA484301C546CDB002CDCB2 /* RZFPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842E1C546CDB002CDCB2 /* RZFPresentation.m */; };
+		ABA484341C551A56002CDCB2 /* NSURL+RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484321C551A56002CDCB2 /* NSURL+RZFManifest.h */; };
+		ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */; };
+		ABA4843D1C559E09002CDCB2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4843C1C559E09002CDCB2 /* main.swift */; };
+		ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */; };
+		ABA484621C55A149002CDCB2 /* RZFManifestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */; };
+		ABA484631C55A149002CDCB2 /* RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484161C544CBD002CDCB2 /* RZFManifest.m */; };
+		ABA484641C55A149002CDCB2 /* RZFManifestEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */; };
+		ABA484651C55A149002CDCB2 /* RZFFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */; };
+		ABA484661C55A149002CDCB2 /* RZFFileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */; };
+		ABA484671C55A149002CDCB2 /* NSURL+RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */; };
+		ABA484681C55A149002CDCB2 /* RZFPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842E1C546CDB002CDCB2 /* RZFPresentation.m */; };
+		ABA4846F1C55A4A5002CDCB2 /* RZFManifestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA484701C55A4A5002CDCB2 /* RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484151C544CBD002CDCB2 /* RZFManifest.h */; };
+		ABA484711C55A4A5002CDCB2 /* RZFManifestEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484111C544C51002CDCB2 /* RZFManifestEntry.h */; };
+		ABA484721C55A4A5002CDCB2 /* RZFFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */; };
+		ABA484731C55A4A5002CDCB2 /* RZFFileHash.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484291C546AC0002CDCB2 /* RZFFileHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA484741C55A4A5002CDCB2 /* NSURL+RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484321C551A56002CDCB2 /* NSURL+RZFManifest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA484751C55A4A5002CDCB2 /* RZFPresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4842D1C546CDB002CDCB2 /* RZFPresentation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA484771C55A6D7002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
+		ABA4847A1C55A701002CDCB2 /* FreshAirMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */; };
+		ABBE3DDA1C55AB4A006A738A /* FreshAirMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */; };
+		ABBE3DDD1C55AD1F006A738A /* FreshAirMac.h in Headers */ = {isa = PBXBuildFile; fileRef = ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,15 +57,63 @@
 			remoteGlobalIDString = ABA483F61C544C1F002CDCB2;
 			remoteInfo = FreshAir;
 		};
+		ABA484781C55A6F8002CDCB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABA483EE1C544C1F002CDCB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABA4844A1C55A111002CDCB2;
+			remoteInfo = FreshAirMac;
+		};
+		ABBE3DD81C55AB43006A738A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABA483EE1C544C1F002CDCB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABA4844A1C55A111002CDCB2;
+			remoteInfo = FreshAirMac;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		ABA484381C559E09002CDCB2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFManifestManager+UIKit.h"; sourceTree = "<group>"; };
+		AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RZFManifestManager+UIKit.m"; sourceTree = "<group>"; };
+		AB954B801C55D7D6003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
 		ABA483F71C544C1F002CDCB2 /* FreshAir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA483FA1C544C1F002CDCB2 /* FreshAir.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAir.h; sourceTree = "<group>"; };
 		ABA483FC1C544C1F002CDCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABA484011C544C1F002CDCB2 /* FreshAirTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreshAirTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA484061C544C1F002CDCB2 /* FreshAirTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreshAirTests.m; sourceTree = "<group>"; };
 		ABA484081C544C1F002CDCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABA484111C544C51002CDCB2 /* RZFManifestEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFManifestEntry.h; sourceTree = "<group>"; };
+		ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifestEntry.m; sourceTree = "<group>"; };
+		ABA484151C544CBD002CDCB2 /* RZFManifest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFManifest.h; sourceTree = "<group>"; };
+		ABA484161C544CBD002CDCB2 /* RZFManifest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifest.m; sourceTree = "<group>"; };
+		ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFManifestManager.h; sourceTree = "<group>"; };
+		ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifestManager.m; sourceTree = "<group>"; };
+		ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFetchOperation.h; sourceTree = "<group>"; };
+		ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFetchOperation.m; sourceTree = "<group>"; };
+		ABA484291C546AC0002CDCB2 /* RZFFileHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFileHash.h; sourceTree = "<group>"; };
+		ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFileHash.m; sourceTree = "<group>"; };
+		ABA4842D1C546CDB002CDCB2 /* RZFPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFPresentation.h; sourceTree = "<group>"; };
+		ABA4842E1C546CDB002CDCB2 /* RZFPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFPresentation.m; sourceTree = "<group>"; };
+		ABA484321C551A56002CDCB2 /* NSURL+RZFManifest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+RZFManifest.h"; sourceTree = "<group>"; };
+		ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+RZFManifest.m"; sourceTree = "<group>"; };
+		ABA4843A1C559E09002CDCB2 /* Breeze */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Breeze; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA4843C1C559E09002CDCB2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAirMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA484541C55A112002CDCB2 /* FreshAirMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreshAirMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAirMac.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +132,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ABA484371C559E09002CDCB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBE3DDA1C55AB4A006A738A /* FreshAirMac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484471C55A111002CDCB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484511C55A112002CDCB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA4847A1C55A701002CDCB2 /* FreshAirMac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +163,7 @@
 			children = (
 				ABA483F91C544C1F002CDCB2 /* FreshAir */,
 				ABA484051C544C1F002CDCB2 /* FreshAirTests */,
+				ABA4843B1C559E09002CDCB2 /* Breeze */,
 				ABA483F81C544C1F002CDCB2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +173,9 @@
 			children = (
 				ABA483F71C544C1F002CDCB2 /* FreshAir.framework */,
 				ABA484011C544C1F002CDCB2 /* FreshAirTests.xctest */,
+				ABA4843A1C559E09002CDCB2 /* Breeze */,
+				ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */,
+				ABA484541C55A112002CDCB2 /* FreshAirMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,7 +184,17 @@
 			isa = PBXGroup;
 			children = (
 				ABA483FA1C544C1F002CDCB2 /* FreshAir.h */,
+				ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */,
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
+				ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */,
+				ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */,
+				ABA4842D1C546CDB002CDCB2 /* RZFPresentation.h */,
+				ABA4842E1C546CDB002CDCB2 /* RZFPresentation.m */,
+				ABA484291C546AC0002CDCB2 /* RZFFileHash.h */,
+				ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */,
+				ABA484321C551A56002CDCB2 /* NSURL+RZFManifest.h */,
+				ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */,
+				ABA484311C551229002CDCB2 /* Private */,
 			);
 			path = FreshAir;
 			sourceTree = "<group>";
@@ -80,10 +202,34 @@
 		ABA484051C544C1F002CDCB2 /* FreshAirTests */ = {
 			isa = PBXGroup;
 			children = (
+				AB954B801C55D7D6003A050B /* Examples */,
 				ABA484061C544C1F002CDCB2 /* FreshAirTests.m */,
 				ABA484081C544C1F002CDCB2 /* Info.plist */,
 			);
 			path = FreshAirTests;
+			sourceTree = "<group>";
+		};
+		ABA484311C551229002CDCB2 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				ABA484151C544CBD002CDCB2 /* RZFManifest.h */,
+				ABA484161C544CBD002CDCB2 /* RZFManifest.m */,
+				ABA484111C544C51002CDCB2 /* RZFManifestEntry.h */,
+				ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */,
+				ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */,
+				ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */,
+				AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */,
+				AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */,
+			);
+			name = Private;
+			sourceTree = "<group>";
+		};
+		ABA4843B1C559E09002CDCB2 /* Breeze */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4843C1C559E09002CDCB2 /* main.swift */,
+			);
+			path = Breeze;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +240,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
+				ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */,
+				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
+				ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */,
+				ABA4842F1C546CDB002CDCB2 /* RZFPresentation.h in Headers */,
+				ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */,
+				AB954B7E1C55AFC7003A050B /* RZFManifestManager+UIKit.h in Headers */,
+				ABA484131C544C51002CDCB2 /* RZFManifestEntry.h in Headers */,
+				ABA484341C551A56002CDCB2 /* NSURL+RZFManifest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484481C55A111002CDCB2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBE3DDD1C55AD1F006A738A /* FreshAirMac.h in Headers */,
+				ABA4846F1C55A4A5002CDCB2 /* RZFManifestManager.h in Headers */,
+				ABA484701C55A4A5002CDCB2 /* RZFManifest.h in Headers */,
+				ABA484711C55A4A5002CDCB2 /* RZFManifestEntry.h in Headers */,
+				ABA484721C55A4A5002CDCB2 /* RZFFetchOperation.h in Headers */,
+				ABA484731C55A4A5002CDCB2 /* RZFFileHash.h in Headers */,
+				ABA484741C55A4A5002CDCB2 /* NSURL+RZFManifest.h in Headers */,
+				ABA484751C55A4A5002CDCB2 /* RZFPresentation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,12 +305,67 @@
 			productReference = ABA484011C544C1F002CDCB2 /* FreshAirTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		ABA484391C559E09002CDCB2 /* Breeze */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA4843E1C559E09002CDCB2 /* Build configuration list for PBXNativeTarget "Breeze" */;
+			buildPhases = (
+				ABA484361C559E09002CDCB2 /* Sources */,
+				ABA484371C559E09002CDCB2 /* Frameworks */,
+				ABA484381C559E09002CDCB2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABBE3DD91C55AB43006A738A /* PBXTargetDependency */,
+			);
+			name = Breeze;
+			productName = Breeze;
+			productReference = ABA4843A1C559E09002CDCB2 /* Breeze */;
+			productType = "com.apple.product-type.tool";
+		};
+		ABA4844A1C55A111002CDCB2 /* FreshAirMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA4845C1C55A112002CDCB2 /* Build configuration list for PBXNativeTarget "FreshAirMac" */;
+			buildPhases = (
+				ABA484461C55A111002CDCB2 /* Sources */,
+				ABA484471C55A111002CDCB2 /* Frameworks */,
+				ABA484481C55A111002CDCB2 /* Headers */,
+				ABA484491C55A111002CDCB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FreshAirMac;
+			productName = "FreshAir-Mac";
+			productReference = ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ABA484531C55A112002CDCB2 /* FreshAirMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA4845F1C55A112002CDCB2 /* Build configuration list for PBXNativeTarget "FreshAirMacTests" */;
+			buildPhases = (
+				ABA484501C55A112002CDCB2 /* Sources */,
+				ABA484511C55A112002CDCB2 /* Frameworks */,
+				ABA484521C55A112002CDCB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABA484791C55A6F8002CDCB2 /* PBXTargetDependency */,
+			);
+			name = FreshAirMacTests;
+			productName = "FreshAir-MacTests";
+			productReference = ABA484541C55A112002CDCB2 /* FreshAirMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		ABA483EE1C544C1F002CDCB2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Raizlabs;
 				TargetAttributes = {
@@ -149,6 +373,15 @@
 						CreatedOnToolsVersion = 7.1.1;
 					};
 					ABA484001C544C1F002CDCB2 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					ABA484391C559E09002CDCB2 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					ABA4844A1C55A111002CDCB2 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					ABA484531C55A112002CDCB2 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
 				};
@@ -167,6 +400,9 @@
 			targets = (
 				ABA483F61C544C1F002CDCB2 /* FreshAir */,
 				ABA484001C544C1F002CDCB2 /* FreshAirTests */,
+				ABA484391C559E09002CDCB2 /* Breeze */,
+				ABA4844A1C55A111002CDCB2 /* FreshAirMac */,
+				ABA484531C55A112002CDCB2 /* FreshAirMacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +419,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB954B811C55D7D6003A050B /* Examples in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484491C55A111002CDCB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484521C55A112002CDCB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB954B821C55D7D6003A050B /* Examples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +445,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */,
+				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
+				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
+				ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */,
+				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
+				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
+				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
+				ABA484301C546CDB002CDCB2 /* RZFPresentation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +464,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ABA484361C559E09002CDCB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA4843D1C559E09002CDCB2 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484461C55A111002CDCB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA484621C55A149002CDCB2 /* RZFManifestManager.m in Sources */,
+				ABA484661C55A149002CDCB2 /* RZFFileHash.m in Sources */,
+				ABA484671C55A149002CDCB2 /* NSURL+RZFManifest.m in Sources */,
+				ABA484631C55A149002CDCB2 /* RZFManifest.m in Sources */,
+				ABA484641C55A149002CDCB2 /* RZFManifestEntry.m in Sources */,
+				ABA484651C55A149002CDCB2 /* RZFFetchOperation.m in Sources */,
+				ABA484681C55A149002CDCB2 /* RZFPresentation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA484501C55A112002CDCB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA484771C55A6D7002CDCB2 /* FreshAirTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -211,6 +501,16 @@
 			isa = PBXTargetDependency;
 			target = ABA483F61C544C1F002CDCB2 /* FreshAir */;
 			targetProxy = ABA484031C544C1F002CDCB2 /* PBXContainerItemProxy */;
+		};
+		ABA484791C55A6F8002CDCB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABA4844A1C55A111002CDCB2 /* FreshAirMac */;
+			targetProxy = ABA484781C55A6F8002CDCB2 /* PBXContainerItemProxy */;
+		};
+		ABBE3DD91C55AB43006A738A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABA4844A1C55A111002CDCB2 /* FreshAirMac */;
+			targetProxy = ABBE3DD81C55AB43006A738A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -252,10 +552,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -293,9 +593,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -312,9 +612,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = FreshAir/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -328,9 +630,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = FreshAir/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -342,6 +646,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -352,6 +657,86 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		ABA4843F1C559E09002CDCB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABA484401C559E09002CDCB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		ABA4845D1C55A112002CDCB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FreshAir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		ABA4845E1C55A112002CDCB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FreshAir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ABA484601C55A112002CDCB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FreshAirTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		ABA484611C55A112002CDCB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FreshAirTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.FreshAirMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -374,6 +759,7 @@
 				ABA4840D1C544C1F002CDCB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABA4840E1C544C1F002CDCB2 /* Build configuration list for PBXNativeTarget "FreshAirTests" */ = {
 			isa = XCConfigurationList;
@@ -382,6 +768,34 @@
 				ABA484101C544C1F002CDCB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA4843E1C559E09002CDCB2 /* Build configuration list for PBXNativeTarget "Breeze" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA4843F1C559E09002CDCB2 /* Debug */,
+				ABA484401C559E09002CDCB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA4845C1C55A112002CDCB2 /* Build configuration list for PBXNativeTarget "FreshAirMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA4845D1C55A112002CDCB2 /* Debug */,
+				ABA4845E1C55A112002CDCB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA4845F1C55A112002CDCB2 /* Build configuration list for PBXNativeTarget "FreshAirMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA484601C55A112002CDCB2 /* Debug */,
+				ABA484611C55A112002CDCB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

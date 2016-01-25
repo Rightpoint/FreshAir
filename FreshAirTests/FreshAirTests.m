@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <FreshAir/FreshAir.h>
+
 
 @interface FreshAirTests : XCTestCase
 
