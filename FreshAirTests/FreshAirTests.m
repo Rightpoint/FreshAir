@@ -9,33 +9,45 @@
 #import <XCTest/XCTest.h>
 #import <FreshAir/FreshAir.h>
 
+#define BUNDLE [NSBundle bundleForClass:self.class]
+@interface FreshAirTests : XCTestCase <RZFManifestManagerDelegate>
 
-@interface FreshAirTests : XCTestCase
+@property (strong, nonatomic) NSError *error;
+@property (strong, nonatomic) NSArray *bundles;
 
 @end
 
 @implementation FreshAirTests
 
-- (void)setUp {
+- (void)manifestManager:(RZFManifestManager *)manifestManager didLoadBundle:(NSBundle *)bundle
+{
+    self.bundles = [self.bundles arrayByAddingObject:bundle];
+}
+
+- (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error
+{
+    self.error = error;
+}
+
+- (void)setUp
+{
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtURL:[RZFManifestManager defaultLocalURL] error:&error];
+    XCTAssertNil(error);
+    [[RZFManifestManager defaultEnvironment] setValue:@"0.9" forKey:@"appVersion"];
+    self.bundles = @[];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
+- (void)testEmbeddedManifest
+{
+    NSURL *url = [BUNDLE URLForResource:@"Examples/TestEmbeddedManifest" withExtension:@"freshair"];
+    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url delegate:self];
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+    while (mgr.loaded == NO) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+    }
+    XCTAssertNil(self.error);
 }
 
 @end

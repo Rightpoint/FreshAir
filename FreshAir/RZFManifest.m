@@ -58,7 +58,6 @@
 {
     NSURL *manifestFile = [self.bundle.bundleURL rzf_manifestURL];
     return [[NSFileManager defaultManager] fileExistsAtPath:manifestFile.path];
-
 }
 
 - (NSArray *)unloadedFilenames

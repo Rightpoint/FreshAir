@@ -32,10 +32,15 @@
 - (BOOL)isLoadedInBundle:(NSBundle *)bundle
 {
     NSParameterAssert(bundle);
-    NSParameterAssert(self.SHA);
     NSURL *file = [bundle.bundleURL URLByAppendingPathComponent:self.filename];
-    return ([[NSFileManager defaultManager] fileExistsAtPath:file.path] &&
-            [[RZFFileHash sha1HashOfFileAtPath:file.path] isEqual:self.SHA]);
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:file.path];
+    if (self.SHA) {
+        NSString *computedSha = [RZFFileHash sha1HashOfFileAtPath:file.path];
+        return fileExists && [computedSha isEqual:self.SHA];
+    }
+    else {
+        return fileExists;
+    }
 }
 
 @end

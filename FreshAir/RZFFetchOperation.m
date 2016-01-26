@@ -44,7 +44,7 @@
 
 - (void)confirmSHA
 {
-    if (self.SHA) {
+    if (self.SHA && self.error == nil) {
         NSString *SHA = [RZFFileHash sha1HashOfFileAtPath:self.destinationURL.path];
         if ([self.SHA isEqual:SHA] == NO) {
             NSString *message = [NSString stringWithFormat:@"SHA Does Not Match:\n%@: %@\n%@: %@",
@@ -60,7 +60,11 @@
 - (void)performCopyFromURL:(NSURL *)fromURL
 {
     NSError *error = nil;
-    if ([self.fileManager copyItemAtURL:fromURL toURL:self.manifest.bundle.bundleURL error:&error] == NO) {
+    if ([self.fileManager fileExistsAtPath:self.destinationURL.path] &&
+        [self.fileManager removeItemAtPath:self.destinationURL.path error:&error] == NO) {
+        self.error = error;
+    }
+    else if ([self.fileManager copyItemAtURL:fromURL toURL:self.destinationURL error:&error] == NO) {
         self.error = error;
     }
 }

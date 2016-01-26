@@ -64,42 +64,37 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
         _environment = [self.class.defaultEnvironment copy];
         _backgroundOperations = [[NSOperationQueue alloc] init];
 
-        [self ensureLocalDirectory:self.containerURL];
         [self syncRemoteURL:remoteURL];
     }
     return self;
 }
 
-- (BOOL)loaded
-{
-    return self.backgroundOperations.operationCount == 0;
-}
-
 - (void)syncRemoteURL:(NSURL *)remoteURL
 {
-    RZFManifest *manifest = [self manifestForRemoteURL:remoteURL];
+    // Prepare the destination bundle
+    NSString *bundleName = [remoteURL lastPathComponent];
+    NSURL *bundleURL = [self.containerURL URLByAppendingPathComponent:bundleName];
+    [self ensureLocalDirectory:bundleURL];
+    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
 
-    // Fetch (or update) the manifest
-    NSString *filename = [NSURL rzf_manifestFilename];
-    NSOperation *manifestFetchOperation = [[RZFFetchOperation alloc] initWithFilename:filename
-                                                                                  SHA:nil
-                                                                           inManifest:manifest];
-    [self dispatchOperations:@[manifestFetchOperation]];
+    // Create the manifest
+    RZFManifest *manifest = [[RZFManifest alloc] initWithRemoteURL:remoteURL
+                                                            bundle:bundle
+                                                       environment:self.environment];
+
+    // Always fetch or update the manifest
+    NSOperation *fetch = [[RZFFetchOperation alloc] initWithFilename:[NSURL rzf_manifestFilename]
+                                                                 SHA:nil
+                                                          inManifest:manifest];
+    [self dispatchOperations:@[fetch]];
     if ([manifest isManifestLoaded]) {
         [self pruneManifest:manifest];
     }
 }
 
-- (RZFManifest *)manifestForRemoteURL:(NSURL *)remoteURL
+- (BOOL)loaded
 {
-    NSString *bundleName = [remoteURL lastPathComponent];
-    NSURL *bundleURL = [self.containerURL URLByAppendingPathComponent:bundleName];
-    [self ensureLocalDirectory:bundleURL];
-    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
-    RZFManifest *manifest = [[RZFManifest alloc] initWithRemoteURL:remoteURL
-                                                            bundle:bundle
-                                                       environment:self.environment];
-    return manifest;
+    return self.backgroundOperations.operationCount == 0;
 }
 
 - (void)ensureLocalDirectory:(NSURL *)localDirectory
@@ -118,22 +113,25 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
         return;
     }
     NSMutableArray *operations = [NSMutableArray array];
-    for (NSString *filename in manifest.unloadedFilenames) {
-        // Make any intermediary directories that are needed
-        if ([filename pathComponents].count > 1) {
-            NSMutableArray *components = [[filename pathComponents] mutableCopy];
-            // Remove the last one (The file)
-            [components removeLastObject];
-            // Create a URL for the directory with the rest of the components
-            NSURL *localDirectoryURL = manifest.bundle.bundleURL;
-            for (NSString *component in components) {
-                localDirectoryURL = [localDirectoryURL URLByAppendingPathComponent:component];
+    for (RZFManifestEntry *entry in manifest.entries) {
+        if ([entry isApplicableInEnvironment:self.environment] &&
+            [entry isLoadedInBundle:manifest.bundle] == NO) {
+            // Make any intermediary directories that are needed
+            if ([entry.filename pathComponents].count > 1) {
+                NSMutableArray *components = [[entry.filename pathComponents] mutableCopy];
+                // Remove the last one (The file)
+                [components removeLastObject];
+                // Create a URL for the directory with the rest of the components
+                NSURL *localDirectoryURL = manifest.bundle.bundleURL;
+                for (NSString *component in components) {
+                    localDirectoryURL = [localDirectoryURL URLByAppendingPathComponent:component];
+                }
+                [self ensureLocalDirectory:localDirectoryURL];
             }
-            [self ensureLocalDirectory:localDirectoryURL];
+            [operations addObject:[[RZFFetchOperation alloc] initWithFilename:entry.filename
+                                                                          SHA:entry.SHA
+                                                                   inManifest:manifest]];
         }
-        [operations addObject:[[RZFFetchOperation alloc] initWithFilename:filename
-                                                                      SHA:nil
-                                                               inManifest:manifest]];
     }
     [self dispatchOperations:operations];
 }
@@ -144,7 +142,10 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
     for (NSOperation *operation in operations) {
         __weak NSOperation *weakOperation = operation;
         operation.completionBlock = ^() {
-            [self reportCompletionOfOperation:weakOperation];
+            NSOperation *strongOperation = weakOperation;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reportCompletionOfOperation:strongOperation];
+            });
         };
     }
     [self.backgroundOperations addOperations:operations waitUntilFinished:NO];
@@ -158,25 +159,30 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
             [self.delegate manifestManager:self didEncounterError:fetchOperation.error];
             return;
         }
+        NSLog(@"\n%@ ->\n%@", fetchOperation.fromURL.path, fetchOperation.destinationURL.path);
         RZFManifest *manifest = fetchOperation.manifest;
         NSURL *bundleManifest = [manifest.bundle.bundleURL rzf_manifestURL];
-        NSURL *fromURL = fetchOperation.fromURL;
         // If the fetch was for this bundle's manifest file, load all of the entries
         // of this manifest
-        if ([fromURL isEqual:bundleManifest]) {
+        if ([fetchOperation.destinationURL isEqual:bundleManifest]) {
             [self loadEntriesInManifest:manifest];
         }
         // If this is a child manifest, create a new manifest object
         // and load all entries of the child manifest
-        else if ([fromURL rzf_isManifestURL]) {
-            NSURL *remoteURL = [fromURL URLByDeletingLastPathComponent];
-            RZFManifest *childManifest = [self manifestForRemoteURL:remoteURL];
+        else if ([fetchOperation.destinationURL rzf_isManifestURL]) {
+            NSURL *remoteURL = [fetchOperation.fromURL URLByDeletingLastPathComponent];
+            NSURL *bundleURL = [fetchOperation.destinationURL URLByDeletingLastPathComponent];
+            NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
+            RZFManifest *childManifest = [[RZFManifest alloc] initWithRemoteURL:remoteURL
+                                                                         bundle:bundle
+                                                                    environment:self.environment];
+
             [self loadEntriesInManifest:childManifest];
         }
         // If the manifest is loaded (IE: This is the last downloaded file)
         // notify the delegate
-        else if ([manifest isLoaded]) {
-            NSBundle *bundle = manifest.bundle;
+        NSBundle *bundle = manifest.bundle;
+        if ([manifest isLoaded] && [self.bundles containsObject:bundle] == NO) {
             self.bundles = [self.bundles arrayByAddingObject:bundle];
             [self.delegate manifestManager:self didLoadBundle:bundle];
         }

@@ -12,7 +12,7 @@
 
 + (NSString *)rzf_manifestFilename
 {
-    return @"mansifest.json";
+    return @"manifest.json";
 }
 
 + (NSString *)rzf_presentationFilename
