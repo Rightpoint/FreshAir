@@ -1,0 +1,68 @@
+{
+    "description": "Schema for FreshAir Release Files",
+    "definitions": {
+        "condition": {
+            "description": "A locally evaluated expression that is used to filter items.",
+            "type": "string",
+            "minLength": 1
+        },
+        "feature": {
+            "description": "A user facing feature that the release enables",
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "The key that identifies this feature. This key will be used to lookup an image, a localized title string, and a localized description string",
+                    "type": "string"
+                },
+                "condition": {
+                    "description": "A condition that must be true for the feature to function",
+                    "$ref": "#/definitions/condition"
+                }
+            }
+        },
+        "action": {
+            "description": "An action that can be performed",
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "The key that identifies this action. This key will be used to lookup a localized title for a button",
+                    "type": "string"
+                },
+                "condition": {
+                    "description": "A condition that must be true for the action to appear to the user",
+                    "$ref": "#/definitions/condition"
+                },
+                "URL": {
+                    "description": "The URL to open in the app when the button is pressed",
+                    "pattern": "://"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "properties": {
+        "version": {
+            "description": "The version for this release. This is the value of CFBundleShortVersionString on iOS, and <Android>",
+            "type": "string"
+        },
+        "features": {
+            "description": "A list of user facing features that have been added to the release",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/feature",
+                "required": ["key"]
+            }
+        },
+        "actions": {
+            "description": "A list of actions to be displayed to the user",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/action",
+                "required": ["key", "URL"]
+            }
+        }
+    }
+}

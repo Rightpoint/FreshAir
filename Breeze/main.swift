@@ -24,10 +24,3 @@ else {
 }
 
 let sha = RZFFileHash.sha1HashOfFileAtPath("FreshAirMac.framework/Versions/A/Headers/FreshAirMac.h")
-if let paths = fileManager.subpathsAtPath(Parameters.inputPath) {
-    let imageNames = paths.filter {
-        $0.pathExtension == "imageset"
-        }.map { (x:String) -> String in
-            x.lastPathComponent.stringByDeletingPathExtension
-    }
-}

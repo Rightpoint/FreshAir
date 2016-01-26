@@ -1,0 +1,37 @@
+{
+    "description": "Schema for FreshAir Manifest Files",
+    "definitions": {
+        "condition": {
+            "description": "A locally evaluated expression that is used to filter items.",
+            "type": "string",
+            "minLength": 1
+        },
+        "file": {
+            "description": "A file declaration",
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "description": "A relative path to the file.",
+                    "type": "string"
+                },
+                "SHA": {
+                    "description": "The computed SHA1 of the file.",
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 40
+                },
+                "condition": {
+                    "description": "A condition that must be true for the file to download",
+                    "$ref": "#/definitions/condition"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/file",
+        "required": ["filename"]
+    }
+}

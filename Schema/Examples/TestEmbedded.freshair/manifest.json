@@ -1,12 +1,12 @@
 [
 	{
 	    "condition": "platform == 'iOS' && systemVersion > 8.4 && appVersion < 1.0",
-	    "filename": "ForceUpgrade.freshair/manifest.json",
+	    "filename": "Embed1.freshair/manifest.json",
 	    "sha": "ABCDEF012345"
 	},
 	{
 	    "condition": "platform == 'iOS' && systemVersion > 8.4 && appVersion > 1.0",
-	    "filename": "NotifyUpgrade.freshair/manifest.json",
+	    "filename": "Embed2.freshair/manifest.json",
 	    "sha": "ABCDEF012345"
 	}
 ]
