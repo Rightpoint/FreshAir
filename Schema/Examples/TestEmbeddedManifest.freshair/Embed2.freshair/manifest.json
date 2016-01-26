@@ -1,8 +1,5 @@
-[
-  {
-    "filename": "baz.md"
-  },
-  {
-    "filename": "zab.md"
-  }
-]
+[{
+	"filename": "baz.md"
+}, {
+	"filename": "zab.md"
+}]

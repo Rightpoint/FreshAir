@@ -11,8 +11,8 @@
 		AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */; };
 		AB954BE71C56DC39003A050B /* manifest_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE51C56DC39003A050B /* manifest_schema.json */; };
 		AB954BE81C56DC39003A050B /* manifest_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE51C56DC39003A050B /* manifest_schema.json */; };
-		AB954BE91C56DC39003A050B /* release_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_schema.json */; };
-		AB954BEA1C56DC39003A050B /* release_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_schema.json */; };
+		AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_notes_schema.json */; };
+		AB954BEA1C56DC39003A050B /* release_notes_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_notes_schema.json */; };
 		AB954BEC1C56F539003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
 		AB954BED1C56F539003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
 		ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA483FA1C544C1F002CDCB2 /* FreshAir.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,7 +93,7 @@
 		AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFManifestManager+UIKit.h"; sourceTree = "<group>"; };
 		AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RZFManifestManager+UIKit.m"; sourceTree = "<group>"; };
 		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
-		AB954BE61C56DC39003A050B /* release_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_schema.json; sourceTree = "<group>"; };
+		AB954BE61C56DC39003A050B /* release_notes_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_schema.json; sourceTree = "<group>"; };
 		AB954BEB1C56F539003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
 		ABA483F71C544C1F002CDCB2 /* FreshAir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA483FA1C544C1F002CDCB2 /* FreshAir.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAir.h; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 			children = (
 				AB954BEB1C56F539003A050B /* Examples */,
 				AB954BE51C56DC39003A050B /* manifest_schema.json */,
-				AB954BE61C56DC39003A050B /* release_schema.json */,
+				AB954BE61C56DC39003A050B /* release_notes_schema.json */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -435,7 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB954BE91C56DC39003A050B /* release_schema.json in Resources */,
+				AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */,
 				AB954BE71C56DC39003A050B /* manifest_schema.json in Resources */,
 				AB954BEC1C56F539003A050B /* Examples in Resources */,
 			);
@@ -452,7 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB954BEA1C56DC39003A050B /* release_schema.json in Resources */,
+				AB954BEA1C56DC39003A050B /* release_notes_schema.json in Resources */,
 				AB954BE81C56DC39003A050B /* manifest_schema.json in Resources */,
 				AB954BED1C56F539003A050B /* Examples in Resources */,
 			);

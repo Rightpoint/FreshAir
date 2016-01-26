@@ -1,0 +1,37 @@
+{
+	"releases": [{
+		"version": "1.1",
+		"features": [{
+			"key": "apple_pay"
+		}, {
+			"key": "calendar_integration"
+		}, {
+			"key": "twitters_integration"
+		}]
+	}, {
+		"version": "1.2",
+		"features": [{
+			"key": "facebook_integration"
+		}]
+	}, {
+		"version": "2.0",
+		"features": [{
+			"key": "new_major_feature"
+		}, {
+			"key": "feature_social"
+		}]
+	}, {
+		"version": "2.1",
+		"features": [{
+			"key": "peek_pop"
+		}]
+	}],
+	"actions": [{
+		"condition": "appVersion >= 2.0",
+		"key": "dismiss",
+		"URL": "freshair://dismiss"
+	}, {
+		"key": "upgrade",
+		"URL": "https://itunes.apple.com/us/app/invaluable-live-auction-bidding/id944415329?mt=8&uo=6&at=&ct="
+	}]
+}

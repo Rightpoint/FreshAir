@@ -1,5 +1,5 @@
 {
-    "description": "Schema for FreshAir Release Files",
+    "description": "Schema for FreshAir Release Note Files",
     "definitions": {
         "condition": {
             "description": "A locally evaluated expression that is used to filter items.",
@@ -17,6 +17,29 @@
                 },
                 "condition": {
                     "description": "A condition that must be true for the feature to function",
+                    "$ref": "#/definitions/condition"
+                }
+            }
+        },
+        "release": {
+            "description": "An externally published version of the application",
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "version": {
+                    "description": "The version for this release. This is the value of CFBundleShortVersionString on iOS, and <Android>",
+                    "type": "string"
+                },
+                "features": {
+                    "description": "A list of user facing features that have been added to the release",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/feature",
+                        "required": ["key"]
+                    }
+                },
+                "condition": {
+                    "description": "A condition that must be true for the release to be valid",
                     "$ref": "#/definitions/condition"
                 }
             }
@@ -44,24 +67,20 @@
     "additionalProperties": false,
     "type": "object",
     "properties": {
-        "version": {
-            "description": "The version for this release. This is the value of CFBundleShortVersionString on iOS, and <Android>",
-            "type": "string"
-        },
-        "features": {
-            "description": "A list of user facing features that have been added to the release",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/feature",
-                "required": ["key"]
-            }
-        },
         "actions": {
             "description": "A list of actions to be displayed to the user",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/action",
                 "required": ["key", "URL"]
+            }
+        }
+        "releases": {
+            "description": "A list release objects",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/release",
+                "required": ["version", "features"]
             }
         }
     }

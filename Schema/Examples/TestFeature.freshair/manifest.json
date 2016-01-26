@@ -1,0 +1,13 @@
+[{
+	"condition": "platform == 'iOS' && systemVersion > '8.0' && appVersion < '1.1'",
+	"filename": "1.1.release.json",
+}, {
+	"condition": "platform == 'iOS' && systemVersion > '8.1' && appVersion < '1.2'",
+	"filename": "1.2.release.json",
+}, {
+	"condition": "platform == 'iOS' && systemVersion > '8.1' && appVersion < '2.0'",
+	"filename": "2.0.release.json",
+}, {
+	"condition": "platform == 'iOS' && systemVersion > '9.0' && appVersion < '2.1'",
+	"filename": "2.1.release.json",
+}]
