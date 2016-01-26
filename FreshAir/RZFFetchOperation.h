@@ -19,7 +19,7 @@
 
 @property (strong, nonatomic) NSURL *fromURL;
 @property (strong, nonatomic) NSURL *destinationURL;
-@property (strong, nonatomic) NSString *SHA;
+@property (copy, nonatomic) NSString *SHA;
 
 @property (strong, nonatomic) RZFManifest *manifest;
 

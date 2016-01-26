@@ -1,6 +1,6 @@
 [{
-	"condition": "platform == 'iOS' && systemVersion > '8.0' && appVersion < '1.1'",
-	"filename": "1.1.release.json",
+	"condition": "platform == 'iOS'",
+	"filename": "release_notes.json",
 }, {
 	"condition": "platform == 'iOS' && systemVersion > '8.1' && appVersion < '1.2'",
 	"filename": "1.2.release.json",

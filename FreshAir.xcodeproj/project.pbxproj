@@ -15,6 +15,14 @@
 		AB954BEA1C56DC39003A050B /* release_notes_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_notes_schema.json */; };
 		AB954BEC1C56F539003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
 		AB954BED1C56F539003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
+		AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; };
+		AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */; };
+		AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; };
+		AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BF31C57A85E003A050B /* RZFFeature.m */; };
+		AB954BF81C57A86D003A050B /* RZFAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF61C57A86D003A050B /* RZFAction.h */; };
+		AB954BF91C57A86D003A050B /* RZFAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BF71C57A86D003A050B /* RZFAction.m */; };
+		AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; };
+		AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BFB1C57A89E003A050B /* RZFRelease.m */; };
 		ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA483FA1C544C1F002CDCB2 /* FreshAir.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484021C544C1F002CDCB2 /* FreshAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; };
 		ABA484071C544C1F002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
@@ -95,6 +103,14 @@
 		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
 		AB954BE61C56DC39003A050B /* release_notes_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_schema.json; sourceTree = "<group>"; };
 		AB954BEB1C56F539003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
+		AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNotes.h; sourceTree = "<group>"; };
+		AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNotes.m; sourceTree = "<group>"; };
+		AB954BF21C57A85E003A050B /* RZFFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFeature.h; sourceTree = "<group>"; };
+		AB954BF31C57A85E003A050B /* RZFFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFeature.m; sourceTree = "<group>"; };
+		AB954BF61C57A86D003A050B /* RZFAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAction.h; sourceTree = "<group>"; };
+		AB954BF71C57A86D003A050B /* RZFAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAction.m; sourceTree = "<group>"; };
+		AB954BFA1C57A89E003A050B /* RZFRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFRelease.h; sourceTree = "<group>"; };
+		AB954BFB1C57A89E003A050B /* RZFRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFRelease.m; sourceTree = "<group>"; };
 		ABA483F71C544C1F002CDCB2 /* FreshAir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA483FA1C544C1F002CDCB2 /* FreshAir.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAir.h; sourceTree = "<group>"; };
 		ABA483FC1C544C1F002CDCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -236,6 +252,14 @@
 				ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */,
 				AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */,
 				AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */,
+				AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */,
+				AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */,
+				AB954BFA1C57A89E003A050B /* RZFRelease.h */,
+				AB954BFB1C57A89E003A050B /* RZFRelease.m */,
+				AB954BF21C57A85E003A050B /* RZFFeature.h */,
+				AB954BF31C57A85E003A050B /* RZFFeature.m */,
+				AB954BF61C57A86D003A050B /* RZFAction.h */,
+				AB954BF71C57A86D003A050B /* RZFAction.m */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -255,9 +279,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
+				AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */,
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
 				ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */,
 				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
+				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
+				AB954BF81C57A86D003A050B /* RZFAction.h in Headers */,
 				ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */,
 				ABA4842F1C546CDB002CDCB2 /* RZFPresentation.h in Headers */,
 				ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */,
@@ -467,12 +495,16 @@
 			files = (
 				ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */,
 				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
+				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
 				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
+				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
 				ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */,
+				AB954BF91C57A86D003A050B /* RZFAction.m in Sources */,
 				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
 				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
 				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
 				ABA484301C546CDB002CDCB2 /* RZFPresentation.m in Sources */,
+				AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,7 +36,8 @@
                     "items": {
                         "$ref": "#/definitions/feature",
                         "required": ["key"]
-                    }
+                    },
+                    "minItems": 1
                 },
                 "condition": {
                     "description": "A condition that must be true for the release to be valid",
@@ -73,15 +74,18 @@
             "items": {
                 "$ref": "#/definitions/action",
                 "required": ["key", "URL"]
-            }
-        }
+            },
+            "minItems": 1,
+            "maxItems": 2
+        },
         "releases": {
             "description": "A list release objects",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/release",
                 "required": ["version", "features"]
-            }
+            },
+            "minItems": 1
         }
     }
 }
