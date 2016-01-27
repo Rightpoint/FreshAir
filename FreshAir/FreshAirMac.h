@@ -18,6 +18,10 @@ FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 
 
 #import <FreshAirMac/RZFManifestManager.h>
+#import <FreshAirMac/RZFReleaseNotes.h>
+#import <FreshAirMac/RZFRelease.h>
+#import <FreshAirMac/RZFFeature.h>
+
 #import <FreshAirMac/RZFFileHash.h>
-#import <FreshAirMac/RZFPresentation.h>
 #import <FreshAirMac/NSURL+RZFManifest.h>
+#import <FreshAirMac/NSObject+RZFImport.h>

@@ -1,5 +1,10 @@
-[{
-	"filename": "baz.md"
-}, {
-	"filename": "zab.md"
-}]
+[
+  {
+    "sha" : "ce43ab6a17de3e559912040b77a79fd23b8ca21c",
+    "filename" : "baz.md"
+  },
+  {
+    "sha" : "abc818a29949e64432082b658c2c142a9648a1aa",
+    "filename" : "zab.md"
+  }
+]

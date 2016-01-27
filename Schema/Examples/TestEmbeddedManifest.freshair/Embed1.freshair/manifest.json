@@ -1,5 +1,10 @@
-[{
-	"filename": "bar.md"
-}, {
-	"filename": "foo.md"
-}]
+[
+  {
+    "sha" : "de0e4198a25a42f482822cb246ba4be9ffa7f721",
+    "filename" : "bar.md"
+  },
+  {
+    "sha" : "872d2599aa7be0e8a805cfdbf5569b6c46c8d814",
+    "filename" : "foo.md"
+  }
+]

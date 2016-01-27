@@ -1,21 +1,21 @@
 {
 	"releases": [{
 		"version": "1.1",
-        "condition": [{"key": "systemVersion", "value": "8.0"}],
+        "conditions": [{"key": "systemVersion", "value": "8.0"}],
 		"features": ["apple_pay", "calendar_integration","twitters_integration"]
 	}, {
 		"version": "1.2",
-        "condition": [{"key": "systemVersion", "value": "8.2"}],
+        "conditions": [{"key": "systemVersion", "value": "8.2"}],
 		"features": ["facebook_integration"]
 	}, {
 		"version": "2.0",
-        "condition": [{"key": "systemVersion", "value": "8.2"}],
+        "conditions": [{"key": "systemVersion", "value": "8.2"}],
 		"features": ["new_major_feature", "new_major_feature_2"]
 	}, {
 		"version": "2.1",
-        "condition": [{"key": "systemVersion", "value": "8.0"}],
+        "conditions": [{"key": "systemVersion", "value": "8.0"}],
 		"features": ["peek_pop"]
 	}],
-    "forceUpgradeCondition": [{"key": "version", "comparison": "lt", "value": "1.2"}],
+    "forceUpgradeConditions": [{"key": "version", "comparison": "lt", "value": "1.2"}],
     "upgradeURL": "https://itunes.apple.com/us/app/invaluable-live-auction-bidding/id944415329?mt=8&uo=6&at=&ct="
 }

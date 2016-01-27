@@ -42,13 +42,14 @@
                     },
                     "minItems": 1
                 },
-                "condition": {
+                "conditions": {
                     "description": "A condition that must be true for the release to be valid",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/condition",
                         "required": ["key", "value"]
-                    }
+                    },
+                    "minItems": 1
                 }
             }
         }
@@ -56,13 +57,14 @@
     "additionalProperties": false,
     "type": "object",
     "properties": {
-        "forceUpgradeCondition": {
+        "forceUpgradeConditions": {
             "description": "The condition that determines if an upgrade is forced",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/condition",
                 "required": ["key", "value"]
-            }
+            },
+            "minItems": 1
         },
         "upgradeURL": {
             "description": "The URL to open when an upgrade is requested",

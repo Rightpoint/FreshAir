@@ -35,7 +35,7 @@
                     "minLength": 40,
                     "maxLength": 40
                 },
-                "condition": {
+                "conditions": {
                     "description": "A condition that must be true for the file to download",
                     "type": "array",
                     "items": {

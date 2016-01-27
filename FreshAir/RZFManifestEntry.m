@@ -32,4 +32,10 @@
     }
 }
 
+- (NSString *)shaInBundle:(NSBundle *)bundle
+{
+    NSURL *file = [bundle.bundleURL URLByAppendingPathComponent:self.filename];
+    return [RZFFileHash sha1HashOfFileAtPath:file.path];
+}
+
 @end

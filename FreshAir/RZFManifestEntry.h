@@ -16,5 +16,6 @@
 
 - (BOOL)isApplicableInEnvironment:(NSDictionary *)environment;
 - (BOOL)isLoadedInBundle:(NSBundle *)bundle;
+- (NSString *)shaInBundle:(NSBundle *)bundle;
 
 @end

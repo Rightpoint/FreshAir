@@ -15,13 +15,19 @@
     return @"manifest.json";
 }
 
-+ (NSString *)rzf_presentationFilename
++ (NSString *)rzf_releaseFilename
 {
-    return @"presentation.json";
+    return @"release.json";
+}
+
++ (NSString *)rzf_freshairExtension
+{
+    return @"freshair";
 }
 
 - (NSURL *)rzf_manifestURL
 {
+
     return [self URLByAppendingPathComponent:[NSURL rzf_manifestFilename]];
 }
 
@@ -30,9 +36,9 @@
     return [self.lastPathComponent isEqual:[NSURL rzf_manifestFilename]];
 }
 
-- (NSURL *)rzf_presentationURL
+- (NSURL *)rzf_releaseURL
 {
-    return [self URLByAppendingPathComponent:[NSURL rzf_presentationFilename]];
+    return [self URLByAppendingPathComponent:[NSURL rzf_releaseFilename]];
 }
 
 @end

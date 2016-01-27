@@ -50,7 +50,7 @@
     releaseNotes.releases = [value[RZF_KP(RZFReleaseNotes, releases)] map:^id(id value) {
         return [RZFRelease instanceFromJSON:value];
     }];
-    releaseNotes.forceUpgradeCondition = [value[RZF_KP(RZFReleaseNotes, forceUpgradeCondition)] map:^id(id value) {
+    releaseNotes.forceUpgradeConditions = [value[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] map:^id(id value) {
         return [RZFCondition instanceFromJSON:value];
     }];
     return releaseNotes;
@@ -64,9 +64,9 @@
              RZF_KP(RZFReleaseNotes, releases): [self.releases valueForKey:RZF_KP(RZFRelease, jsonRepresentation)],
              } mutableCopy];
 
-    NSArray *conditions = self.forceUpgradeCondition;
+    NSArray *conditions = self.forceUpgradeConditions;
     if (conditions) {
-        representation[RZF_KP(RZFReleaseNotes, forceUpgradeCondition)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
+        representation[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
     }
     return [representation copy];
 }
@@ -150,6 +150,7 @@
 
 + (instancetype)instanceFromJSON:(NSDictionary *)value
 {
+    NSLog(@"%@", value);
     NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
     RZFManifestEntry *manifestEntry = [[RZFManifestEntry alloc] init];
     manifestEntry.filename = value[RZF_KP(RZFManifestEntry, filename)];
@@ -164,11 +165,13 @@
 {
     NSMutableDictionary *representation = [@{
                                              RZF_KP(RZFManifestEntry, filename): self.filename,
-                                             RZF_KP(RZFManifestEntry, sha): self.sha,
                                              } mutableCopy];
-    NSArray *conditions = self.conditions;
-    if (conditions) {
-        representation[RZF_KP(RZFRelease, conditions)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
+    if (self.conditions) {
+        NSArray *jsonConditions = [self.conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
+        representation[RZF_KP(RZFRelease, conditions)] = jsonConditions;
+    }
+    if (self.sha) {
+        representation[RZF_KP(RZFManifestEntry, sha)] = self.sha;
     }
     return [representation copy];
 }

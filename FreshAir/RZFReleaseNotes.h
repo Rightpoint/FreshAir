@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) NSArray *releases;
 @property (strong, nonatomic) NSURL *upgradeURL;
-@property (strong, nonatomic) NSArray *forceUpgradeCondition;
+@property (strong, nonatomic) NSArray *forceUpgradeConditions;
 
 @end

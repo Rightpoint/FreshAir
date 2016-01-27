@@ -12,11 +12,13 @@
 
 + (NSString *)rzf_manifestFilename;
 
-+ (NSString *)rzf_presentationFilename;
++ (NSString *)rzf_releaseFilename;
+
++ (NSString *)rzf_freshairExtension;
 
 - (NSURL *)rzf_manifestURL;
 
-- (NSURL *)rzf_presentationURL;
+- (NSURL *)rzf_releaseURL;
 
 - (BOOL)rzf_isManifestURL;
 
