@@ -74,6 +74,30 @@
 		ABA484771C55A6D7002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
 		ABA4847A1C55A701002CDCB2 /* FreshAirMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */; };
 		ABBE3DDD1C55AD1F006A738A /* FreshAirMac.h in Headers */ = {isa = PBXBuildFile; fileRef = ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABF296151C594A700048F58B /* RZFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296071C594A700048F58B /* RZFViewController.h */; };
+		ABF296161C594A700048F58B /* RZFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296081C594A700048F58B /* RZFViewController.m */; };
+		ABF296171C594A700048F58B /* RZFUpdatePromptView.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296091C594A700048F58B /* RZFUpdatePromptView.h */; };
+		ABF296181C594A700048F58B /* RZFUpdatePromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF2960A1C594A700048F58B /* RZFUpdatePromptView.m */; };
+		ABF296191C594A700048F58B /* RZFUpdatePromptViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2960B1C594A700048F58B /* RZFUpdatePromptViewController.h */; };
+		ABF2961A1C594A700048F58B /* RZFUpdatePromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF2960C1C594A700048F58B /* RZFUpdatePromptViewController.m */; };
+		ABF2961B1C594A700048F58B /* RZFReleaseNotesView.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2960D1C594A700048F58B /* RZFReleaseNotesView.h */; };
+		ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF2960E1C594A700048F58B /* RZFReleaseNotesView.m */; };
+		ABF2961D1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2960F1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h */; };
+		ABF2961E1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296101C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m */; };
+		ABF2961F1C594A700048F58B /* RZFReleaseNotesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296111C594A700048F58B /* RZFReleaseNotesViewController.h */; };
+		ABF296201C594A700048F58B /* RZFReleaseNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296121C594A700048F58B /* RZFReleaseNotesViewController.m */; };
+		ABF296211C594A700048F58B /* RZFSlideAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296131C594A700048F58B /* RZFSlideAnimationController.h */; };
+		ABF296221C594A700048F58B /* RZFSlideAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296141C594A700048F58B /* RZFSlideAnimationController.m */; };
+		ABF296251C594AD10048F58B /* UIView+RZFAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296231C594AD10048F58B /* UIView+RZFAutoLayout.h */; };
+		ABF296261C594AD10048F58B /* UIView+RZFAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296241C594AD10048F58B /* UIView+RZFAutoLayout.m */; };
+		ABF2962B1C594AE10048F58B /* UIFont+RZFStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296271C594AE10048F58B /* UIFont+RZFStyle.h */; };
+		ABF2962C1C594AE10048F58B /* UIFont+RZFStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296281C594AE10048F58B /* UIFont+RZFStyle.m */; };
+		ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296291C594AE10048F58B /* UIColor+RZFStyle.h */; };
+		ABF2962E1C594AE10048F58B /* UIColor+RZFStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF2962A1C594AE10048F58B /* UIColor+RZFStyle.m */; };
+		ABF296311C594BC90048F58B /* RZFFeatureViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2962F1C594BC90048F58B /* RZFFeatureViewModel.h */; };
+		ABF296321C594BC90048F58B /* RZFFeatureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */; };
+		ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */; };
+		ABF296361C594D7D0048F58B /* RZFUpdateViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +184,30 @@
 		ABA4844B1C55A111002CDCB2 /* FreshAirMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAirMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA484541C55A112002CDCB2 /* FreshAirMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreshAirMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAirMac.h; sourceTree = "<group>"; };
+		ABF296071C594A700048F58B /* RZFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFViewController.h; sourceTree = "<group>"; };
+		ABF296081C594A700048F58B /* RZFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFViewController.m; sourceTree = "<group>"; };
+		ABF296091C594A700048F58B /* RZFUpdatePromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdatePromptView.h; sourceTree = "<group>"; };
+		ABF2960A1C594A700048F58B /* RZFUpdatePromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFUpdatePromptView.m; sourceTree = "<group>"; };
+		ABF2960B1C594A700048F58B /* RZFUpdatePromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdatePromptViewController.h; sourceTree = "<group>"; };
+		ABF2960C1C594A700048F58B /* RZFUpdatePromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFUpdatePromptViewController.m; sourceTree = "<group>"; };
+		ABF2960D1C594A700048F58B /* RZFReleaseNotesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNotesView.h; sourceTree = "<group>"; };
+		ABF2960E1C594A700048F58B /* RZFReleaseNotesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNotesView.m; sourceTree = "<group>"; };
+		ABF2960F1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNoteCollectionViewCell.h; sourceTree = "<group>"; };
+		ABF296101C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNoteCollectionViewCell.m; sourceTree = "<group>"; };
+		ABF296111C594A700048F58B /* RZFReleaseNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNotesViewController.h; sourceTree = "<group>"; };
+		ABF296121C594A700048F58B /* RZFReleaseNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNotesViewController.m; sourceTree = "<group>"; };
+		ABF296131C594A700048F58B /* RZFSlideAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFSlideAnimationController.h; sourceTree = "<group>"; };
+		ABF296141C594A700048F58B /* RZFSlideAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFSlideAnimationController.m; sourceTree = "<group>"; };
+		ABF296231C594AD10048F58B /* UIView+RZFAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RZFAutoLayout.h"; sourceTree = "<group>"; };
+		ABF296241C594AD10048F58B /* UIView+RZFAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RZFAutoLayout.m"; sourceTree = "<group>"; };
+		ABF296271C594AE10048F58B /* UIFont+RZFStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+RZFStyle.h"; sourceTree = "<group>"; };
+		ABF296281C594AE10048F58B /* UIFont+RZFStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+RZFStyle.m"; sourceTree = "<group>"; };
+		ABF296291C594AE10048F58B /* UIColor+RZFStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RZFStyle.h"; sourceTree = "<group>"; };
+		ABF2962A1C594AE10048F58B /* UIColor+RZFStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RZFStyle.m"; sourceTree = "<group>"; };
+		ABF2962F1C594BC90048F58B /* RZFFeatureViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFeatureViewModel.h; sourceTree = "<group>"; };
+		ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFeatureViewModel.m; sourceTree = "<group>"; };
+		ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdateViewModel.h; sourceTree = "<group>"; };
+		ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFUpdateViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +253,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB8B96881C58587F00EB00CC /* Protected */ = {
+		AB8B96881C58587F00EB00CC /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				ABA484291C546AC0002CDCB2 /* RZFFileHash.h */,
@@ -221,7 +269,7 @@
 				AB954BFE1C581CA0003A050B /* RZFCondition.h */,
 				AB954BFF1C581CA0003A050B /* RZFCondition.m */,
 			);
-			name = Protected;
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		AB954BE41C56DC39003A050B /* Schema */ = {
@@ -290,7 +338,8 @@
 				AB954BFB1C57A89E003A050B /* RZFRelease.m */,
 				AB954BF21C57A85E003A050B /* RZFFeature.h */,
 				AB954BF31C57A85E003A050B /* RZFFeature.m */,
-				AB8B96881C58587F00EB00CC /* Protected */,
+				AB8B96881C58587F00EB00CC /* Utility */,
+				ABF296061C594A490048F58B /* UI */,
 				ABA484311C551229002CDCB2 /* Private */,
 			);
 			path = FreshAir;
@@ -319,6 +368,37 @@
 			name = Private;
 			sourceTree = "<group>";
 		};
+		ABF296061C594A490048F58B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ABF2962F1C594BC90048F58B /* RZFFeatureViewModel.h */,
+				ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */,
+				ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */,
+				ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */,
+				ABF296231C594AD10048F58B /* UIView+RZFAutoLayout.h */,
+				ABF296241C594AD10048F58B /* UIView+RZFAutoLayout.m */,
+				ABF296271C594AE10048F58B /* UIFont+RZFStyle.h */,
+				ABF296281C594AE10048F58B /* UIFont+RZFStyle.m */,
+				ABF296291C594AE10048F58B /* UIColor+RZFStyle.h */,
+				ABF2962A1C594AE10048F58B /* UIColor+RZFStyle.m */,
+				ABF296071C594A700048F58B /* RZFViewController.h */,
+				ABF296081C594A700048F58B /* RZFViewController.m */,
+				ABF296091C594A700048F58B /* RZFUpdatePromptView.h */,
+				ABF2960A1C594A700048F58B /* RZFUpdatePromptView.m */,
+				ABF2960B1C594A700048F58B /* RZFUpdatePromptViewController.h */,
+				ABF2960C1C594A700048F58B /* RZFUpdatePromptViewController.m */,
+				ABF2960D1C594A700048F58B /* RZFReleaseNotesView.h */,
+				ABF2960E1C594A700048F58B /* RZFReleaseNotesView.m */,
+				ABF2960F1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h */,
+				ABF296101C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m */,
+				ABF296111C594A700048F58B /* RZFReleaseNotesViewController.h */,
+				ABF296121C594A700048F58B /* RZFReleaseNotesViewController.m */,
+				ABF296131C594A700048F58B /* RZFSlideAnimationController.h */,
+				ABF296141C594A700048F58B /* RZFSlideAnimationController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -326,18 +406,30 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF2961B1C594A700048F58B /* RZFReleaseNotesView.h in Headers */,
+				ABF296251C594AD10048F58B /* UIView+RZFAutoLayout.h in Headers */,
 				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
 				AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */,
 				AB954C061C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
+				ABF2961F1C594A700048F58B /* RZFReleaseNotesViewController.h in Headers */,
+				ABF2961D1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h in Headers */,
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
 				ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */,
 				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
 				AB954C0D1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
+				ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
+				ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */,
 				AB954C001C581CA0003A050B /* RZFCondition.h in Headers */,
 				ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */,
+				ABF296311C594BC90048F58B /* RZFFeatureViewModel.h in Headers */,
+				ABF296151C594A700048F58B /* RZFViewController.h in Headers */,
 				ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */,
+				ABF296211C594A700048F58B /* RZFSlideAnimationController.h in Headers */,
 				AB954B7E1C55AFC7003A050B /* RZFManifestManager+UIKit.h in Headers */,
+				ABF296171C594A700048F58B /* RZFUpdatePromptView.h in Headers */,
+				ABF2962B1C594AE10048F58B /* UIFont+RZFStyle.h in Headers */,
+				ABF296191C594A700048F58B /* RZFUpdatePromptViewController.h in Headers */,
 				ABA484131C544C51002CDCB2 /* RZFManifestEntry.h in Headers */,
 				ABA484341C551A56002CDCB2 /* NSURL+RZFManifest.h in Headers */,
 			);
@@ -583,19 +675,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF2961A1C594A700048F58B /* RZFUpdatePromptViewController.m in Sources */,
 				AB954C081C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
 				ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */,
 				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
 				AB954C021C581CA0003A050B /* RZFCondition.m in Sources */,
 				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
+				ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */,
 				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
 				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
+				ABF2962E1C594AE10048F58B /* UIColor+RZFStyle.m in Sources */,
 				ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */,
+				ABF296361C594D7D0048F58B /* RZFUpdateViewModel.m in Sources */,
+				ABF296181C594A700048F58B /* RZFUpdatePromptView.m in Sources */,
+				ABF296221C594A700048F58B /* RZFSlideAnimationController.m in Sources */,
+				ABF296321C594BC90048F58B /* RZFFeatureViewModel.m in Sources */,
 				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
 				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
 				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
+				ABF296201C594A700048F58B /* RZFReleaseNotesViewController.m in Sources */,
+				ABF296161C594A700048F58B /* RZFViewController.m in Sources */,
+				ABF2962C1C594AE10048F58B /* UIFont+RZFStyle.m in Sources */,
+				ABF296261C594AD10048F58B /* UIView+RZFAutoLayout.m in Sources */,
 				AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */,
 				AB954C0F1C582E59003A050B /* NSObject+RZFUtility.m in Sources */,
+				ABF2961E1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
