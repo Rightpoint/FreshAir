@@ -10,6 +10,36 @@
 #import "RZFDefines.h"
 #import "NSObject+RZFUtility.h"
 
+@implementation NSObject (RZFImport)
+
++ (id)rzf_importURL:(NSURL *)URL error:(NSError **)error
+{
+    NSParameterAssert([self conformsToProtocol:@protocol(RZFImporting)]);
+    NSData *data = [NSData dataWithContentsOfURL:URL options:kNilOptions error:error];
+    if (data == nil) {
+        return nil;
+    }
+    Class<RZFImporting> importClass = (id)self;
+
+    NSArray *JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:error];
+    if (JSON == nil) {
+        return nil;
+    }
+    else if ([JSON isKindOfClass:[NSArray class]]) {
+        NSMutableArray *results = [NSMutableArray array];
+        for (NSDictionary *jsonObject in JSON) {
+            id object = [importClass instanceFromJSON:jsonObject];
+            [results addObject:object];
+        }
+        return results;
+    }
+    else {
+        return [importClass instanceFromJSON:JSON];
+    }
+}
+
+@end
+
 @implementation RZFReleaseNotes (RZFImport)
 
 + (instancetype)instanceFromJSON:(id)value

@@ -22,6 +22,12 @@
 
 @end
 
+@interface NSObject (RZFImport)
+
++ (id)rzf_importURL:(NSURL *)URL error:(NSError **)error;
+
+@end
+
 @interface RZFReleaseNotes (RZFImport) <RZFImporting>
 @end
 

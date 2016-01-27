@@ -36,23 +36,8 @@
 
 - (BOOL)loadEntriesError:(NSError **)error
 {
-    NSData *data = [NSData dataWithContentsOfURL:[self.bundle.bundleURL rzf_manifestURL] options:kNilOptions error:error];
-    if (data == nil) {
-        return NO;
-    }
-
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:error];
-    if (jsonArray == nil) {
-        return NO;
-    }
-
-    NSMutableArray *entryArray = [NSMutableArray array];
-    for (NSDictionary *jsonObject in jsonArray) {
-        RZFManifestEntry *entry = [RZFManifestEntry instanceFromJSON:jsonObject];
-        [entryArray addObject:entry];
-    }
-    _entries = entryArray;
-    return YES;
+    _entries = [RZFManifestEntry rzf_importURL:[self.bundle.bundleURL rzf_manifestURL] error:error];
+    return _entries != nil;
 }
 
 - (BOOL)isManifestLoaded
