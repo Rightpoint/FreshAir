@@ -10,11 +10,9 @@
 
 @interface RZFManifestEntry : NSObject
 
-- (instancetype)initWithJSONObject:(NSDictionary *)jsonObject;
-
-@property (copy, nonatomic, readonly) NSString *condition;
-@property (copy, nonatomic, readonly) NSString *filename;
-@property (copy, nonatomic, readonly) NSString *SHA;
+@property (copy, nonatomic) NSArray *conditions;
+@property (copy, nonatomic) NSString *filename;
+@property (copy, nonatomic) NSString *sha;
 
 - (BOOL)isApplicableInEnvironment:(NSDictionary *)environment;
 - (BOOL)isLoadedInBundle:(NSBundle *)bundle;

@@ -11,7 +11,6 @@
 @interface RZFFeature : NSObject
 
 @property (copy, nonatomic) NSString *key;
-@property (copy, nonatomic) NSString *condition;
 
 - (NSString *)localizedTitleKey;
 - (NSString *)localizedDescriptionKey;

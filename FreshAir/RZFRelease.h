@@ -11,9 +11,7 @@
 @interface RZFRelease : NSObject
 
 @property (copy, nonatomic) NSString *version;
-@property (copy, nonatomic) NSString *condition;
+@property (copy, nonatomic) NSArray *conditions;
 @property (strong, nonatomic) NSArray *features;
-
-- (NSString *)conditionWithVersionComparison;
 
 @end

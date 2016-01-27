@@ -84,7 +84,7 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
 
     // Always fetch or update the manifest
     NSOperation *fetch = [[RZFFetchOperation alloc] initWithFilename:[NSURL rzf_manifestFilename]
-                                                                 SHA:nil
+                                                                 sha:nil
                                                           inManifest:manifest];
     [self dispatchOperations:@[fetch]];
     if ([manifest isManifestLoaded]) {
@@ -129,7 +129,7 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
                 [self ensureLocalDirectory:localDirectoryURL];
             }
             [operations addObject:[[RZFFetchOperation alloc] initWithFilename:entry.filename
-                                                                          SHA:entry.SHA
+                                                                          sha:entry.sha
                                                                    inManifest:manifest]];
         }
     }

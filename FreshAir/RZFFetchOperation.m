@@ -15,13 +15,13 @@
 @implementation RZFFetchOperation
 
 - (instancetype)initWithFilename:(NSString *)filename
-                             SHA:(NSString *)SHA
+                             sha:(NSString *)sha
                       inManifest:(RZFManifest *)manifest;
 {
     self = [super init];
     if (self) {
         self.manifest = manifest;
-        self.SHA = SHA;
+        self.sha = sha;
         self.fromURL = [manifest.remoteURL URLByAppendingPathComponent:filename];
         self.destinationURL = [manifest.bundle.bundleURL URLByAppendingPathComponent:filename];
         
@@ -44,12 +44,12 @@
 
 - (void)confirmSHA
 {
-    if (self.SHA && self.error == nil) {
-        NSString *SHA = [RZFFileHash sha1HashOfFileAtPath:self.destinationURL.path];
-        if ([self.SHA isEqual:SHA] == NO) {
+    if (self.sha && self.error == nil) {
+        NSString *sha = [RZFFileHash sha1HashOfFileAtPath:self.destinationURL.path];
+        if ([self.sha isEqual:sha] == NO) {
             NSString *message = [NSString stringWithFormat:@"SHA Does Not Match:\n%@: %@\n%@: %@",
-                                 self.fromURL.path, self.SHA,
-                                 self.destinationURL.path, SHA];
+                                 self.fromURL.path, self.sha,
+                                 self.destinationURL.path, sha];
             self.error = [NSError errorWithDomain:RZFreshAirErrorDomain
                                              code:RZFreshAirErrorCodeSHAMismatch
                                          userInfo:@{NSLocalizedDescriptionKey: message}];

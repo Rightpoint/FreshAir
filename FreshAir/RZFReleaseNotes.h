@@ -11,6 +11,7 @@
 @interface RZFReleaseNotes : NSObject
 
 @property (strong, nonatomic) NSArray *releases;
-@property (strong, nonatomic) NSArray *actions;
+@property (strong, nonatomic) NSURL *upgradeURL;
+@property (strong, nonatomic) NSArray *forceUpgradeCondition;
 
 @end

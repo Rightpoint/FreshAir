@@ -14,12 +14,12 @@
 @interface RZFFetchOperation : NSOperation
 
 - (instancetype)initWithFilename:(NSString *)filename
-                             SHA:(NSString *)SHA
+                             sha:(NSString *)sha
                       inManifest:(RZFManifest *)manifest;
 
 @property (strong, nonatomic) NSURL *fromURL;
 @property (strong, nonatomic) NSURL *destinationURL;
-@property (copy, nonatomic) NSString *SHA;
+@property (copy, nonatomic) NSString *sha;
 
 @property (strong, nonatomic) RZFManifest *manifest;
 

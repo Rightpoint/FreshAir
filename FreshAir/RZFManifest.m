@@ -9,6 +9,7 @@
 #import "RZFManifest.h"
 #import "RZFManifestEntry.h"
 #import "NSURL+RZFManifest.h"
+#import "NSObject+RZFImport.h"
 
 @interface RZFManifest ()
 
@@ -47,7 +48,7 @@
 
     NSMutableArray *entryArray = [NSMutableArray array];
     for (NSDictionary *jsonObject in jsonArray) {
-        RZFManifestEntry *entry = [[RZFManifestEntry alloc] initWithJSONObject:jsonObject];
+        RZFManifestEntry *entry = [RZFManifestEntry instanceFromJSON:jsonObject];
         [entryArray addObject:entry];
     }
     _entries = entryArray;

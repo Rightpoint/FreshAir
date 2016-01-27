@@ -8,25 +8,14 @@
 
 #import "RZFManifestEntry.h"
 #import "RZFFileHash.h"
+#import "RZFCondition.h"
 
 @implementation RZFManifestEntry
-
-- (instancetype)initWithJSONObject:(NSDictionary *)jsonObject
-{
-    self = [super init];
-    if (self) {
-        _condition = jsonObject[@"condition"];
-        _filename = jsonObject[@"filename"];
-        _SHA = jsonObject[@"sha"];
-    }
-    return self;
-}
 
 - (BOOL)isApplicableInEnvironment:(NSDictionary *)environment
 {
     NSParameterAssert(environment);
-    return (self.condition == nil ||
-            [[NSPredicate predicateWithFormat:self.condition] evaluateWithObject:environment]);
+    return [[RZFCondition predicateForConditions:self.conditions] evaluateWithObject:environment];
 }
 
 - (BOOL)isLoadedInBundle:(NSBundle *)bundle
@@ -34,9 +23,9 @@
     NSParameterAssert(bundle);
     NSURL *file = [bundle.bundleURL URLByAppendingPathComponent:self.filename];
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:file.path];
-    if (self.SHA) {
+    if (self.sha) {
         NSString *computedSha = [RZFFileHash sha1HashOfFileAtPath:file.path];
-        return fileExists && [computedSha isEqual:self.SHA];
+        return fileExists && [computedSha isEqual:self.sha];
     }
     else {
         return fileExists;

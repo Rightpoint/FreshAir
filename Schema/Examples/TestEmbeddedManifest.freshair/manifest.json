@@ -1,9 +1,17 @@
 [{
-	"condition": "platform == 'iOS' && systemVersion > '8.4' && appVersion < '1.0'",
+    "condition": [
+                  {"key": "platform", "comparison": "eq", "value": "iOS"},
+                  {"key": "systemVersion", "comparison": "gt", "value": "8.4"},
+                  {"key": "appVersion", "comparison": "lt", "value": "1.0"}
+                  ],
 	"filename": "Embed1.freshair/manifest.json",
-	"sha": "63e305bc2cd658a32bf75e1bbf220f98a3530f02"
+	"sha": "d4d37a8811dc833e6a300670a8181052c9dc390f"
 }, {
-	"condition": "platform == 'iOS' && systemVersion > '8.4' && appVersion > '1.0'",
+    "condition": [
+                  {"key": "platform", "comparison": "eq", "value": "iOS"},
+                  {"key": "systemVersion", "comparison": "gt", "value": "8.4"},
+                  {"key": "appVersion", "comparison": "gt", "value": "1.0"}
+                  ],
 	"filename": "Embed2.freshair/manifest.json",
-	"sha": "NOTSET"
+	"sha": "ff1c1368b45f868632eed703bc3cc578a85d0935"
 }]

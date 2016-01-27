@@ -3,8 +3,22 @@
     "definitions": {
         "condition": {
             "description": "A locally evaluated expression that is used to filter items.",
-            "type": "string",
-            "minLength": 1
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "The key to use to obtain the local value",
+                    "type": "string"
+                },
+                "comparison": {
+                    "description": "The comparison type to use",
+                    "enum": [ "gt", "eq", "lt", "gte", "lte" ]
+                },
+                "value": {
+                    "description": "The expected value",
+                    "type": "string"
+                }
+            }
         },
         "file": {
             "description": "A file declaration",
@@ -23,7 +37,11 @@
                 },
                 "condition": {
                     "description": "A condition that must be true for the file to download",
-                    "$ref": "#/definitions/condition"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/condition",
+                        "required": ["key", "value"]
+                    }
                 }
             }
         }

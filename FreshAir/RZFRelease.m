@@ -7,13 +7,8 @@
 //
 
 #import "RZFRelease.h"
+#import "RZFCondition.h"
 
 @implementation RZFRelease
-
-- (NSString *)conditionWithVersionComparison
-{
-    NSString *versionCompare = [NSString stringWithFormat:@"appVersion < %@", self.version];
-    return self.condition.length > 0 ? [self.condition stringByAppendingString:versionCompare] : versionCompare;
-}
 
 @end

@@ -19,10 +19,20 @@
 		AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */; };
 		AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; };
 		AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BF31C57A85E003A050B /* RZFFeature.m */; };
-		AB954BF81C57A86D003A050B /* RZFAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF61C57A86D003A050B /* RZFAction.h */; };
-		AB954BF91C57A86D003A050B /* RZFAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BF71C57A86D003A050B /* RZFAction.m */; };
 		AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; };
 		AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BFB1C57A89E003A050B /* RZFRelease.m */; };
+		AB954C001C581CA0003A050B /* RZFCondition.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFE1C581CA0003A050B /* RZFCondition.h */; };
+		AB954C011C581CA0003A050B /* RZFCondition.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFE1C581CA0003A050B /* RZFCondition.h */; };
+		AB954C021C581CA0003A050B /* RZFCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BFF1C581CA0003A050B /* RZFCondition.m */; };
+		AB954C031C581CA0003A050B /* RZFCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954BFF1C581CA0003A050B /* RZFCondition.m */; };
+		AB954C061C5824ED003A050B /* NSObject+RZFImport.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954C041C5824ED003A050B /* NSObject+RZFImport.h */; };
+		AB954C071C5824ED003A050B /* NSObject+RZFImport.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954C041C5824ED003A050B /* NSObject+RZFImport.h */; };
+		AB954C081C5824ED003A050B /* NSObject+RZFImport.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954C051C5824ED003A050B /* NSObject+RZFImport.m */; };
+		AB954C091C5824ED003A050B /* NSObject+RZFImport.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954C051C5824ED003A050B /* NSObject+RZFImport.m */; };
+		AB954C0D1C582E59003A050B /* NSObject+RZFUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954C0B1C582E59003A050B /* NSObject+RZFUtility.h */; };
+		AB954C0E1C582E59003A050B /* NSObject+RZFUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954C0B1C582E59003A050B /* NSObject+RZFUtility.h */; };
+		AB954C0F1C582E59003A050B /* NSObject+RZFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954C0C1C582E59003A050B /* NSObject+RZFUtility.m */; };
+		AB954C101C582E59003A050B /* NSObject+RZFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954C0C1C582E59003A050B /* NSObject+RZFUtility.m */; };
 		ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA483FA1C544C1F002CDCB2 /* FreshAir.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484021C544C1F002CDCB2 /* FreshAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; };
 		ABA484071C544C1F002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
@@ -107,10 +117,15 @@
 		AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNotes.m; sourceTree = "<group>"; };
 		AB954BF21C57A85E003A050B /* RZFFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFeature.h; sourceTree = "<group>"; };
 		AB954BF31C57A85E003A050B /* RZFFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFeature.m; sourceTree = "<group>"; };
-		AB954BF61C57A86D003A050B /* RZFAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAction.h; sourceTree = "<group>"; };
-		AB954BF71C57A86D003A050B /* RZFAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAction.m; sourceTree = "<group>"; };
 		AB954BFA1C57A89E003A050B /* RZFRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFRelease.h; sourceTree = "<group>"; };
 		AB954BFB1C57A89E003A050B /* RZFRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFRelease.m; sourceTree = "<group>"; };
+		AB954BFE1C581CA0003A050B /* RZFCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFCondition.h; sourceTree = "<group>"; };
+		AB954BFF1C581CA0003A050B /* RZFCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFCondition.m; sourceTree = "<group>"; };
+		AB954C041C5824ED003A050B /* NSObject+RZFImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RZFImport.h"; sourceTree = "<group>"; };
+		AB954C051C5824ED003A050B /* NSObject+RZFImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RZFImport.m"; sourceTree = "<group>"; };
+		AB954C0A1C582B4B003A050B /* RZFDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZFDefines.h; sourceTree = "<group>"; };
+		AB954C0B1C582E59003A050B /* NSObject+RZFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RZFUtility.h"; sourceTree = "<group>"; };
+		AB954C0C1C582E59003A050B /* NSObject+RZFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RZFUtility.m"; sourceTree = "<group>"; };
 		ABA483F71C544C1F002CDCB2 /* FreshAir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA483FA1C544C1F002CDCB2 /* FreshAir.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAir.h; sourceTree = "<group>"; };
 		ABA483FC1C544C1F002CDCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -258,8 +273,13 @@
 				AB954BFB1C57A89E003A050B /* RZFRelease.m */,
 				AB954BF21C57A85E003A050B /* RZFFeature.h */,
 				AB954BF31C57A85E003A050B /* RZFFeature.m */,
-				AB954BF61C57A86D003A050B /* RZFAction.h */,
-				AB954BF71C57A86D003A050B /* RZFAction.m */,
+				AB954BFE1C581CA0003A050B /* RZFCondition.h */,
+				AB954BFF1C581CA0003A050B /* RZFCondition.m */,
+				AB954C041C5824ED003A050B /* NSObject+RZFImport.h */,
+				AB954C051C5824ED003A050B /* NSObject+RZFImport.m */,
+				AB954C0B1C582E59003A050B /* NSObject+RZFUtility.h */,
+				AB954C0C1C582E59003A050B /* NSObject+RZFUtility.m */,
+				AB954C0A1C582B4B003A050B /* RZFDefines.h */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -281,11 +301,13 @@
 			files = (
 				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
 				AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */,
+				AB954C061C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
 				ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */,
 				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
+				AB954C0D1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
-				AB954BF81C57A86D003A050B /* RZFAction.h in Headers */,
+				AB954C001C581CA0003A050B /* RZFCondition.h in Headers */,
 				ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */,
 				ABA4842F1C546CDB002CDCB2 /* RZFPresentation.h in Headers */,
 				ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */,
@@ -303,10 +325,13 @@
 				ABA4846F1C55A4A5002CDCB2 /* RZFManifestManager.h in Headers */,
 				ABA484701C55A4A5002CDCB2 /* RZFManifest.h in Headers */,
 				ABA484711C55A4A5002CDCB2 /* RZFManifestEntry.h in Headers */,
+				AB954C011C581CA0003A050B /* RZFCondition.h in Headers */,
 				ABA484721C55A4A5002CDCB2 /* RZFFetchOperation.h in Headers */,
+				AB954C071C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 				ABA484731C55A4A5002CDCB2 /* RZFFileHash.h in Headers */,
 				ABA484741C55A4A5002CDCB2 /* NSURL+RZFManifest.h in Headers */,
 				ABA484751C55A4A5002CDCB2 /* RZFPresentation.h in Headers */,
+				AB954C0E1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,18 +518,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB954C081C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
 				ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */,
 				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
+				AB954C021C581CA0003A050B /* RZFCondition.m in Sources */,
 				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
 				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
 				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
 				ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */,
-				AB954BF91C57A86D003A050B /* RZFAction.m in Sources */,
 				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
 				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
 				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
 				ABA484301C546CDB002CDCB2 /* RZFPresentation.m in Sources */,
 				AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */,
+				AB954C0F1C582E59003A050B /* NSObject+RZFUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +556,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA484621C55A149002CDCB2 /* RZFManifestManager.m in Sources */,
+				AB954C101C582E59003A050B /* NSObject+RZFUtility.m in Sources */,
 				ABA484661C55A149002CDCB2 /* RZFFileHash.m in Sources */,
+				AB954C091C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
+				AB954C031C581CA0003A050B /* RZFCondition.m in Sources */,
 				ABA484671C55A149002CDCB2 /* NSURL+RZFManifest.m in Sources */,
 				ABA484631C55A149002CDCB2 /* RZFManifest.m in Sources */,
 				ABA484641C55A149002CDCB2 /* RZFManifestEntry.m in Sources */,

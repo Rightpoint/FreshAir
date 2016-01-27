@@ -1,13 +1,18 @@
 [{
-	"condition": "platform == 'iOS'",
+	"condition": [{"key": "platform", "comparison": "eq", "value": "iOS"}]
 	"filename": "release_notes.json",
 }, {
-	"condition": "platform == 'iOS' && systemVersion > '8.1' && appVersion < '1.2'",
+    "condition": [
+                  {"key": "platform", "comparison": "eq", "value": "iOS"},
+                  {"key": "systemVersion", "comparison": "gt", "value": "8.1"},
+                  {"key": "appVersion", "comparison": "lt", "value": "1.2"}
+                  ],
 	"filename": "1.2.release.json",
 }, {
-	"condition": "platform == 'iOS' && systemVersion > '8.1' && appVersion < '2.0'",
+    "condition": [
+                  {"key": "platform", "comparison": "eq", "value": "iOS"},
+                  {"key": "systemVersion", "comparison": "gt", "value": "8.1"},
+                  {"key": "appVersion", "comparison": "lt", "value": "2.0"}
+                  ],
 	"filename": "2.0.release.json",
-}, {
-	"condition": "platform == 'iOS' && systemVersion > '9.0' && appVersion < '2.1'",
-	"filename": "2.1.release.json",
 }]

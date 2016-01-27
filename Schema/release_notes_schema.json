@@ -3,23 +3,26 @@
     "definitions": {
         "condition": {
             "description": "A locally evaluated expression that is used to filter items.",
-            "type": "string",
-            "minLength": 1
-        },
-        "feature": {
-            "description": "A user facing feature that the release enables",
             "additionalProperties": false,
             "type": "object",
             "properties": {
                 "key": {
-                    "description": "The key that identifies this feature. This key will be used to lookup an image, a localized title string, and a localized description string",
+                    "description": "The key to use to obtain the local value",
                     "type": "string"
                 },
-                "condition": {
-                    "description": "A condition that must be true for the feature to function",
-                    "$ref": "#/definitions/condition"
+                "comparison": {
+                    "description": "The comparison type to use. By default the comparison is 'gte'",
+                    "enum": [ "gt", "eq", "lt", "gte", "lte"]
+                },
+                "value": {
+                    "description": "The expected value",
+                    "type": "string"
                 }
             }
+        },
+        "feature": {
+            "description": "A user facing feature that the release enables. The value is a key that identifies this feature. This key will be used to lookup an image, a localized title string, and a localized description string",
+            "type": "string"
         },
         "release": {
             "description": "An externally published version of the application",
@@ -41,26 +44,11 @@
                 },
                 "condition": {
                     "description": "A condition that must be true for the release to be valid",
-                    "$ref": "#/definitions/condition"
-                }
-            }
-        },
-        "action": {
-            "description": "An action that can be performed",
-            "additionalProperties": false,
-            "type": "object",
-            "properties": {
-                "key": {
-                    "description": "The key that identifies this action. This key will be used to lookup a localized title for a button",
-                    "type": "string"
-                },
-                "condition": {
-                    "description": "A condition that must be true for the action to appear to the user",
-                    "$ref": "#/definitions/condition"
-                },
-                "URL": {
-                    "description": "The URL to open in the app when the button is pressed",
-                    "pattern": "://"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/condition",
+                        "required": ["key", "value"]
+                    }
                 }
             }
         }
@@ -68,15 +56,18 @@
     "additionalProperties": false,
     "type": "object",
     "properties": {
-        "actions": {
-            "description": "A list of actions to be displayed to the user",
+        "forceUpgradeCondition": {
+            "description": "The condition that determines if an upgrade is forced",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/action",
-                "required": ["key", "URL"]
-            },
-            "minItems": 1,
-            "maxItems": 2
+                "$ref": "#/definitions/condition",
+                "required": ["key", "value"]
+            }
+        },
+        "upgradeURL": {
+            "description": "The URL to open when an upgrade is requested",
+            "type": "string",
+            "pattern": "://"
         },
         "releases": {
             "description": "A list release objects",
