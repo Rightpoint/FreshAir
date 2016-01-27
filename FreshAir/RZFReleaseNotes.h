@@ -10,11 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN;
 
+@class RZFRelease, RZFCondition;
+
 @interface RZFReleaseNotes : NSObject
 
-@property (strong, nonatomic) NSArray *releases;
+@property (strong, nonatomic) NSArray<RZFRelease *> *releases;
 @property (strong, nonatomic) NSURL *upgradeURL;
-@property (strong, nonatomic) NSArray *forceUpgradeConditions;
+@property (strong, nonatomic) NSArray<RZFCondition *> *forceUpgradeConditions;
 
 @end
 

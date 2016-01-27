@@ -31,7 +31,8 @@ func updateManifestShaInBundle(path: String) throws {
         if entry.sha == nil {
             throw BreezeError.ManifestFileMissing(filename: entry.filename)
         }
-        return entry.jsonRepresentation()
+        let result = entry.jsonRepresentation()
+        return result
     }
 
     let data = try NSJSONSerialization.dataWithJSONObject(JSON, options: [.PrettyPrinted])
@@ -51,8 +52,8 @@ func populateManifestForReleaseInBundle(path: String) throws {
     guard let entries = try RZFManifestEntry.rzf_importURL(manifestURL) as? [RZFManifestEntry] else {
         throw BreezeError.InvalidJSONFormat(path: manifestURL.path!)
     }
-    for release in releaseNotes.releases as! [RZFRelease] {
-        for feature in release.features as! [RZFFeature] {
+    for release in releaseNotes.releases {
+        for feature in release.features {
             // Check for key.png, key@2x.png, key@3x.png
             // In Localization, check for key.title, key.description
         }

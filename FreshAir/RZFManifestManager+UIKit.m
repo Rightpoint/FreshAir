@@ -15,8 +15,7 @@
 {
     [[self defaultEnvironment] setValue:@"iOS" forKey:@"platform"];
     [[self defaultEnvironment] setValue:[[UIDevice currentDevice] systemVersion] forKey:@"systemVersion"];
-    [[self defaultEnvironment] setValue:@([[UIScreen mainScreen] scale]) forKey:@"displayScale"];
-    [[self defaultEnvironment] setValue:[NSUserDefaults standardUserDefaults] forKey:@"defaults"];
+    [[self defaultEnvironment] setValue:[@([[UIScreen mainScreen] scale]) stringValue] forKey:@"displayScale"];
 }
 
 @end

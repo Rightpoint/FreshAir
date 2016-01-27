@@ -21,14 +21,14 @@ NS_ASSUME_NONNULL_BEGIN;
 @property (copy, nonatomic, readonly) NSURL *remoteURL;
 @property (strong, nonatomic, readonly) NSBundle *bundle;
 
-@property (copy, nonatomic, readonly) NSArray *entries;
+@property (copy, nonatomic, readonly) NSArray<RZFManifestEntry *> *entries;
 
 - (BOOL)loadEntriesError:(NSError **)error;
 - (BOOL)isManifestLoaded;
 
 - (BOOL)isLoaded;
 
-- (NSArray *)unloadedFilenames;
+- (NSArray<NSString *> *)unloadedFilenames;
 
 @end
 

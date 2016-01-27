@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @interface RZFCondition : NSObject
 
-+ (NSPredicate *)predicateForConditions:(NSArray *)conditions;
++ (NSPredicate *)predicateForConditions:(NSArray<RZFCondition *> *)conditions;
 
 @property (copy, nonatomic) NSString *key;
 @property (copy, nonatomic) NSString *comparison;

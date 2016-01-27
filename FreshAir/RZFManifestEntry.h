@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN;
 
+@class RZFCondition;
+
 @interface RZFManifestEntry : NSObject
 
-@property (copy, nonatomic) NSArray *conditions;
+@property (copy, nonatomic) NSArray<RZFCondition *> *conditions;
 @property (copy, nonatomic) NSString *filename;
 @property (copy, nonatomic) NSString * __nullable sha;
 

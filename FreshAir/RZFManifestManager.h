@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
  *          appVersion:    The value of NSBundle.mainBundle.userInfo.CFBundleShortVersionString
  *          defaults:      The value of NSUserDefaults.standardUserDefaults
  */
-+ (NSMutableDictionary *)defaultEnvironment;
++ (NSMutableDictionary<NSString *, NSString *> *)defaultEnvironment;
 
 /**
  *  The default local URL to download the manifest bundles too.
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
                          delegate:(id<RZFManifestManagerDelegate>)delegate;
 
 
-@property (strong, nonatomic, readonly) NSArray* bundles;
+@property (strong, nonatomic, readonly) NSArray<NSBundle *>* bundles;
 @property (assign, nonatomic, readonly) BOOL loaded;
 
 

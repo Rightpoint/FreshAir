@@ -10,11 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN;
 
+@class RZFFeature, RZFCondition;
+
 @interface RZFRelease : NSObject
 
 @property (copy, nonatomic) NSString *version;
-@property (copy, nonatomic) NSArray *conditions;
-@property (strong, nonatomic) NSArray *features;
+@property (copy, nonatomic) NSArray<RZFCondition *> *conditions;
+@property (strong, nonatomic) NSArray<RZFFeature *> *features;
 
 @end
 
