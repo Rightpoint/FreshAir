@@ -45,12 +45,14 @@
 + (instancetype)instanceFromJSON:(id)value
 {
     NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
+    NSArray *releasesJSON = value[RZF_KP(RZFReleaseNotes, releases)] ?: @[];
+    NSArray *forceUpgradeJSON = value[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] ?: @[];
     RZFReleaseNotes *releaseNotes = [[RZFReleaseNotes alloc] init];
     releaseNotes.upgradeURL = [NSURL URLWithString:value[RZF_KP(RZFReleaseNotes, upgradeURL)]];
-    releaseNotes.releases = [value[RZF_KP(RZFReleaseNotes, releases)] map:^id(id value) {
+    releaseNotes.releases = [releasesJSON map:^id(id value) {
         return [RZFRelease instanceFromJSON:value];
     }];
-    releaseNotes.forceUpgradeConditions = [value[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] map:^id(id value) {
+    releaseNotes.forceUpgradeConditions = [forceUpgradeJSON map:^id(id value) {
         return [RZFCondition instanceFromJSON:value];
     }];
     return releaseNotes;
@@ -65,7 +67,7 @@
              } mutableCopy];
 
     NSArray *conditions = self.forceUpgradeConditions;
-    if (conditions) {
+    if (conditions.count > 0) {
         representation[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
     }
     return [representation copy];
@@ -78,12 +80,14 @@
 + (instancetype)instanceFromJSON:(id)value
 {
     NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
+    NSArray *conditionsJSON = value[RZF_KP(RZFRelease, conditions)] ?: @[];
+
     RZFRelease *release = [[RZFRelease alloc] init];
     release.version = value[RZF_KP(RZFRelease, version)];
     release.features = [value[RZF_KP(RZFRelease, features)] map:^id(id value) {
         return [RZFFeature instanceFromJSON:value];
     }];
-    release.conditions = [value[RZF_KP(RZFRelease, conditions)] map:^id(id value) {
+    release.conditions = [conditionsJSON map:^id(id value) {
         return [RZFCondition instanceFromJSON:value];
     }];
     return release;
@@ -97,7 +101,7 @@
              RZF_KP(RZFRelease, features): [self.features valueForKey:RZF_KP(RZFFeature, jsonRepresentation)],
              } mutableCopy];
     NSArray *conditions = self.conditions;
-    if (conditions) {
+    if (conditions.count > 0) {
         representation[RZF_KP(RZFRelease, conditions)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
     }
     return [representation copy];
@@ -150,11 +154,12 @@
 
 + (instancetype)instanceFromJSON:(NSDictionary *)value
 {
-    NSLog(@"%@", value);
     NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
+    NSArray *conditionsJSON = value[RZF_KP(RZFManifestEntry, conditions)] ?: @[];
+
     RZFManifestEntry *manifestEntry = [[RZFManifestEntry alloc] init];
     manifestEntry.filename = value[RZF_KP(RZFManifestEntry, filename)];
-    manifestEntry.conditions = [value[RZF_KP(RZFRelease, conditions)] map:^id(id value) {
+    manifestEntry.conditions = [conditionsJSON map:^id(id value) {
         return [RZFCondition instanceFromJSON:value];
     }];
     manifestEntry.sha = value[RZF_KP(RZFManifestEntry, sha)];
@@ -166,7 +171,7 @@
     NSMutableDictionary *representation = [@{
                                              RZF_KP(RZFManifestEntry, filename): self.filename,
                                              } mutableCopy];
-    if (self.conditions) {
+    if (self.conditions.count > 0) {
         NSArray *jsonConditions = [self.conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
         representation[RZF_KP(RZFRelease, conditions)] = jsonConditions;
     }

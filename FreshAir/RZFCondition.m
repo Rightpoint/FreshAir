@@ -38,12 +38,14 @@
     else if ([self.comparison isEqual:@"lte"]) {
         return @"<=";
     }
+    [NSException raise:NSInvalidArgumentException format:@"Unsupported comparison: %@", self.comparison];
     return nil;
 }
 
 - (NSPredicate *)predicate
 {
-    return [NSPredicate predicateWithFormat:@"%K %@ %@", self.key, self.predicateComparison, self.value];
+    NSString *predicateString = [NSString stringWithFormat:@"%@ %@ '%@'", self.key, self.predicateComparison, self.value];
+    return [NSPredicate predicateWithFormat:predicateString];
 }
 
 @end

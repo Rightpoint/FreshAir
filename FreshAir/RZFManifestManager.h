@@ -8,10 +8,13 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN;
+
 OBJC_EXTERN NSString *const RZFreshAirErrorDomain;
 typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
     RZFreshAirErrorCodeSHAMismatch
 };
+
 
 @protocol RZFManifestManagerDelegate;
 
@@ -59,3 +62,6 @@ typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
 - (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END;
+

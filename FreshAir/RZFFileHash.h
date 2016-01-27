@@ -22,6 +22,6 @@
 
 @interface RZFFileHash : NSObject
 
-+ (NSString *)sha1HashOfFileAtPath:(NSString *)filePath;
++ (NSString * __nullable)sha1HashOfFileAtPath:(NSString * __nonnull)filePath;
 
 @end

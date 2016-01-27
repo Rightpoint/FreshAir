@@ -10,6 +10,8 @@
 
 @class RZFManifestEntry;
 
+NS_ASSUME_NONNULL_BEGIN;
+
 @interface RZFManifest : NSObject
 
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
@@ -29,3 +31,5 @@
 - (NSArray *)unloadedFilenames;
 
 @end
+
+NS_ASSUME_NONNULL_END;

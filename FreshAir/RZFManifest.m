@@ -30,6 +30,7 @@
         _remoteURL = remoteURL;
         _bundle = bundle;
         _environment = environment;
+        _entries = @[];
     }
     return self;
 }

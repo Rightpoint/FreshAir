@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN;
+
 @interface RZFRelease : NSObject
 
 @property (copy, nonatomic) NSString *version;
@@ -15,3 +17,5 @@
 @property (strong, nonatomic) NSArray *features;
 
 @end
+
+NS_ASSUME_NONNULL_END;

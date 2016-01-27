@@ -14,6 +14,8 @@
 #import "RZFManifest.h"
 #import "RZFManifestEntry.h"
 
+NS_ASSUME_NONNULL_BEGIN;
+
 // One stop shop for the boring JSON mapping.
 @protocol RZFImporting <NSObject>
 
@@ -24,7 +26,7 @@
 
 @interface NSObject (RZFImport)
 
-+ (id)rzf_importURL:(NSURL *)URL error:(NSError **)error;
++ (id __nullable)rzf_importURL:(NSURL *)URL error:(out NSError **)error;
 
 @end
 
@@ -42,3 +44,5 @@
 
 @interface RZFManifestEntry (RZFImport) <RZFImporting>
 @end
+
+NS_ASSUME_NONNULL_END;

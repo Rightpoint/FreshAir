@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN;
+
 @interface RZFFeature : NSObject
 
 @property (copy, nonatomic) NSString *key;
@@ -17,3 +19,5 @@
 - (NSString *)localizedImageKey;
 
 @end
+
+NS_ASSUME_NONNULL_END;

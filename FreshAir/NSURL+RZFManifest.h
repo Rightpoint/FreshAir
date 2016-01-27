@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN;
+
 @interface NSURL (RZFManifest)
 
 + (NSString *)rzf_manifestFilename;
@@ -23,3 +25,5 @@
 - (BOOL)rzf_isManifestURL;
 
 @end
+
+NS_ASSUME_NONNULL_END;
