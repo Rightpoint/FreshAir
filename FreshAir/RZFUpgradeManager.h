@@ -20,13 +20,13 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL currentVersion:(NSString *)currentVersion;
 
 /**
- * Delegate to present. By default this protocol is implemented by UIApplication and performs a modal presentation
- * on top of the rootViewController.
+ * Delegate to manage presentation. By default this protocol is implemented by UIApplication and performs a modal presentation
+ * on top-most presented view controller of the app window.
  */
 @property (weak, nonatomic) id<RZFUpgradeManagerDelegate> delegate;
 
 /**
- *  Refresh the bundle
+ *  Refresh the bundle. This should be called when the network is available.
  */
 - (void)refreshUpgradeBundle;
 
@@ -46,8 +46,7 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 - (void)showReleaseNotesIfDesired;
 
 /**
- * Present the release notes
- *
+ * Present the release notes for features that are in the new version of the application.
  */
 - (void)showReleaseNotes;
 
