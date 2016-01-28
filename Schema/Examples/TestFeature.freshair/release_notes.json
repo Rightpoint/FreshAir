@@ -16,6 +16,6 @@
         "conditions": [{"key": "systemVersion", "value": "8.0"}],
 		"features": ["peek_pop"]
 	}],
-    "minimumVersion": @"1.2",
+    "minimumVersion": "1.2",
     "upgradeURL": "https://itunes.apple.com/us/app/invaluable-live-auction-bidding/id944415329?mt=8&uo=6&at=&ct="
 }

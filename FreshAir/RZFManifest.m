@@ -12,6 +12,12 @@
 #import "NSObject+RZFImport.h"
 #import "NSBundle+RZFreshAir.h"
 
+@interface RZFManifest ()
+
+@property (copy, nonatomic) NSArray<RZFManifestEntry *> *entries;
+
+@end
+
 @implementation RZFManifest
 
 @synthesize entries = _entries;

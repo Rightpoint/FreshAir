@@ -17,7 +17,7 @@
 
 + (NSString *)rzf_releaseFilename
 {
-    return @"release.json";
+    return @"release_notes.json";
 }
 
 + (NSString *)rzf_freshairExtension

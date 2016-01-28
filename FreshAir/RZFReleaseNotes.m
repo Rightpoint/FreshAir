@@ -9,6 +9,7 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 #import "RZFDefines.h"
+#import "RZFFeature.h"
 
 @implementation RZFReleaseNotes
 
@@ -29,6 +30,21 @@
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version
 {
     return self.minimumVersion != nil && [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedAscending;
+}
+
+- (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;
+{
+    NSMutableArray *features = [NSMutableArray array];
+    for (RZFRelease *release in self.releases) {
+        NSString *version = release.version;
+        NSComparisonResult compareLast = [version compare:lastVersion options:NSNumericSearch];
+        NSComparisonResult compareCurrent = [version compare:currentVersion options:NSNumericSearch];
+        if (compareLast == NSOrderedDescending && compareCurrent != NSOrderedDescending) {
+            [features addObjectsFromArray:release.features];
+        }
+    }
+
+    return [features copy];
 }
 
 @end

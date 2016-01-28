@@ -57,4 +57,27 @@
     XCTAssert(self.bundles.count == 2);
 }
 
+- (void)testFeatureRange
+{
+    NSURL *url = [BUNDLE URLForResource:@"Examples/TestFeature" withExtension:@"freshair"];
+    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url
+                                                                   localURL:nil
+                                                                environment:self.environment
+                                                                   delegate:self];
+    [mgr update];
+
+    while (mgr.loaded == NO) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+    }
+    XCTAssertNil(self.error);
+    XCTAssert(self.bundles.count == 1);
+
+    RZFReleaseNotes *notes = [mgr.bundle rzf_releaseNotes];
+    NSArray *f1_12 = [notes featuresFromVersion:@"1.0" toVersion:@"1.2"];
+    NSArray *f12_21 = [notes featuresFromVersion:@"1.2" toVersion:@"2.1"];
+    XCTAssert(f1_12.count == 4);
+    XCTAssert(f12_21.count == 3);
+}
+
+
 @end

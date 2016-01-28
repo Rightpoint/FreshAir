@@ -18,11 +18,7 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @property (strong, nonatomic, readonly) NSBundle *bundle;
 
-@property (copy, nonatomic, readonly) NSArray<RZFManifestEntry *> *entries;
-
-- (BOOL)loadEntriesError:(NSError **)error;
 - (BOOL)isManifestLoaded;
-
 - (BOOL)isLoadedEnvironment:(NSDictionary *)environment;
 
 @end

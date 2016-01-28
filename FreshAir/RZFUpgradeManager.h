@@ -38,7 +38,7 @@
 /**
  * Present the release notes if appropriate.
  *
- * If there are release notes are downloaded that have not been displayed, present them to the user.
+ * If there are release notes for the version running that have not been displayed, display them.
  */
 - (void)showReleaseNotesIfDesired;
 

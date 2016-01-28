@@ -1,12 +1,6 @@
 [
   {
-    "sha" : "8b45c102fe76ff38d28b2fd986f02cc720b6ead6",
+    "sha" : "449d6ad7dc95e97ca6405e8721e3359821fb5c61",
     "filename" : "release_notes.json"
-  },
-  {
-    "filename" : "1.2.release.json"
-  },
-  {
-    "filename" : "2.0.release.json"
   }
 ]

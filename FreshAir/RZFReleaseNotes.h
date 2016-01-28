@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN;
 
-@class RZFRelease, RZFCondition;
+@class RZFRelease, RZFCondition, RZFFeature;
 
 @interface RZFReleaseNotes : NSObject
 
@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN;
 
 - (BOOL)isUpgradeAvailableForVersion:(NSString *)version;
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version;
+
+- (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;
 
 @end
 

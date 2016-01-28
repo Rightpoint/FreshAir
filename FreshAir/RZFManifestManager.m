@@ -10,6 +10,7 @@
 
 #import "RZFManifestManager.h"
 #import "RZFManifest.h"
+#import "RZFManifest+Private.h"
 #import "RZFManifestEntry.h"
 #import "RZFFetchOperation.h"
 #import "NSURL+RZFManifest.h"

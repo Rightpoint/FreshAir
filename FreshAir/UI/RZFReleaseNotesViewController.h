@@ -15,7 +15,7 @@
 
 @protocol RZFReleaseNotesViewControllerDelegate <NSObject>
 
-- (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)ReleaseNotesViewController;
+- (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)releaseNotesViewController;
 
 @end
 
