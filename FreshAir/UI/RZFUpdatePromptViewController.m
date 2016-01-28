@@ -31,11 +31,12 @@ static const CGFloat kRZFUpdatePromptViewHorizontalPadding = 20.0f;
 
 # pragma mark - Lifecycle
 
-- (instancetype)initWithUpdateViewModel:(RZFUpdateViewModel *)updateViewModel bundle:(NSBundle *)bundle
+- (instancetype)initWithUpdateViewModel:(RZFUpdateViewModel *)updateViewModel upgradeURL:(NSURL *)upgradeURL bundle:(NSBundle *)bundle
 {
     self = [super initWithNibName:nil bundle:bundle];
     
     if ( self ) {
+        _upgradeURL = upgradeURL;
         _updateViewModel = updateViewModel;
     }
     
@@ -74,12 +75,12 @@ static const CGFloat kRZFUpdatePromptViewHorizontalPadding = 20.0f;
 
 - (void)didSelectDeclineForUpdatePromptView:(RZFUpdatePromptView *)updatePromptView
 {
-    [self.delegate updatePromptViewController:self dismissAndShouldUpgrade:NO];
+    [self.delegate dismissUpdatePromptViewController:self];
 }
 
 - (void)didSelectConfirmForUpdatePromptView:(RZFUpdatePromptView *)updatePromptView
 {
-    [self.delegate updatePromptViewController:self dismissAndShouldUpgrade:YES];
+    [self.delegate updatePromptViewController:self shouldUpgradeWithURL:self.upgradeURL];
 }
 
 @end

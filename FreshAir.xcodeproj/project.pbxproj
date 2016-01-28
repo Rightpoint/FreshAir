@@ -98,6 +98,8 @@
 		ABF296321C594BC90048F58B /* RZFFeatureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */; };
 		ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */; };
 		ABF296361C594D7D0048F58B /* RZFUpdateViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */; };
+		ABF2963A1C59568D0048F58B /* RZFUpgradeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296381C59568D0048F58B /* RZFUpgradeManager.h */; };
+		ABF2963B1C59568D0048F58B /* RZFUpgradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296391C59568D0048F58B /* RZFUpgradeManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +210,9 @@
 		ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFeatureViewModel.m; sourceTree = "<group>"; };
 		ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdateViewModel.h; sourceTree = "<group>"; };
 		ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFUpdateViewModel.m; sourceTree = "<group>"; };
+		ABF296371C5956660048F58B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		ABF296381C59568D0048F58B /* RZFUpgradeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpgradeManager.h; sourceTree = "<group>"; };
+		ABF296391C59568D0048F58B /* RZFUpgradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFUpgradeManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +309,7 @@
 		ABA483ED1C544C1F002CDCB2 = {
 			isa = PBXGroup;
 			children = (
+				ABF296371C5956660048F58B /* README.md */,
 				AB954BE41C56DC39003A050B /* Schema */,
 				ABA483F91C544C1F002CDCB2 /* FreshAir */,
 				ABA484051C544C1F002CDCB2 /* FreshAirTests */,
@@ -330,6 +336,8 @@
 				ABA483FA1C544C1F002CDCB2 /* FreshAir.h */,
 				ABBE3DDB1C55ACB9006A738A /* FreshAirMac.h */,
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
+				ABF296381C59568D0048F58B /* RZFUpgradeManager.h */,
+				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
 				ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */,
 				ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */,
 				AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */,
@@ -418,6 +426,7 @@
 				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
 				AB954C0D1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
 				ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */,
+				ABF2963A1C59568D0048F58B /* RZFUpgradeManager.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
 				ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */,
 				AB954C001C581CA0003A050B /* RZFCondition.h in Headers */,
@@ -684,6 +693,7 @@
 				ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */,
 				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
 				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
+				ABF2963B1C59568D0048F58B /* RZFUpgradeManager.m in Sources */,
 				ABF2962E1C594AE10048F58B /* UIColor+RZFStyle.m in Sources */,
 				ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */,
 				ABF296361C594D7D0048F58B /* RZFUpdateViewModel.m in Sources */,

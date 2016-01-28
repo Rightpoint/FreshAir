@@ -57,14 +57,9 @@
     "additionalProperties": false,
     "type": "object",
     "properties": {
-        "forceUpgradeConditions": {
-            "description": "The condition that determines if an upgrade is forced",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/condition",
-                "required": ["key", "value"]
-            },
-            "minItems": 1
+        "minimumVersion": {
+            "description": "The minimum supported version",
+            "type": "string",
         },
         "upgradeURL": {
             "description": "The URL to open when an upgrade is requested",

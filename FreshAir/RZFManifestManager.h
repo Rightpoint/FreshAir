@@ -41,16 +41,20 @@ typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
  *  Create a new manifest manager that will obtain the manifest at the remote URL and store it in the localURL directory
  *
  *  @param remoteURL The remote URL to load. This should refer to the .freshair file, not the manifest file.
- *  @param localURL The local path to store the root bundle. A directory will be appended to this URL to contain the root bundle.
+ *  @param localURL The local path to store the root bundle. A directory will be appended to this URL to contain the root bundle. If this value is nil, it will default to [RZFManifestManager defaultLocalURL]
+ *  @param environment The local path to store the root bundle. A directory will be appended to this URL to contain the root bundle.
  *
  *
  *  @param delegate The delegate to be informed when a bundle is loaded.
  */
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
+                         localURL:(NSURL * __nullable)localURL
+                      environment:(NSDictionary<NSString *, NSString *> * __nullable)environment
                          delegate:(id<RZFManifestManagerDelegate>)delegate;
 
 
-@property (strong, nonatomic, readonly) NSArray<NSBundle *>* bundles;
+@property (strong, nonatomic, readonly) NSBundle *bundle;
+@property (strong, nonatomic, readonly) NSArray<NSBundle *> *allBundles;
 @property (assign, nonatomic, readonly) BOOL loaded;
 
 

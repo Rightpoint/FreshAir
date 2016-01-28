@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSError *error;
 @property (strong, nonatomic) NSArray *bundles;
+@property (strong, nonatomic) NSMutableDictionary *environment;
 
 @end
 
@@ -35,19 +36,24 @@
     NSError *error = nil;
     [[NSFileManager defaultManager] removeItemAtURL:[RZFManifestManager defaultLocalURL] error:&error];
     XCTAssertNil(error);
-    [[RZFManifestManager defaultEnvironment] setValue:@"0.9" forKey:@"appVersion"];
+    self.environment = [RZFManifestManager defaultEnvironment];
+    [self.environment setValue:@"0.9" forKey:@"appVersion"];
     self.bundles = @[];
 }
 
 - (void)testEmbeddedManifest
 {
     NSURL *url = [BUNDLE URLForResource:@"Examples/TestEmbeddedManifest" withExtension:@"freshair"];
-    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url delegate:self];
+    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url
+                                                                   localURL:nil
+                                                                environment:self.environment
+                                                                   delegate:self];
 
     while (mgr.loaded == NO) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     }
     XCTAssertNil(self.error);
+    XCTAssert(self.bundles.count == 2);
 }
 
 @end

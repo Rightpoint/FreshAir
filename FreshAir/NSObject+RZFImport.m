@@ -46,14 +46,11 @@
 {
     NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
     NSArray *releasesJSON = value[RZF_KP(RZFReleaseNotes, releases)] ?: @[];
-    NSArray *forceUpgradeJSON = value[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] ?: @[];
     RZFReleaseNotes *releaseNotes = [[RZFReleaseNotes alloc] init];
     releaseNotes.upgradeURL = [NSURL URLWithString:value[RZF_KP(RZFReleaseNotes, upgradeURL)]];
+    releaseNotes.minimumVersion = value[RZF_KP(RZFReleaseNotes, minimumVersion)];
     releaseNotes.releases = [releasesJSON map:^id(id value) {
         return [RZFRelease instanceFromJSON:value];
-    }];
-    releaseNotes.forceUpgradeConditions = [forceUpgradeJSON map:^id(id value) {
-        return [RZFCondition instanceFromJSON:value];
     }];
     return releaseNotes;
 }
@@ -66,9 +63,8 @@
              RZF_KP(RZFReleaseNotes, releases): [self.releases valueForKey:RZF_KP(RZFRelease, jsonRepresentation)],
              } mutableCopy];
 
-    NSArray *conditions = self.forceUpgradeConditions;
-    if (conditions.count > 0) {
-        representation[RZF_KP(RZFReleaseNotes, forceUpgradeConditions)] = [conditions valueForKey:RZF_KP(RZFCondition, jsonRepresentation)];
+    if (self.minimumVersion) {
+        representation[RZF_KP(RZFReleaseNotes, minimumVersion)] = self.minimumVersion;
     }
     return [representation copy];
 }

@@ -14,14 +14,16 @@
 
 @protocol RZFUpdatePromptViewControllerDelegate <NSObject>
 
-- (void)updatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController dismissAndShouldUpgrade:(BOOL)shouldUpgrade;
+- (void)updatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController shouldUpgradeWithURL:(NSURL *)url;
+- (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController;
 
 @end
 
 @interface RZFUpdatePromptViewController : RZFViewController
 
-- (instancetype)initWithUpdateViewModel:(RZFUpdateViewModel *)updateViewModel bundle:(NSBundle *)bundle;
+- (instancetype)initWithUpdateViewModel:(RZFUpdateViewModel *)updateViewModel upgradeURL:(NSURL *)upgradeURL bundle:(NSBundle *)bundle;
 
+@property (strong, nonatomic, readonly) NSURL *upgradeURL;
 @property (weak, nonatomic, readwrite) id <RZFUpdatePromptViewControllerDelegate> delegate;
 
 @end

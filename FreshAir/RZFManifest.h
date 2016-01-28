@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @interface RZFManifest : NSObject
 
+
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
                            bundle:(NSBundle *)bundle
                       environment:(NSDictionary *)environment;

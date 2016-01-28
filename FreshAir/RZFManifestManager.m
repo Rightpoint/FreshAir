@@ -20,10 +20,10 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
 
 @property (copy, nonatomic, readonly) NSURL *remoteURL;
 @property (copy, nonatomic, readonly) NSURL *containerURL;
-@property (copy, nonatomic, readonly) NSDictionary *environment;
+@property (copy, nonatomic, readonly) NSDictionary<NSString *, NSString *> *environment;
 @property (weak, nonatomic, readonly) id <RZFManifestManagerDelegate> delegate;
 @property (strong, nonatomic, readonly) NSOperationQueue *backgroundOperations;
-@property (strong, nonatomic, readwrite) NSArray* bundles;
+@property (strong, nonatomic) NSArray<NSBundle *> *allBundles;
 
 @end
 
@@ -51,7 +51,9 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
 }
 
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
-                         delegate:(id<RZFManifestManagerDelegate>)delegate;
+                         localURL:(NSURL *)localURL
+                      environment:(NSDictionary<NSString *, NSString *> *)environment
+                         delegate:(id<RZFManifestManagerDelegate>)delegate
 {
     NSAssert([[remoteURL pathExtension] isEqual:@"freshair"], @"Remote URL must point to a .freshair resource");
 
@@ -59,10 +61,16 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
     if (self) {
         _remoteURL = remoteURL;
         _delegate = delegate;
-        _bundles = @[];
-        _containerURL = [self.class defaultLocalURL];
-        _environment = [self.class.defaultEnvironment copy];
+        _containerURL = localURL ?: [self.class defaultLocalURL];
+        _environment = [environment copy] ?: [self.class.defaultEnvironment copy];
         _backgroundOperations = [[NSOperationQueue alloc] init];
+        _allBundles = @[];
+
+        // Prepare the bundle
+        NSString *bundleName = [remoteURL lastPathComponent];
+        NSURL *bundleURL = [self.containerURL URLByAppendingPathComponent:bundleName];
+        [self ensureLocalDirectory:bundleURL];
+        _bundle = [NSBundle bundleWithURL:bundleURL];
 
         [self syncRemoteURL:remoteURL];
     }
@@ -71,15 +79,9 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
 
 - (void)syncRemoteURL:(NSURL *)remoteURL
 {
-    // Prepare the destination bundle
-    NSString *bundleName = [remoteURL lastPathComponent];
-    NSURL *bundleURL = [self.containerURL URLByAppendingPathComponent:bundleName];
-    [self ensureLocalDirectory:bundleURL];
-    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
-
     // Create the manifest
     RZFManifest *manifest = [[RZFManifest alloc] initWithRemoteURL:remoteURL
-                                                            bundle:bundle
+                                                            bundle:_bundle
                                                        environment:self.environment];
 
     // Always fetch or update the manifest
@@ -159,7 +161,6 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
             [self.delegate manifestManager:self didEncounterError:fetchOperation.error];
             return;
         }
-        NSLog(@"\n%@ ->\n%@", fetchOperation.fromURL.path, fetchOperation.destinationURL.path);
         RZFManifest *manifest = fetchOperation.manifest;
         NSURL *bundleManifest = [manifest.bundle.bundleURL rzf_manifestURL];
         // If the fetch was for this bundle's manifest file, load all of the entries
@@ -182,8 +183,8 @@ NSString *const RZFreshAirErrorDomain = @"com.raizlabs.freshair.error";
         // If the manifest is loaded (IE: This is the last downloaded file)
         // notify the delegate
         NSBundle *bundle = manifest.bundle;
-        if ([manifest isLoaded] && [self.bundles containsObject:bundle] == NO) {
-            self.bundles = [self.bundles arrayByAddingObject:bundle];
+        if ([manifest isLoaded] && [self.allBundles containsObject:bundle] == NO) {
+            self.allBundles = [self.allBundles arrayByAddingObject:bundle];
             [self.delegate manifestManager:self didLoadBundle:bundle];
         }
     }

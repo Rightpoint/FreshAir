@@ -7,6 +7,7 @@
 //
 
 #import "RZFUpdateViewModel.h"
+#import "RZFReleaseNotes.h"
 
 static NSString * const kRZFDefaultPromptTitleLabelText = @"New Version";
 static NSString * const kRZFDefaultPromptTitleLabelTextForce = @"Please Update";
@@ -17,5 +18,6 @@ static NSString * const kRZFDefaultConfirmButtonTitle = @"Update";
 static NSString * const kRZFDefaultForceUpdateButtonTitle = @"Update Now";
 
 @implementation RZFUpdateViewModel
+
 
 @end

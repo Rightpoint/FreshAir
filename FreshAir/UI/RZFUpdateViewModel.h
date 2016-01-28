@@ -8,14 +8,16 @@
 
 @import UIKit;
 
+@class RZFReleaseNotes;
+
 @interface RZFUpdateViewModel : NSObject
 
-@property (copy, nonatomic, readonly) NSString *localizedTitle;
-@property (copy, nonatomic, readonly) NSString *localizedDescription;
-@property (strong, nonatomic, readonly) UIImage *image;
+@property (copy, nonatomic) NSString *localizedTitle;
+@property (copy, nonatomic) NSString *localizedDescription;
+@property (strong, nonatomic) UIImage *image;
 
-@property (copy, nonatomic, readonly) NSString *localizedConfirmation;
-@property (copy, nonatomic, readonly) NSString *localizedDismiss;
-@property (assign, nonatomic, readonly) BOOL isForced;
+@property (copy, nonatomic) NSString *localizedConfirmation;
+@property (copy, nonatomic) NSString *localizedDismiss;
+@property (assign, nonatomic) BOOL isForced;
 
 @end
