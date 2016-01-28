@@ -14,12 +14,8 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @interface RZFManifest : NSObject
 
+- (instancetype)initWithBundle:(NSBundle *)bundle;
 
-- (instancetype)initWithRemoteURL:(NSURL *)remoteURL
-                           bundle:(NSBundle *)bundle
-                      environment:(NSDictionary *)environment;
-
-@property (copy, nonatomic, readonly) NSURL *remoteURL;
 @property (strong, nonatomic, readonly) NSBundle *bundle;
 
 @property (copy, nonatomic, readonly) NSArray<RZFManifestEntry *> *entries;
@@ -27,9 +23,7 @@ NS_ASSUME_NONNULL_BEGIN;
 - (BOOL)loadEntriesError:(NSError **)error;
 - (BOOL)isManifestLoaded;
 
-- (BOOL)isLoaded;
-
-- (NSArray<NSString *> *)unloadedFilenames;
+- (BOOL)isLoadedEnvironment:(NSDictionary *)environment;
 
 @end
 

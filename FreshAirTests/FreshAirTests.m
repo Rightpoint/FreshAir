@@ -48,6 +48,7 @@
                                                                    localURL:nil
                                                                 environment:self.environment
                                                                    delegate:self];
+    [mgr update];
 
     while (mgr.loaded == NO) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];

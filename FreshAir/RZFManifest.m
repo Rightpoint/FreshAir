@@ -10,26 +10,18 @@
 #import "RZFManifestEntry.h"
 #import "NSURL+RZFManifest.h"
 #import "NSObject+RZFImport.h"
-
-@interface RZFManifest ()
-
-@property (copy, nonatomic) NSDictionary *environment;
-
-@end
+#import "NSBundle+RZFreshAir.h"
 
 @implementation RZFManifest
 
 @synthesize entries = _entries;
 
-- (instancetype)initWithRemoteURL:(NSURL *)remoteURL
-                           bundle:(NSBundle *)bundle
-                      environment:(NSDictionary *)environment;
+- (instancetype)initWithBundle:(NSBundle *)bundle
 {
+    NSAssert(bundle.infoDictionary[RZFreshAirRemoteURL] != nil, @"Specified bundle is not a freshair bundle");
     self = [super init];
     if (self) {
-        _remoteURL = remoteURL;
         _bundle = bundle;
-        _environment = environment;
         _entries = @[];
     }
     return self;
@@ -47,21 +39,20 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:manifestFile.path];
 }
 
-- (NSArray *)unloadedFilenames
+- (BOOL)isLoadedEnvironment:(NSDictionary *)environment
 {
-    NSMutableArray *unloadedFiles = [NSMutableArray array];
-    for (RZFManifestEntry *entry in self.entries) {
-        if ([entry isApplicableInEnvironment:self.environment] &&
-            [entry isLoadedInBundle:self.bundle] == NO) {
-            [unloadedFiles addObject:entry.filename];
+    BOOL result = NO;
+    if ([self isManifestLoaded]) {
+        result = YES;
+        for (RZFManifestEntry *entry in self.entries) {
+            if ([entry isApplicableInEnvironment:environment] &&
+                [entry isLoadedInBundle:self.bundle] == NO) {
+                result = NO;
+                break;
+            }
         }
     }
-    return [unloadedFiles copy];
-}
-
-- (BOOL)isLoaded
-{
-    return [self isManifestLoaded] && self.unloadedFilenames.count == 0;
+    return result;
 }
 
 @end

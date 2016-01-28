@@ -11,6 +11,8 @@
 #import "RZFManifest.h"
 #import "RZFManifestEntry.h"
 #import "RZFFileHash.h"
+#import "RZFError.h"
+#import "NSBundle+RZFreshAir.h"
 
 @implementation RZFFetchOperation
 
@@ -22,7 +24,7 @@
     if (self) {
         self.manifest = manifest;
         self.sha = sha;
-        self.fromURL = [manifest.remoteURL URLByAppendingPathComponent:filename];
+        self.fromURL = [manifest.bundle.rzf_remoteURL URLByAppendingPathComponent:filename];
         self.destinationURL = [manifest.bundle.bundleURL URLByAppendingPathComponent:filename];
         
         self.session = [NSURLSession sharedSession];

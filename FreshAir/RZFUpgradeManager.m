@@ -8,7 +8,7 @@
 
 #import "RZFUpgradeManager.h"
 #import "RZFManifestManager.h"
-#import "NSURL+RZFManifest.h"
+#import "NSBundle+RZFreshAir.h"
 #import "NSObject+RZFImport.h"
 #import "RZFUpdatePromptViewController.h"
 #import "RZFUpdateViewModel.h"
@@ -69,15 +69,16 @@
     return self;
 }
 
-- (void)checkForUpdateInBundle:(NSBundle *)bundle
+- (void)refreshUpgradeBundle
 {
-    NSURL *releaseURL = [bundle.bundleURL rzf_releaseURL];
-    NSError *error = nil;
-    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes rzf_importURL:releaseURL error:&error];
-    if (error) {
-        [self logError:error message:@"Loading Release Notes"];
-    }
-    else {
+    [self.upgradeManifestManager update];
+}
+
+- (void)showUpgradePromptIfDesired
+{
+    NSBundle *bundle = self.upgradeManifestManager.bundle;
+    RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
+    if (releaseNotes) {
         BOOL isForced = [releaseNotes isUpgradeRequiredForVersion:self.currentVersion];
         if ([releaseNotes isUpgradeAvailableForVersion:self.currentVersion] || isForced) {
             RZFUpdateViewModel *updateViewModel = [[RZFUpdateViewModel alloc] init];
@@ -92,12 +93,12 @@
 
 - (void)manifestManager:(RZFManifestManager *)manifestManager didLoadBundle:(NSBundle *)bundle
 {
-    [self checkForUpdateInBundle:bundle];
+    [self showUpgradePromptIfDesired];
 }
 
 - (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error
 {
-    [self logError:error message:@"Loading Manifest"];
+    NSLog(@"Error Loading Manifest: %@", error);
 }
 
 - (void)updatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController shouldUpgradeWithURL:(NSURL *)url
@@ -110,15 +111,14 @@
     [self.delegate upgradeManager:self dismissViewController:updatePromptViewController];
 }
 
-- (void)showReleaseNotesIfAvailableAndUnviewed
+- (void)showReleaseNotesIfDesired
 {
 
 }
 
-- (void)logError:(NSError *)error message:(NSString *)message
+- (void)showReleaseNotes
 {
-    NSLog(@"Error %@: %@", message, error);
-}
 
+}
 
 @end

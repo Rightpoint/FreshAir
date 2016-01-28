@@ -10,13 +10,7 @@
 
 @class RZFUpgradeManager;
 
-@protocol RZFUpgradeManagerDelegate <NSObject>
-
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager presentViewController:(UIViewController *)viewController;
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager dismissViewController:(UIViewController *)viewController;
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager openURL:(NSURL *)upgradeURL;
-
-@end
+@protocol RZFUpgradeManagerDelegate;
 
 @interface RZFUpgradeManager : NSObject
 
@@ -28,22 +22,39 @@
  */
 @property (weak, nonatomic) id<RZFUpgradeManagerDelegate> delegate;
 
-- (void)attemptManifestRefresh;
+/**
+ *  Refresh the bundle
+ */
+- (void)refreshUpgradeBundle;
 
 /**
- * Show the upgrade prompt if desired. If there are release notes downloaded and the version
- * has not been viewed, or if an update is forced, trigger the delegate to display the upgrade prompt.
+ * Show the upgrade prompt if appropriate.
+ *
+ * If there is a new version that has not been prompted display the upgrade prompt.
+ * Also, if the current version is below the minimum version, display the upgrade prompt and do not allow it to be dismissed.
  */
 - (void)showUpgradePromptIfDesired;
 
 /**
- * Show the upgrade prompt. This can be triggered to force an update.
- */
-- (void)showUpgradePrompt;
-
-/**
+ * Present the release notes if appropriate.
+ *
+ * If there are release notes are downloaded that have not been displayed, present them to the user.
  */
 - (void)showReleaseNotesIfDesired;
 
+/**
+ * Present the release notes
+ *
+ */
+- (void)showReleaseNotes;
+
+
+@end
+
+@protocol RZFUpgradeManagerDelegate <NSObject>
+
+- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager presentViewController:(UIViewController *)viewController;
+- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager dismissViewController:(UIViewController *)viewController;
+- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager openURL:(NSURL *)upgradeURL;
 
 @end

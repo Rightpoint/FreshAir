@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN;
 
-OBJC_EXTERN NSString *const RZFreshAirErrorDomain;
-typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
-    RZFreshAirErrorCodeSHAMismatch
-};
-
-
 @protocol RZFManifestManagerDelegate;
 
 @interface RZFManifestManager : NSObject
@@ -52,8 +46,12 @@ typedef NS_ENUM(NSUInteger, RZFreshAirErrorCode) {
                       environment:(NSDictionary<NSString *, NSString *> * __nullable)environment
                          delegate:(id<RZFManifestManagerDelegate>)delegate;
 
+/**
+ *  Update the local bundle to the state of the remote bundle.
+ */
+- (void)update;
 
-@property (strong, nonatomic, readonly) NSBundle *bundle;
+@property (strong, nonatomic, readonly) NSBundle * __nullable bundle;
 @property (strong, nonatomic, readonly) NSArray<NSBundle *> *allBundles;
 @property (assign, nonatomic, readonly) BOOL loaded;
 
