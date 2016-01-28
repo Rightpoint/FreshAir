@@ -21,7 +21,9 @@ FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 #import <FreshAirMac/RZFReleaseNotes.h>
 #import <FreshAirMac/RZFRelease.h>
 #import <FreshAirMac/RZFFeature.h>
+#import <FreshAirMac/RZFError.h>
 
 #import <FreshAirMac/RZFFileHash.h>
 #import <FreshAirMac/NSURL+RZFManifest.h>
+#import <FreshAirMac/NSBundle+RZFreshAir.h>
 #import <FreshAirMac/NSObject+RZFImport.h>

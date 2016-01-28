@@ -47,6 +47,7 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
 @property (strong, nonatomic) RZFManifestManager *upgradeManifestManager;
 @property (strong, nonatomic) NSString *currentVersion;
 @property (strong, nonatomic) NSUserDefaults *userDefaults;
+@property (assign, nonatomic) BOOL shouldShowUpgradePrompt;
 
 @end
 
@@ -84,7 +85,9 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
 
 - (void)manifestManager:(RZFManifestManager *)manifestManager didLoadBundle:(NSBundle *)bundle
 {
-    [self showUpgradePromptIfDesired];
+    if (self.shouldShowUpgradePrompt) {
+        [self showUpgradePromptIfDesired];
+    }
 }
 
 - (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error
@@ -96,7 +99,6 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
 {
     NSBundle *bundle = self.upgradeManifestManager.bundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
-#warning Still chance for double load
     if (releaseNotes && self.upgradeManifestManager.loaded) {
         NSString *lastVersionPrompted = [self.userDefaults stringForKey:RZFLastVersionPromptedKey];
         BOOL isForced = [releaseNotes isUpgradeRequiredForVersion:self.currentVersion];
@@ -109,7 +111,11 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
             RZFUpdatePromptViewController *vc = [[RZFUpdatePromptViewController alloc] initWithUpdateViewModel:updateViewModel upgradeURL:releaseNotes.upgradeURL bundle:bundle];
             vc.delegate = self;
             [self.delegate upgradeManager:self presentViewController:vc];
+            self.shouldShowUpgradePrompt = NO;
         }
+    }
+    else {
+        self.shouldShowUpgradePrompt = YES;
     }
 }
 
@@ -120,7 +126,9 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
 
 - (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController
 {
-    [self.userDefaults setValue:self.currentVersion forKey:RZFLastVersionPromptedKey];
+    NSBundle *bundle = self.upgradeManifestManager.bundle;
+    RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
+    [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
     [self.delegate upgradeManager:self dismissViewController:updatePromptViewController];
 }
 

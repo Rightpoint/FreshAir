@@ -29,7 +29,7 @@
 
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version
 {
-    return self.minimumVersion != nil && [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedAscending;
+    return self.minimumVersion != nil && [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedDescending;
 }
 
 - (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;
