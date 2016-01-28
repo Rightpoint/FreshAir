@@ -16,8 +16,8 @@
 #import "RZFUpdatePromptViewController.h"
 #import "RZFReleaseNotesViewController.h"
 
-static NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
-static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
+NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
+NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
 
 @interface UIApplication (RZFPresentation) <RZFUpgradeManagerDelegate>
 @end
@@ -26,7 +26,11 @@ static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersi
 
 - (void)upgradeManager:(RZFUpgradeManager *)upgradeManager presentViewController:(UIViewController *)viewController
 {
-    [self.delegate.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+    UIViewController *topViewController = self.delegate.window.rootViewController;
+    while (topViewController.presentedViewController) {
+        topViewController = topViewController.presentedViewController;
+    }
+    [topViewController presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)upgradeManager:(RZFUpgradeManager *)upgradeManager dismissViewController:(UIViewController *)viewController

@@ -12,6 +12,9 @@
 
 @protocol RZFUpgradeManagerDelegate;
 
+OBJC_EXTERN NSString *const RZFLastVersionPromptedKey;
+OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
+
 @interface RZFUpgradeManager : NSObject
 
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL currentVersion:(NSString *)currentVersion;

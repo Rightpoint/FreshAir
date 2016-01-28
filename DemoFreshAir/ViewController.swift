@@ -31,10 +31,13 @@ class ViewController: UITableViewController {
             upgradeManager.showReleaseNotesIfDesired()
         case (0, 2):
             upgradeManager.showReleaseNotes()
+        case (0, 3):
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(RZFLastVersionOfReleaseNotesDisplayedKey)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(RZFLastVersionPromptedKey)
         default:
             break
-
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 

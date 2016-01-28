@@ -23,16 +23,27 @@ static const CGFloat kRZFTintViewAlpha = 0.7f;
 
 # pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super init];
-    
+    self = [super initWithNibName:nil bundle:nil];
     if ( self ) {
         self.slideAnimationController = [[RZFSlideAnimationController alloc] init];
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
     }
     
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.slideAnimationController = [[RZFSlideAnimationController alloc] init];
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.transitioningDelegate = self;
+    }
+
     return self;
 }
 
