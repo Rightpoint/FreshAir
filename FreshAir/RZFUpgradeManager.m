@@ -11,6 +11,7 @@
 
 #import "NSBundle+RZFreshAir.h"
 #import "NSObject+RZFImport.h"
+#import "UIApplication+RZFInteractionDelegate.h"
 #import "RZFUpdateViewModel.h"
 
 #import "RZFUpdatePromptViewController.h"
@@ -18,32 +19,6 @@
 
 NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
 NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
-
-@interface UIApplication (RZFPresentation) <RZFUpgradeManagerDelegate>
-@end
-
-@implementation UIApplication (RZFPresentation)
-
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager presentViewController:(UIViewController *)viewController
-{
-    UIViewController *topViewController = self.delegate.window.rootViewController;
-    while (topViewController.presentedViewController) {
-        topViewController = topViewController.presentedViewController;
-    }
-    [topViewController presentViewController:viewController animated:YES completion:nil];
-}
-
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager dismissViewController:(UIViewController *)viewController
-{
-    [viewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager openURL:(NSURL *)upgradeURL
-{
-    [self openURL:upgradeURL];
-}
-
-@end
 
 @interface RZFUpgradeManager ()
 <RZFManifestManagerDelegate, RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
@@ -114,7 +89,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
             RZFUpdatePromptViewController *vc = [[RZFUpdatePromptViewController alloc] initWithUpdateViewModel:updateViewModel upgradeURL:releaseNotes.upgradeURL bundle:bundle];
             vc.delegate = self;
-            [self.delegate upgradeManager:self presentViewController:vc];
+            [self.delegate rzf_intitiator:self presentViewController:vc];
             self.shouldShowUpgradePrompt = NO;
         }
     }
@@ -125,7 +100,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (void)updatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController shouldUpgradeWithURL:(NSURL *)url
 {
-    [self.delegate upgradeManager:self openURL:url];
+    [self.delegate rzf_intitiator:self openURL:url];
 }
 
 - (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController
@@ -133,7 +108,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     NSBundle *bundle = self.upgradeManifestManager.bundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
     [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
-    [self.delegate upgradeManager:self dismissViewController:updatePromptViewController];
+    [self.delegate rzf_intitiator:self dismissViewController:updatePromptViewController];
 }
 
 - (void)showReleaseNotesIfDesired
@@ -157,14 +132,13 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.currentVersion];
     RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:bundle];
     vc.delegate = self;
-    [self.delegate upgradeManager:self presentViewController:vc];
+    [self.delegate rzf_intitiator:self presentViewController:vc];
 }
 
 - (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)releaseNotesViewController
 {
     [self.userDefaults setValue:self.currentVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
-    [self.delegate upgradeManager:self dismissViewController:releaseNotesViewController];
+    [self.delegate rzf_intitiator:self dismissViewController:releaseNotesViewController];
 }
-
 
 @end

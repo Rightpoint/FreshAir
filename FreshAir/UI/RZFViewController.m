@@ -61,7 +61,6 @@ static const CGFloat kRZFTintViewAlpha = 0.7f;
     self.tintView = [[UIView alloc] init];
     self.tintView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tintView];
-    
     [self.tintView rzf_fillContainerWithInsets:UIEdgeInsetsZero];
     
     self.tintView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:kRZFTintViewAlpha];

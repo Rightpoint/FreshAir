@@ -117,6 +117,9 @@
 		ABF296661C59B4440048F58B /* FreshAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; };
 		ABF296671C59B4440048F58B /* FreshAir.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ABF2966B1C59BA6D0048F58B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
+		ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */; };
+		ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */; };
+		ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +263,9 @@
 		ABF2965D1C59B41C0048F58B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABF296601C59B41C0048F58B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABF296621C59B41C0048F58B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUIInteractionDelegate.h; sourceTree = "<group>"; };
+		ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RZFInteractionDelegate.h"; sourceTree = "<group>"; };
+		ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RZFInteractionDelegate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +471,9 @@
 				ABF296121C594A700048F58B /* RZFReleaseNotesViewController.m */,
 				ABF296131C594A700048F58B /* RZFSlideAnimationController.h */,
 				ABF296141C594A700048F58B /* RZFSlideAnimationController.m */,
+				ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */,
+				ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */,
+				ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -490,10 +499,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABF2961B1C594A700048F58B /* RZFReleaseNotesView.h in Headers */,
+				ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */,
 				ABF296421C5993A60048F58B /* NSBundle+RZFreshAir.h in Headers */,
 				ABF296251C594AD10048F58B /* UIView+RZFAutoLayout.h in Headers */,
 				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
 				AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */,
+				ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */,
 				AB954C061C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 				ABF2961F1C594A700048F58B /* RZFReleaseNotesViewController.h in Headers */,
 				ABF2961D1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h in Headers */,
@@ -818,6 +829,7 @@
 				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
 				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
 				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
+				ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */,
 				ABF296201C594A700048F58B /* RZFReleaseNotesViewController.m in Sources */,
 				ABF296161C594A700048F58B /* RZFViewController.m in Sources */,
 				ABF2962C1C594AE10048F58B /* UIFont+RZFStyle.m in Sources */,

@@ -10,7 +10,7 @@
 
 @class RZFUpgradeManager;
 
-@protocol RZFUpgradeManagerDelegate;
+@protocol RZFInteractionDelegate;
 
 OBJC_EXTERN NSString *const RZFLastVersionPromptedKey;
 OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
@@ -20,10 +20,10 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL currentVersion:(NSString *)currentVersion;
 
 /**
- * Delegate to manage presentation. By default this protocol is implemented by UIApplication and performs a modal presentation
- * on top-most presented view controller of the app window.
+ * Delegate to manage presentation. If not set, the delegate will perform modal
+ * presentations on the top-most presented view controller of the UIApplication delegate window property, and call openURL directly on UIApplication.
  */
-@property (weak, nonatomic) id<RZFUpgradeManagerDelegate> delegate;
+@property (weak, nonatomic) id<RZFInteractionDelegate> delegate;
 
 /**
  *  Refresh the bundle. This should be called when the network is available.
@@ -53,10 +53,3 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 @end
 
-@protocol RZFUpgradeManagerDelegate <NSObject>
-
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager presentViewController:(UIViewController *)viewController;
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager dismissViewController:(UIViewController *)viewController;
-- (void)upgradeManager:(RZFUpgradeManager *)upgradeManager openURL:(NSURL *)upgradeURL;
-
-@end
