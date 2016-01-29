@@ -12,6 +12,8 @@
 #import "RZFManifest.h"
 #import "RZFManifest+Private.h"
 #import "RZFManifestEntry.h"
+#import "RZFEnvironment.h"
+
 #import "RZFFetchOperation.h"
 #import "NSURL+RZFManifest.h"
 #import "NSBundle+RZFreshAir.h"
@@ -20,7 +22,7 @@
 @interface RZFManifestManager ()
 
 @property (copy, nonatomic, readonly) NSURL *containerURL;
-@property (copy, nonatomic, readonly) NSDictionary<NSString *, NSString *> *environment;
+@property (copy, nonatomic, readonly) RZFEnvironment *environment;
 @property (weak, nonatomic, readonly) id <RZFManifestManagerDelegate> delegate;
 @property (strong, nonatomic, readonly) NSOperationQueue *backgroundOperations;
 @property (strong, nonatomic) NSArray<NSBundle *> *allBundles;
@@ -39,20 +41,9 @@
     return URL;
 }
 
-+ (NSMutableDictionary *)defaultEnvironment
-{
-    NSAssert([NSThread currentThread] == [NSThread mainThread], @"Can only mutate the default environment on the main thread.");
-    static NSMutableDictionary *defaultEnvironment = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        defaultEnvironment = [NSMutableDictionary dictionary];
-    });
-    return defaultEnvironment;
-}
-
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
                          localURL:(NSURL *)localURL
-                      environment:(NSDictionary<NSString *, NSString *> *)environment
+                      environment:(RZFEnvironment *)environment
                          delegate:(id<RZFManifestManagerDelegate>)delegate
 {
     NSAssert([[remoteURL pathExtension] isEqual:@"freshair"], @"Remote URL must point to a .freshair resource");
@@ -61,7 +52,7 @@
     if (self) {
         _delegate = delegate;
         _containerURL = localURL ?: [self.class defaultLocalURL];
-        _environment = [environment copy] ?: [self.class.defaultEnvironment copy];
+        _environment = environment ?: [[RZFEnvironment alloc] init];
         _backgroundOperations = [[NSOperationQueue alloc] init];
         _allBundles = @[];
 
@@ -90,14 +81,11 @@
                                                                  sha:nil
                                                           inManifest:manifest];
     [self dispatchOperations:@[fetch]];
-    if ([manifest isManifestLoaded]) {
-        [self pruneManifest:manifest];
-    }
 }
 
 - (BOOL)loaded
 {
-    return [[self.bundle rzf_manifest] isLoadedEnvironment:self.environment];
+    return [self.environment isBundleLoaded:self.bundle];
 }
 
 - (void)createDirectoryForManifestEntry:(RZFManifestEntry *)entry inDirectory:(NSURL *)localDirectoryURL
@@ -124,8 +112,9 @@
     }
     NSMutableArray *operations = [NSMutableArray array];
     for (RZFManifestEntry *entry in manifest.entries) {
-        if ([entry isApplicableInEnvironment:self.environment] &&
-            [entry isLoadedInBundle:manifest.bundle] == NO) {
+        BOOL applicable = [entry isApplicableInEnvironment:self.environment.variables];
+        BOOL loaded = [entry isLoadedInBundle:manifest.bundle];
+        if (applicable && loaded == NO) {
             // Make any intermediary directories that are needed
             if ([entry.filename pathComponents].count > 1) {
                 [self createDirectoryForManifestEntry:entry
@@ -189,20 +178,10 @@
         // If the manifest is loaded (IE: This is the last downloaded file)
         // notify the delegate
         NSBundle *bundle = manifest.bundle;
-        if ([manifest isLoadedEnvironment:self.environment] &&
+        if ([self.environment isBundleLoaded:bundle] &&
             [self.allBundles containsObject:bundle] == NO) {
             self.allBundles = [self.allBundles arrayByAddingObject:bundle];
             [self.delegate manifestManager:self didLoadBundle:bundle];
-        }
-    }
-}
-
-- (void)pruneManifest:(RZFManifest *)manifest
-{
-    // Match the current directory list to the entries, minus the files with sha mismatches.
-    for (RZFManifestEntry *entry in manifest.entries) {
-        if ([entry isApplicableInEnvironment:self.environment] &&
-            [entry isLoadedInBundle:manifest.bundle] == NO) {
         }
     }
 }

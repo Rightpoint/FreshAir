@@ -11,7 +11,7 @@ import FreshAir
 
 class ViewController: UITableViewController {
     static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/TestFeature", withExtension: "freshair")
-    var upgradeManager = RZFUpgradeManager(remoteURL: freshairURL, currentVersion: "2.0")
+    var upgradeManager = RZFUpgradeManager(remoteURL: freshairURL)
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

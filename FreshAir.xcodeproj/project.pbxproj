@@ -10,8 +10,8 @@
 		AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968B1C58595D00EB00CC /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB954B7E1C55AFC7003A050B /* RZFManifestManager+UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */; };
-		AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */; };
+		AB954B7E1C55AFC7003A050B /* RZFEnvironment+UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954B7C1C55AFC7003A050B /* RZFEnvironment+UIKit.h */; };
+		AB954B7F1C55AFC7003A050B /* RZFEnvironment+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AB954B7D1C55AFC7003A050B /* RZFEnvironment+UIKit.m */; };
 		AB954BE71C56DC39003A050B /* manifest_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE51C56DC39003A050B /* manifest_schema.json */; };
 		AB954BE81C56DC39003A050B /* manifest_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE51C56DC39003A050B /* manifest_schema.json */; };
 		AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_notes_schema.json */; };
@@ -120,6 +120,9 @@
 		ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */; };
 		ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */; };
 		ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */; };
+		ABF296761C5B94710048F58B /* RZFEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296741C5B94710048F58B /* RZFEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABF296771C5B94710048F58B /* RZFEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296751C5B94710048F58B /* RZFEnvironment.m */; };
+		ABF296781C5BA7040048F58B /* RZFEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296741C5B94710048F58B /* RZFEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,8 +183,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFManifestManager+UIKit.h"; sourceTree = "<group>"; };
-		AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RZFManifestManager+UIKit.m"; sourceTree = "<group>"; };
+		AB954B7C1C55AFC7003A050B /* RZFEnvironment+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFEnvironment+UIKit.h"; sourceTree = "<group>"; };
+		AB954B7D1C55AFC7003A050B /* RZFEnvironment+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RZFEnvironment+UIKit.m"; sourceTree = "<group>"; };
 		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
 		AB954BE61C56DC39003A050B /* release_notes_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_schema.json; sourceTree = "<group>"; };
 		AB954BEB1C56F539003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
@@ -266,6 +269,8 @@
 		ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUIInteractionDelegate.h; sourceTree = "<group>"; };
 		ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RZFInteractionDelegate.h"; sourceTree = "<group>"; };
 		ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RZFInteractionDelegate.m"; sourceTree = "<group>"; };
+		ABF296741C5B94710048F58B /* RZFEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFEnvironment.h; sourceTree = "<group>"; };
+		ABF296751C5B94710048F58B /* RZFEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFEnvironment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +419,8 @@
 				ABF296411C5993A60048F58B /* NSBundle+RZFreshAir.m */,
 				ABA484151C544CBD002CDCB2 /* RZFManifest.h */,
 				ABA484161C544CBD002CDCB2 /* RZFManifest.m */,
+				ABF296741C5B94710048F58B /* RZFEnvironment.h */,
+				ABF296751C5B94710048F58B /* RZFEnvironment.m */,
 				AB8B96881C58587F00EB00CC /* Utility */,
 				ABF296061C594A490048F58B /* UI */,
 				ABA484311C551229002CDCB2 /* Private */,
@@ -435,8 +442,8 @@
 			children = (
 				ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */,
 				ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */,
-				AB954B7C1C55AFC7003A050B /* RZFManifestManager+UIKit.h */,
-				AB954B7D1C55AFC7003A050B /* RZFManifestManager+UIKit.m */,
+				AB954B7C1C55AFC7003A050B /* RZFEnvironment+UIKit.h */,
+				AB954B7D1C55AFC7003A050B /* RZFEnvironment+UIKit.m */,
 				AB954C0B1C582E59003A050B /* NSObject+RZFUtility.h */,
 				AB954C0C1C582E59003A050B /* NSObject+RZFUtility.m */,
 				AB954C0A1C582B4B003A050B /* RZFDefines.h */,
@@ -524,12 +531,13 @@
 				ABF296151C594A700048F58B /* RZFViewController.h in Headers */,
 				ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */,
 				ABF296211C594A700048F58B /* RZFSlideAnimationController.h in Headers */,
-				AB954B7E1C55AFC7003A050B /* RZFManifestManager+UIKit.h in Headers */,
+				AB954B7E1C55AFC7003A050B /* RZFEnvironment+UIKit.h in Headers */,
 				ABF296171C594A700048F58B /* RZFUpdatePromptView.h in Headers */,
 				ABF2962B1C594AE10048F58B /* UIFont+RZFStyle.h in Headers */,
 				ABF296191C594A700048F58B /* RZFUpdatePromptViewController.h in Headers */,
 				ABA484131C544C51002CDCB2 /* RZFManifestEntry.h in Headers */,
 				ABA484341C551A56002CDCB2 /* NSURL+RZFManifest.h in Headers */,
+				ABF296761C5B94710048F58B /* RZFEnvironment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +558,7 @@
 				AB954C071C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 				ABF296491C59ADA80048F58B /* RZFError.h in Headers */,
 				ABA484731C55A4A5002CDCB2 /* RZFFileHash.h in Headers */,
+				ABF296781C5BA7040048F58B /* RZFEnvironment.h in Headers */,
 				ABA484741C55A4A5002CDCB2 /* NSURL+RZFManifest.h in Headers */,
 				AB954C0E1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
 			);
@@ -815,9 +824,10 @@
 				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
 				AB954C021C581CA0003A050B /* RZFCondition.m in Sources */,
 				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
+				ABF296771C5B94710048F58B /* RZFEnvironment.m in Sources */,
 				ABF296431C5993A60048F58B /* NSBundle+RZFreshAir.m in Sources */,
 				ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */,
-				AB954B7F1C55AFC7003A050B /* RZFManifestManager+UIKit.m in Sources */,
+				AB954B7F1C55AFC7003A050B /* RZFEnvironment+UIKit.m in Sources */,
 				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
 				ABF2963B1C59568D0048F58B /* RZFUpgradeManager.m in Sources */,
 				ABF2962E1C594AE10048F58B /* UIColor+RZFStyle.m in Sources */,

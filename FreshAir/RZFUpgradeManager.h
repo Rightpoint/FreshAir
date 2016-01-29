@@ -17,7 +17,7 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 @interface RZFUpgradeManager : NSObject
 
-- (instancetype)initWithRemoteURL:(NSURL *)remoteURL currentVersion:(NSString *)currentVersion;
+- (instancetype)initWithRemoteURL:(NSURL *)remoteURL;
 
 /**
  * Delegate to manage presentation. If not set, the delegate will perform modal

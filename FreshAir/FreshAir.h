@@ -25,3 +25,4 @@ FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 #import <FreshAir/RZFError.h>
 #import <FreshAir/NSBundle+RZFreshAir.h>
 #import <FreshAir/RZFManifest.h>
+#import <FreshAir/RZFEnvironment.h>

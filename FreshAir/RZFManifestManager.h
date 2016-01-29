@@ -11,20 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN;
 
 @protocol RZFManifestManagerDelegate;
+@class RZFEnvironment;
 
 @interface RZFManifestManager : NSObject
-
-/**
- *  The environment that the manifest conditions are evaluated against. By default, this dictionary
- *  contains:
- *
- *          platform:      iOS
- *          systemVersion: The value of UIDevice.currentDevice.systemVersion
- *          displayScale:  The value of UIScreen.mainScreen.scale
- *          appVersion:    The value of NSBundle.mainBundle.userInfo.CFBundleShortVersionString
- *          defaults:      The value of NSUserDefaults.standardUserDefaults
- */
-+ (NSMutableDictionary<NSString *, NSString *> *)defaultEnvironment;
 
 /**
  *  The default local URL to download the manifest bundles too.
@@ -43,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN;
  */
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
                          localURL:(NSURL * __nullable)localURL
-                      environment:(NSDictionary<NSString *, NSString *> * __nullable)environment
+                      environment:(RZFEnvironment * __nullable)environment
                          delegate:(id<RZFManifestManagerDelegate>)delegate;
 
 /**

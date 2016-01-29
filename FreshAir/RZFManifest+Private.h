@@ -7,6 +7,7 @@
 //
 
 #import "RZFManifest.h"
+#import "RZFManifestEntry.h"
 
 @interface RZFManifest (RZFUtility)
 

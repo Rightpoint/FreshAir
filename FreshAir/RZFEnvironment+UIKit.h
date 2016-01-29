@@ -6,8 +6,8 @@
 //  Copyright © 2016 Raizlabs. All rights reserved.
 //
 
-#import <FreshAir/FreshAir.h>
+#import "RZFEnvironment.h"
 
-@interface RZFManifestManager (UIKit)
+@interface RZFEnvironment (UIKit)
 
 @end

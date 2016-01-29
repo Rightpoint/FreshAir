@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) NSError *error;
 @property (strong, nonatomic) NSArray *bundles;
-@property (strong, nonatomic) NSMutableDictionary *environment;
+@property (strong, nonatomic) RZFEnvironment *environment;
 
 @end
 
@@ -33,11 +33,13 @@
 - (void)setUp
 {
     [super setUp];
-    NSError *error = nil;
-    [[NSFileManager defaultManager] removeItemAtURL:[RZFManifestManager defaultLocalURL] error:&error];
-    XCTAssertNil(error);
-    self.environment = [RZFManifestManager defaultEnvironment];
-    [self.environment setValue:@"0.9" forKey:@"appVersion"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[RZFManifestManager defaultLocalURL].path]) {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] removeItemAtURL:[RZFManifestManager defaultLocalURL] error:&error];
+        XCTAssertNil(error);
+    }
+    [[RZFEnvironment defaultVariables] setValue:@"0.9" forKey:RZFEnvironmentAppVersionKey];
+    self.environment = [[RZFEnvironment alloc] init];
     self.bundles = @[];
 }
 
@@ -51,10 +53,10 @@
     [mgr update];
 
     while (mgr.loaded == NO) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
     }
     XCTAssertNil(self.error);
-    XCTAssert(self.bundles.count == 2);
+    XCTAssertEqual(self.bundles.count, 2);
 }
 
 - (void)testFeatureRange
