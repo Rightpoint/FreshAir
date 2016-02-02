@@ -10,69 +10,99 @@
 #import <FreshAir/FreshAir.h>
 
 #define BUNDLE [NSBundle bundleForClass:self.class]
-@interface FreshAirTests : XCTestCase <RZFManifestManagerDelegate>
+@interface FreshAirTests : XCTestCase
 
-@property (strong, nonatomic) NSError *error;
-@property (strong, nonatomic) NSArray *bundles;
 @property (strong, nonatomic) RZFEnvironment *environment;
 
 @end
 
 @implementation FreshAirTests
 
-- (void)manifestManager:(RZFManifestManager *)manifestManager didLoadBundle:(NSBundle *)bundle
-{
-    self.bundles = [self.bundles arrayByAddingObject:bundle];
-}
-
-- (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error
-{
-    self.error = error;
-}
-
 - (void)setUp
 {
     [super setUp];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[RZFManifestManager defaultLocalURL].path]) {
+
+#if (TARGET_IPHONE_SIMULATOR)
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[RZFBundleResourceRequest localURL].path]) {
         NSError *error = nil;
-        [[NSFileManager defaultManager] removeItemAtURL:[RZFManifestManager defaultLocalURL] error:&error];
+        [[NSFileManager defaultManager] removeItemAtURL:[RZFBundleResourceRequest localURL] error:&error];
         XCTAssertNil(error);
     }
+#endif
+
     [[RZFEnvironment defaultVariables] setValue:@"0.9" forKey:RZFEnvironmentAppVersionKey];
     self.environment = [[RZFEnvironment alloc] init];
-    self.bundles = @[];
 }
 
-- (void)testEmbeddedManifest
+- (void)testBasicManifest
 {
-    NSURL *url = [BUNDLE URLForResource:@"Examples/TestEmbeddedManifest" withExtension:@"freshair"];
-    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url
-                                                                   localURL:nil
-                                                                environment:self.environment
-                                                                   delegate:self];
-    [mgr update];
+    NSURL *url = [BUNDLE URLForResource:@"Examples/TestBasic" withExtension:@"freshair"];
+    RZFBundleResourceRequest *mgr = [[RZFBundleResourceRequest alloc] initWithRemoteURL:url
+                                                                            environment:self.environment
+                                                                             completion:nil];
 
-    while (mgr.loaded == NO) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    while (mgr.loaded == NO && mgr.error == nil) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
-    XCTAssertNil(self.error);
-    XCTAssertEqual(self.bundles.count, 2);
+    XCTAssertNil(mgr.error);
+    XCTAssertNotNil(mgr.bundle);
+    XCTAssertNil([mgr.bundle URLForResource:@"not_on_ios" withExtension:nil]);
+    XCTAssertNil([mgr.bundle URLForResource:@"gt_version_1" withExtension:nil]);
+    XCTAssertNotNil([mgr.bundle URLForResource:@"lte_version_1" withExtension:nil]);
+}
+
+- (void)testBasicManifestWithOnePointOh
+{
+    [[RZFEnvironment defaultVariables] setValue:@"1.0" forKey:RZFEnvironmentAppVersionKey];
+    self.environment = [[RZFEnvironment alloc] init];
+
+    NSURL *url = [BUNDLE URLForResource:@"Examples/TestBasic" withExtension:@"freshair"];
+    RZFBundleResourceRequest *mgr = [[RZFBundleResourceRequest alloc] initWithRemoteURL:url
+                                                                            environment:self.environment
+                                                                             completion:nil];
+
+    while (mgr.loaded == NO && mgr.error == nil) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+    XCTAssertNil(mgr.error);
+    XCTAssertNotNil(mgr.bundle);
+    XCTAssertNil([mgr.bundle URLForResource:@"not_on_ios" withExtension:nil]);
+    XCTAssertNil([mgr.bundle URLForResource:@"gt_version_1" withExtension:nil]);
+    XCTAssertNotNil([mgr.bundle URLForResource:@"lte_version_1" withExtension:nil]);
+}
+
+- (void)testBasicManifestWithOnePointOne
+{
+    [[RZFEnvironment defaultVariables] setValue:@"1.1" forKey:RZFEnvironmentAppVersionKey];
+    self.environment = [[RZFEnvironment alloc] init];
+
+    NSURL *url = [BUNDLE URLForResource:@"Examples/TestBasic" withExtension:@"freshair"];
+    RZFBundleResourceRequest *mgr = [[RZFBundleResourceRequest alloc] initWithRemoteURL:url
+                                                                            environment:self.environment
+                                                                             completion:nil];
+
+    while (mgr.loaded == NO && mgr.error == nil) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+    XCTAssertNil(mgr.error);
+    XCTAssertNotNil(mgr.bundle);
+    XCTAssertNil([mgr.bundle URLForResource:@"not_on_ios" withExtension:nil]);
+    XCTAssertNotNil([mgr.bundle URLForResource:@"gt_version_1" withExtension:nil]);
+    XCTAssertNil([mgr.bundle URLForResource:@"lte_version_1" withExtension:nil]);
 }
 
 - (void)testFeatureRange
 {
     NSURL *url = [BUNDLE URLForResource:@"Examples/TestFeature" withExtension:@"freshair"];
-    RZFManifestManager *mgr = [[RZFManifestManager alloc] initWithRemoteURL:url
-                                                                   localURL:nil
-                                                                environment:self.environment
-                                                                   delegate:self];
-    [mgr update];
+    RZFBundleResourceRequest *mgr = [[RZFBundleResourceRequest alloc] initWithRemoteURL:url
+                                                                            environment:self.environment
+                                                                             completion:nil];
 
-    while (mgr.loaded == NO) {
+    while (mgr.loaded == NO && mgr.error == nil) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     }
-    XCTAssertNil(self.error);
-    XCTAssert(self.bundles.count == 1);
+    XCTAssertNil(mgr.error);
+    XCTAssertNotNil(mgr.bundle);
 
     RZFReleaseNotes *notes = [mgr.bundle rzf_releaseNotes];
     NSArray *f1_12 = [notes featuresFromVersion:@"1.0" toVersion:@"1.2"];

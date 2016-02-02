@@ -17,18 +17,13 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 @interface RZFUpgradeManager : NSObject
 
-- (instancetype)initWithRemoteURL:(NSURL *)remoteURL;
+- (instancetype)init;
 
 /**
  * Delegate to manage presentation. If not set, the delegate will perform modal
  * presentations on the top-most presented view controller of the UIApplication delegate window property, and call openURL directly on UIApplication.
  */
 @property (weak, nonatomic) id<RZFInteractionDelegate> delegate;
-
-/**
- *  Refresh the bundle. This should be called when the network is available.
- */
-- (void)refreshUpgradeBundle;
 
 /**
  * Show the upgrade prompt if appropriate.

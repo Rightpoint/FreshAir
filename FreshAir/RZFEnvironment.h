@@ -51,16 +51,28 @@ OBJC_EXTERN NSString *const RZFEnvironmentAppVersionKey;
 - (BOOL)isUpgradeForced:(RZFReleaseNotes *)releaseNotes;
 
 /**
+ *  Check if the user should see release notes
+ */
+- (BOOL)shouldUserSeeReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+
+/**
+ *  Obtain the unviewed features in the release notes
+ */
+- (NSArray<RZFFeature *> *)unviewedFeaturesForReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+
+/**
+ *  Note that the user has viewed the release notes
+ */
+- (void)userDidViewContentOfReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+
+/**
  *  Note that the user has viewed the specified version.
  */
 - (void)userDidViewUpdatePromptForReleaseNotes:(RZFReleaseNotes *)releaseNotes;
 
-- (BOOL)shouldUserSeeReleaseNotes:(RZFReleaseNotes *)releaseNotes;
-
-- (NSArray<RZFFeature *> *)unviewedFeaturesForReleaseNotes:(RZFReleaseNotes *)releaseNotes;
-
-- (void)userDidViewContentOfReleaseNotes:(RZFReleaseNotes *)releaseNotes;
-
-- (BOOL)isBundleLoaded:(NSBundle *)bundle;
+/**
+ * Check to see if the bundle is loaded
+ */
+- (BOOL)isRemoteBundleLoaded:(NSBundle *)bundle;
 
 @end

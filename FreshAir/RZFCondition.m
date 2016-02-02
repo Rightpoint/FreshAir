@@ -26,6 +26,9 @@
     if ([self.comparison isEqual:@"eq"]) {
         return @"==";
     }
+    else if ([self.comparison isEqual:@"ne"]) {
+        return @"!=";
+    }
     else if ([self.comparison isEqual:@"gt"]) {
         return @">";
     }

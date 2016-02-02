@@ -60,11 +60,6 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     return [releaseNotes isUpgradeRequiredForVersion:self.currentVersion];
 }
 
-- (void)userDidViewUpdatePromptForReleaseNotes:(RZFReleaseNotes *)releaseNotes
-{
-    [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
-}
-
 - (BOOL)shouldUserSeeReleaseNotes:(RZFReleaseNotes *)releaseNotes
 {
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
@@ -92,7 +87,12 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 }
 
-- (BOOL)isBundleLoaded:(NSBundle *)bundle
+- (void)userDidViewUpdatePromptForReleaseNotes:(RZFReleaseNotes *)releaseNotes
+{
+    [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
+}
+
+- (BOOL)isRemoteBundleLoaded:(NSBundle *)bundle
 {
     RZFManifest *manifest = [bundle rzf_manifest];
     BOOL result = NO;

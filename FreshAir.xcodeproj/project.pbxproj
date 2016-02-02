@@ -51,21 +51,21 @@
 		ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */; };
 		ABA484171C544CBD002CDCB2 /* RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484151C544CBD002CDCB2 /* RZFManifest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484161C544CBD002CDCB2 /* RZFManifest.m */; };
-		ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */; };
+		ABA4841B1C544DDA002CDCB2 /* RZFBundleResourceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA4841C1C544DDA002CDCB2 /* RZFBundleResourceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */; };
 		ABA4841F1C544ECA002CDCB2 /* RZFFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */; };
 		ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */; };
 		ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484291C546AC0002CDCB2 /* RZFFileHash.h */; };
 		ABA484341C551A56002CDCB2 /* NSURL+RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484321C551A56002CDCB2 /* NSURL+RZFManifest.h */; };
 		ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */; };
 		ABA484451C559FD2002CDCB2 /* RZFFileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */; };
-		ABA484621C55A149002CDCB2 /* RZFManifestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */; };
+		ABA484621C55A149002CDCB2 /* RZFBundleResourceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */; };
 		ABA484631C55A149002CDCB2 /* RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484161C544CBD002CDCB2 /* RZFManifest.m */; };
 		ABA484641C55A149002CDCB2 /* RZFManifestEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */; };
 		ABA484651C55A149002CDCB2 /* RZFFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */; };
 		ABA484661C55A149002CDCB2 /* RZFFileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA4842A1C546AC0002CDCB2 /* RZFFileHash.m */; };
 		ABA484671C55A149002CDCB2 /* NSURL+RZFManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484331C551A56002CDCB2 /* NSURL+RZFManifest.m */; };
-		ABA4846F1C55A4A5002CDCB2 /* RZFManifestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA4846F1C55A4A5002CDCB2 /* RZFBundleResourceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484701C55A4A5002CDCB2 /* RZFManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484151C544CBD002CDCB2 /* RZFManifest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484711C55A4A5002CDCB2 /* RZFManifestEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA484111C544C51002CDCB2 /* RZFManifestEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA484721C55A4A5002CDCB2 /* RZFFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */; };
@@ -216,8 +216,8 @@
 		ABA484121C544C51002CDCB2 /* RZFManifestEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifestEntry.m; sourceTree = "<group>"; };
 		ABA484151C544CBD002CDCB2 /* RZFManifest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFManifest.h; sourceTree = "<group>"; };
 		ABA484161C544CBD002CDCB2 /* RZFManifest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifest.m; sourceTree = "<group>"; };
-		ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFManifestManager.h; sourceTree = "<group>"; };
-		ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFManifestManager.m; sourceTree = "<group>"; };
+		ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFBundleResourceRequest.h; sourceTree = "<group>"; };
+		ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFBundleResourceRequest.m; sourceTree = "<group>"; };
 		ABA4841D1C544ECA002CDCB2 /* RZFFetchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFetchOperation.h; sourceTree = "<group>"; };
 		ABA4841E1C544ECA002CDCB2 /* RZFFetchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFFetchOperation.m; sourceTree = "<group>"; };
 		ABA484291C546AC0002CDCB2 /* RZFFileHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFFileHash.h; sourceTree = "<group>"; };
@@ -405,8 +405,8 @@
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
 				ABF296381C59568D0048F58B /* RZFUpgradeManager.h */,
 				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
-				ABA484191C544DDA002CDCB2 /* RZFManifestManager.h */,
-				ABA4841A1C544DDA002CDCB2 /* RZFManifestManager.m */,
+				ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */,
+				ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */,
 				AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */,
 				AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */,
 				AB954BFA1C57A89E003A050B /* RZFRelease.h */,
@@ -516,7 +516,7 @@
 				ABF2961F1C594A700048F58B /* RZFReleaseNotesViewController.h in Headers */,
 				ABF2961D1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h in Headers */,
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
-				ABA4841B1C544DDA002CDCB2 /* RZFManifestManager.h in Headers */,
+				ABA4841B1C544DDA002CDCB2 /* RZFBundleResourceRequest.h in Headers */,
 				ABA4842B1C546AC0002CDCB2 /* RZFFileHash.h in Headers */,
 				AB954C0D1C582E59003A050B /* NSObject+RZFUtility.h in Headers */,
 				ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */,
@@ -550,7 +550,7 @@
 				AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */,
 				ABF2964E1C59AEA90048F58B /* NSBundle+RZFreshAir.h in Headers */,
 				ABBE3DDD1C55AD1F006A738A /* FreshAirMac.h in Headers */,
-				ABA4846F1C55A4A5002CDCB2 /* RZFManifestManager.h in Headers */,
+				ABA4846F1C55A4A5002CDCB2 /* RZFBundleResourceRequest.h in Headers */,
 				ABA484701C55A4A5002CDCB2 /* RZFManifest.h in Headers */,
 				ABA484711C55A4A5002CDCB2 /* RZFManifestEntry.h in Headers */,
 				AB954C011C581CA0003A050B /* RZFCondition.h in Headers */,
@@ -836,7 +836,7 @@
 				ABF296181C594A700048F58B /* RZFUpdatePromptView.m in Sources */,
 				ABF296221C594A700048F58B /* RZFSlideAnimationController.m in Sources */,
 				ABF296321C594BC90048F58B /* RZFFeatureViewModel.m in Sources */,
-				ABA4841C1C544DDA002CDCB2 /* RZFManifestManager.m in Sources */,
+				ABA4841C1C544DDA002CDCB2 /* RZFBundleResourceRequest.m in Sources */,
 				ABA484201C544ECA002CDCB2 /* RZFFetchOperation.m in Sources */,
 				ABA484351C551A56002CDCB2 /* NSURL+RZFManifest.m in Sources */,
 				ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */,
@@ -863,7 +863,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABA484621C55A149002CDCB2 /* RZFManifestManager.m in Sources */,
+				ABA484621C55A149002CDCB2 /* RZFBundleResourceRequest.m in Sources */,
 				AB954C101C582E59003A050B /* NSObject+RZFUtility.m in Sources */,
 				AB954C361C5850F6003A050B /* RZFRelease.m in Sources */,
 				ABA484661C55A149002CDCB2 /* RZFFileHash.m in Sources */,
@@ -1278,6 +1278,7 @@
 				ABF296651C59B41C0048F58B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

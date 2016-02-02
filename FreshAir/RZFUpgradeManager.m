@@ -7,7 +7,7 @@
 //
 
 #import "RZFUpgradeManager.h"
-#import "RZFManifestManager.h"
+#import "RZFBundleResourceRequest.h"
 #import "RZFEnvironment.h"
 
 #import "NSBundle+RZFreshAir.h"
@@ -19,9 +19,9 @@
 #import "RZFReleaseNotesViewController.h"
 
 @interface RZFUpgradeManager ()
-<RZFManifestManagerDelegate, RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
+<RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
 
-@property (strong, nonatomic) RZFManifestManager *upgradeManifestManager;
+@property (strong, nonatomic) RZFBundleResourceRequest *upgradeManifestManager;
 @property (assign, nonatomic) BOOL shouldShowUpgradePrompt;
 @property (strong, nonatomic) RZFEnvironment *environment;
 
@@ -29,52 +29,40 @@
 
 @implementation RZFUpgradeManager
 
-
-- (instancetype)initWithRemoteURL:(NSURL *)remoteURL
+- (instancetype)init
 {
     self = [super init];
     if (self) {
         self.environment = [[RZFEnvironment alloc] init];
-        self.upgradeManifestManager = [[RZFManifestManager alloc] initWithRemoteURL:remoteURL
-                                                                           localURL:nil
-                                                                        environment:self.environment
-                                                                           delegate:self];
         self.delegate = [UIApplication sharedApplication];
     }
     return self;
 }
 
+- (NSBundle *)bundle
+{
+    return self.upgradeManifestManager ? self.upgradeManifestManager.bundle : [NSBundle mainBundle];
+}
+
+- (BOOL)isBundleLoading
+{
+    return self.upgradeManifestManager ? self.upgradeManifestManager.loaded == NO : NO;
+}
+
 - (RZFReleaseNotes *)releaseNotes
 {
-    NSBundle *bundle = self.upgradeManifestManager.bundle;
+    NSBundle *bundle = self.bundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
     return releaseNotes;
 }
 
-- (void)refreshUpgradeBundle
-{
-    [self.upgradeManifestManager update];
-}
-
-- (void)manifestManager:(RZFManifestManager *)manifestManager didLoadBundle:(NSBundle *)bundle
-{
-    if (self.shouldShowUpgradePrompt) {
-        [self showUpgradePromptIfDesired];
-    }
-}
-
-- (void)manifestManager:(RZFManifestManager *)manifestManager didEncounterError:(NSError *)error
-{
-    NSLog(@"Error Loading Manifest: %@", error);
-}
-
 - (void)showUpgradePromptIfDesired
 {
-    NSBundle *bundle = self.upgradeManifestManager.bundle;
+    NSBundle *bundle = self.bundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
     BOOL showUpgrade = [self.environment shouldDisplayUpgradePrompt:releaseNotes];
 
-    if (showUpgrade && self.upgradeManifestManager.loaded) {
+    if (showUpgrade && self.isBundleLoading) {
         RZFUpdateViewModel *updateViewModel = [[RZFUpdateViewModel alloc] init];
         updateViewModel.isForced = [self.environment isUpgradeForced:releaseNotes];
 
@@ -83,7 +71,7 @@
         [self.delegate rzf_intitiator:self presentViewController:vc];
         self.shouldShowUpgradePrompt = NO;
     }
-    else {
+    else if (self.isBundleLoading) {
         self.shouldShowUpgradePrompt = YES;
     }
 }
@@ -109,7 +97,7 @@
 
 - (void)showReleaseNotes
 {
-    NSBundle *bundle = self.upgradeManifestManager.bundle;
+    NSBundle *bundle = self.bundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
     NSArray *features = [self.environment unviewedFeaturesForReleaseNotes:releaseNotes];
     RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:bundle];

@@ -7,6 +7,7 @@
 //
 
 #import "NSBundle+RZFreshAir.h"
+#import "RZFManifest+Private.h"
 #import "RZFError.h"
 #import "RZFReleaseNotes.h"
 #import "RZFManifest.h"
@@ -14,34 +15,8 @@
 #import "NSURL+RZFManifest.h"
 
 NSString *const RZFreshAirRemoteURL = @"RZFreshAirRemoteURL";
-NSString *const RZFreshAirRemoteBundleIdPrefix = @"com.raizlabs.freshair.";
 
 @implementation NSBundle (RZFreshAir)
-
-+ (NSURL *)rzf_bundleURLInDirectory:(NSURL *)directory forRemoteURL:(NSURL *)remoteURL error:(NSError **)error
-{
-    NSParameterAssert(directory);
-    NSParameterAssert(remoteURL);
-
-    NSString *bundleName = [remoteURL lastPathComponent];
-    NSURL *bundleURL = [directory URLByAppendingPathComponent:bundleName];
-
-    if ([[NSFileManager defaultManager] createDirectoryAtURL:bundleURL withIntermediateDirectories:YES attributes:nil error:error] == NO) {
-        return nil;
-    }
-
-    NSDictionary *infoPlist = @{
-                                @"CFBundleIdentifier": [RZFreshAirRemoteBundleIdPrefix stringByAppendingString:bundleName],
-                                @"CFBundleName": bundleName,
-                                RZFreshAirRemoteURL: [remoteURL absoluteString]
-                                };
-    if ([infoPlist writeToURL:[bundleURL URLByAppendingPathComponent:@"Info.plist"] atomically:YES] == NO) {
-        *error = [NSError errorWithDomain:RZFreshAirErrorDomain code:RZFreshAirErrorCodeFileSaveError userInfo:@{}];
-        return nil;
-    }
-
-    return bundleURL;
-}
 
 - (NSURL *)rzf_remoteURL
 {
@@ -63,7 +38,11 @@ NSString *const RZFreshAirRemoteBundleIdPrefix = @"com.raizlabs.freshair.";
 
 - (RZFManifest *)rzf_manifest
 {
-    return [[RZFManifest alloc] initWithBundle:self];
+    RZFManifest *manifest = [[RZFManifest alloc] initWithBundle:self];
+    if ([manifest isManifestLoaded]) {
+        [manifest loadEntriesError:nil];
+    }
+    return manifest;
 }
 
 @end

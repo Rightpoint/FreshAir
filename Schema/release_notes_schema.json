@@ -12,7 +12,7 @@
                 },
                 "comparison": {
                     "description": "The comparison type to use. By default the comparison is 'gte'",
-                    "enum": [ "gt", "eq", "lt", "gte", "lte"]
+                    "enum": [ "gt", "eq", "lt", "gte", "lte", "ne"]
                 },
                 "value": {
                     "description": "The expected value",

@@ -17,7 +17,7 @@ FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <FreshAir/PublicHeader.h>
 
 
-#import <FreshAir/RZFManifestManager.h>
+#import <FreshAir/RZFBundleResourceRequest.h>
 #import <FreshAir/RZFUpgradeManager.h>
 #import <FreshAir/RZFReleaseNotes.h>
 #import <FreshAir/RZFRelease.h>
