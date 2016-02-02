@@ -19,6 +19,10 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 - (instancetype)init;
 
+@property (strong, nonatomic) NSString *appStoreID;
+@property (strong, nonatomic) NSURL *releaseNoteURL;
+@property (strong, nonatomic) NSBundle *releaseNoteBundle;
+
 /**
  * Delegate to manage presentation. If not set, the delegate will perform modal
  * presentations on the top-most presented view controller of the UIApplication delegate window property, and call openURL directly on UIApplication.
@@ -28,8 +32,8 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 /**
  * Show the upgrade prompt if appropriate.
  *
- * If there is a new version that has not been prompted display the upgrade prompt.
- * Also, if the current version is below the minimum version, display the upgrade prompt and do not allow it to be dismissed.
+ *  If there is a new version that has not been prompted display the upgrade prompt.
+ *  Also, if the current version is below the minimum version, display the upgrade prompt and do not allow it to be dismissed.
  */
 - (void)showUpgradePromptIfDesired;
 
@@ -40,11 +44,4 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
  */
 - (void)showReleaseNotesIfDesired;
 
-/**
- * Present the release notes for features that are in the new version of the application.
- */
-- (void)showReleaseNotes;
-
-
 @end
-

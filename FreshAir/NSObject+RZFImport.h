@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN;
 @interface NSObject (RZFImport)
 
 + (id __nullable)rzf_importURL:(NSURL *)URL error:(out NSError **)error;
++ (id)rzf_importData:(NSData *)data error:(NSError **)error;
 
 @end
 

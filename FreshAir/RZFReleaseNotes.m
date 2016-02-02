@@ -10,26 +10,24 @@
 #import "RZFRelease.h"
 #import "RZFDefines.h"
 #import "RZFFeature.h"
+#import "NSObject+RZFImport.h"
 
 @implementation RZFReleaseNotes
 
-- (NSString *)lastVersion
++ (instancetype)releaseNotesWithURL:(NSURL *)URL error:(NSError **)error
 {
-    NSArray<NSString *> *versions = [self.releases valueForKey:RZF_KP(RZFRelease, version)];
-    [versions sortedArrayUsingComparator:^NSComparisonResult(NSString * obj1, NSString * obj2) {
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    return versions.lastObject;
+    return [self rzf_importURL:URL error:error];
 }
 
-- (BOOL)isUpgradeAvailableForVersion:(NSString *)version
++ (instancetype)releaseNotesWithData:(NSData *)data error:(NSError **)error
 {
-    return [self.lastVersion compare:version options:NSNumericSearch] != NSOrderedSame;
+    return [self rzf_importData:data error:error];
 }
 
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version
 {
-    return self.minimumVersion != nil && [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedDescending;
+    return (self.minimumVersion != nil &&
+            [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedDescending);
 }
 
 - (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;

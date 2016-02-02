@@ -12,13 +12,8 @@
 
 @implementation NSObject (RZFImport)
 
-+ (id)rzf_importURL:(NSURL *)URL error:(NSError **)error
++ (id)rzf_importData:(NSData *)data error:(NSError **)error
 {
-    NSParameterAssert([self conformsToProtocol:@protocol(RZFImporting)]);
-    NSData *data = [NSData dataWithContentsOfURL:URL options:kNilOptions error:error];
-    if (data == nil) {
-        return nil;
-    }
     Class<RZFImporting> importClass = (id)self;
 
     NSArray *JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:error];
@@ -36,6 +31,16 @@
     else {
         return [importClass instanceFromJSON:JSON];
     }
+}
+
++ (id)rzf_importURL:(NSURL *)URL error:(NSError **)error
+{
+    NSParameterAssert([self conformsToProtocol:@protocol(RZFImporting)]);
+    NSData *data = [NSData dataWithContentsOfURL:URL options:kNilOptions error:error];
+    if (data == nil) {
+        return nil;
+    }
+    return [self rzf_importData:data error:error];
 }
 
 @end

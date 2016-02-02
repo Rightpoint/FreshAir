@@ -8,6 +8,9 @@
 
 #import "RZFEnvironment.h"
 #import "RZFReleaseNotes.h"
+#import "RZFCondition.h"
+#import "RZFRelease.h"
+
 #import "NSBundle+RZFreshAir.h"
 #import "RZFManifest+Private.h"
 
@@ -47,17 +50,30 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     return self.variables[RZFEnvironmentAppVersionKey];
 }
 
-- (BOOL)shouldDisplayUpgradePrompt:(RZFReleaseNotes *)releaseNotes
+- (BOOL)isUpgradeAvailableForVersion:(NSString *)version
+{
+    return [version compare:self.currentVersion options:NSNumericSearch] != NSOrderedSame;
+}
+
+- (BOOL)shouldDisplayUpgradePromptForVersion:(NSString *)version;
 {
     NSString *lastVersionPrompted = [self.userDefaults stringForKey:RZFLastVersionPromptedKey];
-    BOOL shouldDisplay = ([releaseNotes isUpgradeAvailableForVersion:self.currentVersion] &&
-                          [lastVersionPrompted isEqual:releaseNotes.lastVersion] == NO);
-    return shouldDisplay || [self isUpgradeForced:releaseNotes];
+    BOOL shouldDisplay = ([self isUpgradeAvailableForVersion:version] &&
+                          [lastVersionPrompted isEqual:version] == NO);
+    return shouldDisplay;
 }
 
 - (BOOL)isUpgradeForced:(RZFReleaseNotes *)releaseNotes;
 {
     return [releaseNotes isUpgradeRequiredForVersion:self.currentVersion];
+}
+
+- (BOOL)isSystemVersionSupported:(NSString *)systemVersion
+{
+    NSString *currentSystemVersion = self.variables[RZFEnvironmentSystemVersionKey];
+
+    BOOL osSupported = [systemVersion compare:currentSystemVersion options:NSNumericSearch] == NSOrderedAscending;
+    return osSupported;
 }
 
 - (BOOL)shouldUserSeeReleaseNotes:(RZFReleaseNotes *)releaseNotes
@@ -77,19 +93,32 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 - (NSArray<RZFFeature *> *)unviewedFeaturesForReleaseNotes:(RZFReleaseNotes *)releaseNotes
 {
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
+
     NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.currentVersion];
     return features;
 }
 
-- (void)userDidViewContentOfReleaseNotes:(RZFReleaseNotes *)releaseNotes
+- (NSArray<RZFRelease *> *)supportedReleasesInReleaseNotes:(RZFReleaseNotes *)releaseNotes
 {
-    [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
-
+    NSMutableArray *results = [NSMutableArray array];
+    for (RZFRelease *release in releaseNotes.releases) {
+        NSPredicate *check = [RZFCondition predicateForConditions:release.conditions];
+        if ([check evaluateWithObject:self.variables]) {
+            [results addObject:release];
+        }
+    }
+    return [results copy];
 }
 
-- (void)userDidViewUpdatePromptForReleaseNotes:(RZFReleaseNotes *)releaseNotes
+- (void)userDidViewContentOfReleaseNotesForVersion:(NSString *)version
 {
-    [self.userDefaults setValue:releaseNotes.lastVersion forKey:RZFLastVersionPromptedKey];
+    [self.userDefaults setValue:version forKey:RZFLastVersionPromptedKey];
+}
+
+- (void)userDidViewContentOfReleaseNotesForCurrentVersion
+{
+    [self.userDefaults setValue:self.currentVersion
+                         forKey:RZFLastVersionPromptedKey];
 }
 
 - (BOOL)isRemoteBundleLoaded:(NSBundle *)bundle

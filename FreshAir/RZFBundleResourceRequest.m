@@ -20,7 +20,7 @@
 #import "RZFError.h"
 
 NSString *const RZFreshAirRemoteBundleIdPrefix = @"com.raizlabs.freshair.";
-NSString *const RZFreshAirLinkSuffix = @"link";
+NSString *const RZFreshAirLinkSuffix = @"freshairlink";
 
 @interface RZFBundleResourceRequest ()
 
@@ -165,6 +165,8 @@ static NSURL *localURL = nil;
 {
     if (self.completion) {
         self.error = error;
+        // Generate a new bundle to a link of the directory.
+        // This ensures that the cache information is cleared out.
         NSError *linkError = nil;
         NSURL *linkURL = [self.class linkedDirectoryForBundle:self.bundle
                                                         error:&linkError];

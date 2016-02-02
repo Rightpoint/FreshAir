@@ -13,7 +13,7 @@ OBJC_EXTERN NSString *const RZFEnvironmentSystemVersionKey;
 OBJC_EXTERN NSString *const RZFEnvironmentDisplayScaleKey;
 OBJC_EXTERN NSString *const RZFEnvironmentAppVersionKey;
 
-@class RZFReleaseNotes, RZFFeature;
+@class RZFReleaseNotes, RZFFeature, RZFRelease;
 
 @interface RZFEnvironment : NSObject
 
@@ -40,15 +40,19 @@ OBJC_EXTERN NSString *const RZFEnvironmentAppVersionKey;
 @property (strong, nonatomic) NSUserDefaults *userDefaults;
 
 /**
- *  Return YES if a new release is in the release notes and the latest release
- *  has not been shown.
+ *  Return YES if version is newer and has not been displayed
  */
-- (BOOL)shouldDisplayUpgradePrompt:(RZFReleaseNotes *)releaseNotes;
+- (BOOL)shouldDisplayUpgradePromptForVersion:(NSString *)version;
 
 /**
  *  Return YES if the current version is less than the minimum required version.
  */
 - (BOOL)isUpgradeForced:(RZFReleaseNotes *)releaseNotes;
+
+/**
+ *  Return YES if the system version is supported.
+ */
+- (BOOL)isSystemVersionSupported:(NSString *)systemVersion;
 
 /**
  *  Check if the user should see release notes
@@ -61,14 +65,19 @@ OBJC_EXTERN NSString *const RZFEnvironmentAppVersionKey;
 - (NSArray<RZFFeature *> *)unviewedFeaturesForReleaseNotes:(RZFReleaseNotes *)releaseNotes;
 
 /**
+ *  Return the releases in release notes that are supported in this environment
+ */
+- (NSArray<RZFRelease *> *)supportedReleasesInReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+
+/**
  *  Note that the user has viewed the release notes
  */
-- (void)userDidViewContentOfReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+- (void)userDidViewContentOfReleaseNotesForCurrentVersion;
 
 /**
  *  Note that the user has viewed the specified version.
  */
-- (void)userDidViewUpdatePromptForReleaseNotes:(RZFReleaseNotes *)releaseNotes;
+- (void)userDidViewUpdatePromptForVersion:(NSString *)version;
 
 /**
  * Check to see if the bundle is loaded

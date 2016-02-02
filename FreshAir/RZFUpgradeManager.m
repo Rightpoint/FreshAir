@@ -14,6 +14,7 @@
 #import "NSObject+RZFImport.h"
 #import "UIApplication+RZFInteractionDelegate.h"
 #import "RZFUpdateViewModel.h"
+#import "RZFAppUpdateCheck.h"
 
 #import "RZFUpdatePromptViewController.h"
 #import "RZFReleaseNotesViewController.h"
@@ -21,7 +22,6 @@
 @interface RZFUpgradeManager ()
 <RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
 
-@property (strong, nonatomic) RZFBundleResourceRequest *upgradeManifestManager;
 @property (assign, nonatomic) BOOL shouldShowUpgradePrompt;
 @property (strong, nonatomic) RZFEnvironment *environment;
 
@@ -39,41 +39,19 @@
     return self;
 }
 
-- (NSBundle *)bundle
-{
-    return self.upgradeManifestManager ? self.upgradeManifestManager.bundle : [NSBundle mainBundle];
-}
-
-- (BOOL)isBundleLoading
-{
-    return self.upgradeManifestManager ? self.upgradeManifestManager.loaded == NO : NO;
-}
-
-- (RZFReleaseNotes *)releaseNotes
-{
-    NSBundle *bundle = self.bundle;
-    RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
-    return releaseNotes;
-}
-
 - (void)showUpgradePromptIfDesired
 {
-    NSBundle *bundle = self.bundle;
-    RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
-    BOOL showUpgrade = [self.environment shouldDisplayUpgradePrompt:releaseNotes];
-
-    if (showUpgrade && self.isBundleLoading) {
-        RZFUpdateViewModel *updateViewModel = [[RZFUpdateViewModel alloc] init];
-        updateViewModel.isForced = [self.environment isUpgradeForced:releaseNotes];
-
-        RZFUpdatePromptViewController *vc = [[RZFUpdatePromptViewController alloc] initWithUpdateViewModel:updateViewModel upgradeURL:releaseNotes.upgradeURL bundle:bundle];
-        vc.delegate = self;
-        [self.delegate rzf_intitiator:self presentViewController:vc];
-        self.shouldShowUpgradePrompt = NO;
-    }
-    else if (self.isBundleLoading) {
-        self.shouldShowUpgradePrompt = YES;
-    }
+    RZFAppUpdateCheck *check = [[RZFAppUpdateCheck alloc] init];
+    check.environment = self.environment;
+    [check checkAppStoreID:self.appStoreID completion:^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {
+        BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
+        BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
+        if (newVersion || isForced) {
+            RZFUpdatePromptViewController *vc = [[RZFUpdatePromptViewController alloc] initWithUpgradeURL:upgradeURL version:version isForced:isForced bundle:nil];
+            vc.delegate = self;
+            [self.delegate rzf_intitiator:self presentViewController:vc];
+        }
+    }];
 }
 
 - (void)updatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController shouldUpgradeWithURL:(NSURL *)url
@@ -83,31 +61,26 @@
 
 - (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController
 {
-    [self.environment userDidViewUpdatePromptForReleaseNotes:self.releaseNotes];
+    [self.environment userDidViewUpdatePromptForVersion:updatePromptViewController.version];
 
     [self.delegate rzf_intitiator:self dismissViewController:updatePromptViewController];
 }
 
 - (void)showReleaseNotesIfDesired
 {
-    if ([self.environment shouldUserSeeReleaseNotes:self.releaseNotes]) {
-        [self showReleaseNotes];
-    }
-}
-
-- (void)showReleaseNotes
-{
-    NSBundle *bundle = self.bundle;
+    NSBundle *bundle = self.releaseNoteBundle;
     RZFReleaseNotes *releaseNotes = [bundle rzf_releaseNotes];
-    NSArray *features = [self.environment unviewedFeaturesForReleaseNotes:releaseNotes];
-    RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:bundle];
-    vc.delegate = self;
-    [self.delegate rzf_intitiator:self presentViewController:vc];
+    if ([self.environment shouldUserSeeReleaseNotes:releaseNotes]) {
+        NSArray *features = [self.environment unviewedFeaturesForReleaseNotes:releaseNotes];
+        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:bundle];
+        vc.delegate = self;
+        [self.delegate rzf_intitiator:self presentViewController:vc];
+    }
 }
 
 - (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)releaseNotesViewController
 {
-    [self.environment userDidViewContentOfReleaseNotes:self.releaseNotes];
+    [self.environment userDidViewContentOfReleaseNotesForCurrentVersion];
     [self.delegate rzf_intitiator:self dismissViewController:releaseNotesViewController];
 }
 

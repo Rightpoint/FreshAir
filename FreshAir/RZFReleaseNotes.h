@@ -14,12 +14,13 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @interface RZFReleaseNotes : NSObject
 
++ (instancetype)releaseNotesWithURL:(NSURL *)URL error:(NSError **)error;
++ (instancetype)releaseNotesWithData:(NSData *)data error:(NSError **)error;
+
 @property (strong, nonatomic) NSArray<RZFRelease *> *releases;
 @property (strong, nonatomic) NSURL *upgradeURL;
 @property (strong, nonatomic) NSString * __nullable minimumVersion;
-@property (strong, nonatomic, readonly) NSString *lastVersion;
 
-- (BOOL)isUpgradeAvailableForVersion:(NSString *)version;
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version;
 
 - (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;

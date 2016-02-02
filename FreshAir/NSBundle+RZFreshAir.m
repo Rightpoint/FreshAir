@@ -29,7 +29,7 @@ NSString *const RZFreshAirRemoteURL = @"RZFreshAirRemoteURL";
 {
     NSURL *releaseURL = [self.bundleURL rzf_releaseURL];
     NSError *error = nil;
-    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes rzf_importURL:releaseURL error:&error];
+    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
     if (error) {
         NSLog(@"Error Loading release Notes: %@", error);
     }

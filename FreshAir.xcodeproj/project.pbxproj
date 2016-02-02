@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB07893A1C60363C0089D510 /* RZFAppUpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */; };
+		AB07893B1C60363C0089D510 /* RZFAppUpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */; };
 		AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968B1C58595D00EB00CC /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,6 +185,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAppUpdateCheck.h; sourceTree = "<group>"; };
+		AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAppUpdateCheck.m; sourceTree = "<group>"; };
 		AB954B7C1C55AFC7003A050B /* RZFEnvironment+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFEnvironment+UIKit.h"; sourceTree = "<group>"; };
 		AB954B7D1C55AFC7003A050B /* RZFEnvironment+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RZFEnvironment+UIKit.m"; sourceTree = "<group>"; };
 		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
@@ -405,8 +409,8 @@
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
 				ABF296381C59568D0048F58B /* RZFUpgradeManager.h */,
 				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
-				ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */,
-				ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */,
+				AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */,
+				AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */,
 				AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */,
 				AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */,
 				AB954BFA1C57A89E003A050B /* RZFRelease.h */,
@@ -417,6 +421,8 @@
 				ABF296451C5997300048F58B /* RZFError.m */,
 				ABF296401C5993A60048F58B /* NSBundle+RZFreshAir.h */,
 				ABF296411C5993A60048F58B /* NSBundle+RZFreshAir.m */,
+				ABA484191C544DDA002CDCB2 /* RZFBundleResourceRequest.h */,
+				ABA4841A1C544DDA002CDCB2 /* RZFBundleResourceRequest.m */,
 				ABA484151C544CBD002CDCB2 /* RZFManifest.h */,
 				ABA484161C544CBD002CDCB2 /* RZFManifest.m */,
 				ABF296741C5B94710048F58B /* RZFEnvironment.h */,
@@ -522,6 +528,7 @@
 				ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */,
 				ABF296461C5997300048F58B /* RZFError.h in Headers */,
 				ABF2963A1C59568D0048F58B /* RZFUpgradeManager.h in Headers */,
+				AB07893A1C60363C0089D510 /* RZFAppUpdateCheck.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
 				ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */,
 				AB954C001C581CA0003A050B /* RZFCondition.h in Headers */,
@@ -822,6 +829,7 @@
 				AB954C081C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
 				ABA484181C544CBD002CDCB2 /* RZFManifest.m in Sources */,
 				ABA484141C544C51002CDCB2 /* RZFManifestEntry.m in Sources */,
+				AB07893B1C60363C0089D510 /* RZFAppUpdateCheck.m in Sources */,
 				AB954C021C581CA0003A050B /* RZFCondition.m in Sources */,
 				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
 				ABF296771C5B94710048F58B /* RZFEnvironment.m in Sources */,

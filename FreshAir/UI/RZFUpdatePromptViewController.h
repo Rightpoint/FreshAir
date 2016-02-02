@@ -21,9 +21,10 @@
 
 @interface RZFUpdatePromptViewController : RZFViewController
 
-- (instancetype)initWithUpdateViewModel:(RZFUpdateViewModel *)updateViewModel upgradeURL:(NSURL *)upgradeURL bundle:(NSBundle *)bundle;
+- (instancetype)initWithUpgradeURL:(NSURL *)upgradeURL version:(NSString *)version isForced:(BOOL)isForced bundle:(NSBundle *)bundle;
 
 @property (strong, nonatomic, readonly) NSURL *upgradeURL;
+@property (strong, nonatomic, readonly) NSString *version;
 @property (weak, nonatomic, readwrite) id <RZFUpdatePromptViewControllerDelegate> delegate;
 
 @end
