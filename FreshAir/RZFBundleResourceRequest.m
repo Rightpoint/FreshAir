@@ -15,7 +15,7 @@
 #import "RZFEnvironment.h"
 
 #import "RZFFetchOperation.h"
-#import "NSURL+RZFManifest.h"
+#import "NSURL+RZFreshAir.h"
 #import "NSBundle+RZFreshAir.h"
 #import "RZFError.h"
 
@@ -121,7 +121,7 @@ static NSURL *localURL = nil;
                       environment:(RZFEnvironment *)environment
                        completion:(RZFBundleUpdateBlock)completion
 {
-    NSAssert([[remoteURL pathExtension] isEqual:@"freshair"], @"Remote URL must point to a .freshair resource");
+    NSAssert([[remoteURL pathExtension] isEqual:[NSURL rzf_freshairExtension]], @"Remote URL must point to a .freshair resource");
 
     self = [super init];
     if (self) {

@@ -10,12 +10,13 @@
 #import "RZFBundleResourceRequest.h"
 #import "RZFEnvironment.h"
 
-#import "NSURL+RZFManifest.h"
+#import "NSURL+RZFreshAir.h"
 #import "NSBundle+RZFreshAir.h"
 #import "NSObject+RZFImport.h"
 #import "UIApplication+RZFInteractionDelegate.h"
 #import "RZFUpdateViewModel.h"
 #import "RZFAppUpdateCheck.h"
+#import "RZFAppStoreUpdateCheck.h"
 
 #import "RZFUpdatePromptViewController.h"
 #import "RZFReleaseNotesViewController.h"
@@ -68,8 +69,12 @@
 {
     RZFAppUpdateCheck *check = nil;
     if (self.appStoreID) {
-        check = [[RZFAppUpdateCheck alloc] initWithAppStoreID:self.appStoreID
-                                                  environment:self.environment];
+        // RZFAppStoreUpdateCheck has the same contract as RZFAppUpdateCheck.
+        // RZFAppStoreUpdateCheck was written to be isolated from the rest of the
+        // implementation details in FreshAir.
+        //
+        // Casting here is cleaner than creating a shared protocol and compliance.
+        check = (id)[[RZFAppStoreUpdateCheck alloc] initWithAppStoreID:self.appStoreID];
     }
     else {
         check = [[RZFAppUpdateCheck alloc] initWithReleaseNoteURL:self.releaseNoteURL
@@ -78,7 +83,10 @@
     [check performCheckWithCompletion:^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
-        if (newVersion || isForced) {
+        BOOL shouldDisplay = ((newVersion &&
+                              [self.environment shouldDisplayUpgradePromptForVersion:version])
+                              || isForced);
+        if (shouldDisplay) {
             RZFUpdatePromptViewController *vc = nil;
             vc = [[RZFUpdatePromptViewController alloc] initWithUpgradeURL:upgradeURL
                                                                    version:version

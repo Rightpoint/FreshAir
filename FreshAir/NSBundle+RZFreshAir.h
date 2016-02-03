@@ -15,11 +15,11 @@ OBJC_EXTERN NSString *const RZFreshAirRemoteURL;
 
 /**
  *  NSBundle.mainBundle is not very consistent, depending on the target configuration.
- *  NSBundle.rzf_appBundle returns the bundle that the app delegate is a part of. This
- *  should more consistently point to the application bundle.
+ *  NSBundle.rzf_appBundle returns the bundle that the UIApplication delegate is a part of.
+ *  This point to the application bundle or be nil.
  *
  *  @note This returns nil until the UIApplication.delegate is configured. In particular,
- *        this method returns nil durrin +load.
+ *        this method returns nil durring +load.
  */
 + (NSBundle *)rzf_appBundle;
 

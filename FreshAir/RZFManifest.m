@@ -8,7 +8,7 @@
 
 #import "RZFManifest.h"
 #import "RZFManifestEntry.h"
-#import "NSURL+RZFManifest.h"
+#import "NSURL+RZFreshAir.h"
 #import "NSObject+RZFImport.h"
 #import "NSBundle+RZFreshAir.h"
 

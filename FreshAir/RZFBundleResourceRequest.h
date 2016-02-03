@@ -15,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^RZFBundleUpdateBlock)(NSBundle *bundle, NSError *error);
 
+/**
+ *  A bundle resource request will query a remote URL and download a
+ *  manifest file describing the contents of the remote directory.
+ *  The request will evaluate the manifest file and download all of 
+ *  the files that are needed for the device.
+ */
 @interface RZFBundleResourceRequest : NSObject
 
 /**
@@ -39,7 +45,8 @@ typedef void(^RZFBundleUpdateBlock)(NSBundle *bundle, NSError *error);
                        completion:(RZFBundleUpdateBlock __nullable)completion;
 
 /**
- *  The primary bundle to download
+ *  The bundle being updated. This will refer to the locally downloaded
+ *  bundle. 
  */
 @property (strong, nonatomic, readonly) NSBundle * __nullable bundle;
 

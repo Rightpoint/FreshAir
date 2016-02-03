@@ -17,8 +17,6 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 @interface RZFUpgradeManager : NSObject
 
-- (instancetype)init;
-
 /**
  *  App Store ID to check for updates using the iTunes API.
  */

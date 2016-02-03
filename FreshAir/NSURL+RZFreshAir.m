@@ -1,14 +1,14 @@
 //
-//  NSURL+RZFManifest.m
+//  NSURL+RZFreshAir.m
 //  FreshAir
 //
 //  Created by Brian King on 1/24/16.
 //  Copyright © 2016 Raizlabs. All rights reserved.
 //
 
-#import "NSURL+RZFManifest.h"
+#import "NSURL+RZFreshAir.h"
 
-@implementation NSURL (RZFManifest)
+@implementation NSURL (RZFreshAir)
 
 + (NSString *)rzf_manifestFilename
 {
@@ -27,7 +27,6 @@
 
 - (NSURL *)rzf_manifestURL
 {
-
     return [self URLByAppendingPathComponent:[NSURL rzf_manifestFilename]];
 }
 

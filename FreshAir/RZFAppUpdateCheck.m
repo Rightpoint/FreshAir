@@ -11,14 +11,6 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 
-static NSString *const RZFAppStoreURLFormat = @"http://itunes.apple.com/us/lookup?id=%@";
-
-static NSString *const RZFAppStoreResultsKey = @"results";
-static NSString *const RZFAppStoreVersionKey = @"version";
-static NSString *const RZFAppStoreMinimumOsVersionKey = @"minimumOsVersion";
-static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
-
-
 @implementation RZFAppUpdateCheck
 
 + (RZFAppUpdateStatus)statusForNewVersion:(BOOL)newVersion deviceSupported:(BOOL)deviceSupported
@@ -43,76 +35,18 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
     return self;
 }
 
-- (instancetype)initWithAppStoreID:(NSString *)appStoreID environment:(RZFEnvironment *)environment
-{
-    self = [super init];
-    if (self) {
-        _session = [NSURLSession sharedSession];
-        _appStoreID = [appStoreID copy];
-        _environment = environment;
-    }
-    return self;
-}
-
 - (void)performCheckWithCompletion:(RZFAppUpdateCheckCompletion)completion;
 {
-    if (self.appStoreID) {
-        [self checkAppStoreID:self.appStoreID completion:completion];
-    }
-    else if (self.releaseNoteURL) {
-        [self checkReleaseNotesURL:self.releaseNoteURL completion:completion];
-    }
-    else {
-        [NSException raise:NSInvalidArgumentException format:@"Must specify an appStoreID or a releaseNoteURL"];
-    }
-}
-
-- (void)checkAppStoreID:(NSString *)appStoreID
-             completion:(RZFAppUpdateCheckCompletion)completion
-{
-    completion = completion ?: ^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {};
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:RZFAppStoreURLFormat, appStoreID]];
-    NSURLSessionDataTask *task = [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        RZFAppUpdateStatus status = RZFAppUpdateStatusNoUpdate;
-        NSString *appStoreVersion = nil;
-        NSURL *upgradeURL = nil;
-
-        if (data) {
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSArray *results = json[RZFAppStoreResultsKey];
-            if (results.count > 0) {
-                NSDictionary *appInfo = results[0];
-                NSString *systemVersion = appInfo[RZFAppStoreMinimumOsVersionKey];
-                NSString *upgradeURLString = appInfo[RZFAppStoreUpgradeURLKey];
-                appStoreVersion = appInfo[RZFAppStoreVersionKey];
-                NSURLComponents *components = [[NSURLComponents alloc] initWithString:upgradeURLString];
-                components.query = nil;
-                upgradeURL = [components URL];
-                BOOL newVersion  = [self.environment shouldDisplayUpgradePromptForVersion:appStoreVersion];
-                BOOL deviceSupported = [self.environment isSystemVersionSupported:systemVersion];
-                status = [self.class statusForNewVersion:newVersion deviceSupported:deviceSupported];
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(status, appStoreVersion, upgradeURL);
-        });
-    }];
-    [task resume];
-}
-
-- (void)checkReleaseNotesURL:(NSURL *)URL
-                  completion:(RZFAppUpdateCheckCompletion)completion;
-{
-    if ([URL.scheme isEqual:@"file"]) {
+    if ([self.releaseNoteURL.scheme isEqual:@"file"]) {
         NSError *error = nil;
-        RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:URL error:&error];
+        RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:self.releaseNoteURL error:&error];
         if (error) {
             NSLog(@"%@", error);
         }
         [self checkReleaseNotes:releaseNotes completion:completion];
     }
     else {
-        NSURLSessionDataTask *task = [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.releaseNoteURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             NSError *importError = nil;
             RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
             if (importError || error) {

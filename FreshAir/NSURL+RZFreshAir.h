@@ -1,5 +1,5 @@
 //
-//  NSURL+RZFManifest.h
+//  NSURL+RZFreshAir.h
 //  FreshAir
 //
 //  Created by Brian King on 1/24/16.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSURL (RZFManifest)
+@interface NSURL (RZFreshAir)
 
 + (NSString *)rzf_manifestFilename;
 

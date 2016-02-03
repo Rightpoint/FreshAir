@@ -7,7 +7,6 @@
 //
 
 #import "NSBundle+RZFreshAir.h"
-#import "NSURL+RZFManifest.h"
 
 NSString *const RZFreshAirRemoteURL = @"RZFreshAirRemoteURL";
 

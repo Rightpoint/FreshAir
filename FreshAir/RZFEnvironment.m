@@ -12,7 +12,6 @@
 #import "RZFRelease.h"
 
 #import "NSBundle+RZFreshAir.h"
-#import "NSURL+RZFManifest.h"
 #import "RZFManifest+Private.h"
 
 // Keys in the environment variables
