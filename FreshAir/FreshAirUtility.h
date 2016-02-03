@@ -14,13 +14,14 @@ FOUNDATION_EXPORT double FreshAirVersionNumber;
 //! Project version string for FreshAir.
 FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 
-#import <FreshAirUtility/RZFManifestManager.h>
+#import <FreshAirUtility/RZFBundleResourceRequest.h>
 #import <FreshAirUtility/RZFReleaseNotes.h>
 #import <FreshAirUtility/RZFRelease.h>
 #import <FreshAirUtility/RZFFeature.h>
+#import <FreshAirUtility/RZFEnvironment.h>
 #import <FreshAirUtility/RZFError.h>
 
 #import <FreshAirUtility/RZFFileHash.h>
-#import <FreshAirUtility/NSURL+RZFManifest.h>
+#import <FreshAirUtility/NSURL+RZFreshAir.h>
 #import <FreshAirUtility/NSBundle+RZFreshAir.h>
 #import <FreshAirUtility/NSObject+RZFImport.h>

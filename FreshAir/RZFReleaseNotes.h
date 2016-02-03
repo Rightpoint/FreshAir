@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray<RZFRelease *> *releases;
 @property (strong, nonatomic) NSURL *upgradeURL;
 @property (strong, nonatomic) NSString * __nullable minimumVersion;
+@property (strong, nonatomic, readonly) NSArray<RZFFeature *> *features;
 
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version;
 

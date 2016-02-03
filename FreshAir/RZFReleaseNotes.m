@@ -30,6 +30,15 @@
             [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedDescending);
 }
 
+- (NSArray *)features
+{
+    NSMutableArray *features = [NSMutableArray array];
+    for (RZFRelease *release in self.releases) {
+        [features addObjectsFromArray:release.features];
+    }
+    return [features copy];
+}
+
 - (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;
 {
     NSMutableArray *features = [NSMutableArray array];
