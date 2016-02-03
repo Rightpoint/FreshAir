@@ -9,10 +9,14 @@
 #import "RZFManifest.h"
 #import "RZFManifestEntry.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RZFManifest (RZFUtility)
 
-@property (copy, nonatomic, readonly) NSArray<RZFManifestEntry *> *entries;
+@property (copy, nonatomic, readonly) NSArray<RZFManifestEntry *> * __nullable entries;
 
 - (BOOL)loadEntriesError:(NSError **)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

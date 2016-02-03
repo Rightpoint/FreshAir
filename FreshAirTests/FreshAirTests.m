@@ -103,8 +103,9 @@
     }
     XCTAssertNil(mgr.error);
     XCTAssertNotNil(mgr.bundle);
+    NSURL *releaseURL = [mgr.bundle.bundleURL rzf_releaseURL];
+    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:nil];
 
-    RZFReleaseNotes *notes = [mgr.bundle rzf_releaseNotes];
     NSArray *f1_12 = [notes featuresFromVersion:@"1.0" toVersion:@"1.2"];
     NSArray *f12_21 = [notes featuresFromVersion:@"1.2" toVersion:@"2.1"];
     XCTAssert(f1_12.count == 4);

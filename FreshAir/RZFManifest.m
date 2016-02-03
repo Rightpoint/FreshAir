@@ -28,7 +28,6 @@
     self = [super init];
     if (self) {
         _bundle = bundle;
-        _entries = @[];
     }
     return self;
 }

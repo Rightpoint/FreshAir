@@ -19,13 +19,26 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 
 - (instancetype)init;
 
+/**
+ *  App Store ID to check for updates using the iTunes API.
+ */
 @property (strong, nonatomic) NSString *appStoreID;
+
+/**
+ *  URL pointing to release_notes.json to use to check for updates.
+ */
 @property (strong, nonatomic) NSURL *releaseNoteURL;
-@property (strong, nonatomic) NSBundle *releaseNoteBundle;
+
+/**
+ *  The bundle that contains resources for the release notes. If this bundle contains
+ *  a FreshAirUpdate.strings file, the bundle will also be used for the upgrade prompt.
+ */
+@property (strong, nonatomic) NSBundle *bundle;
 
 /**
  * Delegate to manage presentation. If not set, the delegate will perform modal
- * presentations on the top-most presented view controller of the UIApplication delegate window property, and call openURL directly on UIApplication.
+ * presentations on the top-most presented view controller of the UIApplication 
+ * delegate window property, and call openURL directly on UIApplication.
  */
 @property (weak, nonatomic) id<RZFInteractionDelegate> delegate;
 
@@ -33,7 +46,8 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
  * Show the upgrade prompt if appropriate.
  *
  *  If there is a new version that has not been prompted display the upgrade prompt.
- *  Also, if the current version is below the minimum version, display the upgrade prompt and do not allow it to be dismissed.
+ *  Also, if the current version is below the minimum version, display the upgrade 
+ *  prompt and do not allow it to be dismissed.
  */
 - (void)showUpgradePromptIfDesired;
 
@@ -43,5 +57,10 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
  * If there are release notes for the version running that have not been displayed, display them.
  */
 - (void)showReleaseNotesIfDesired;
+
+/**
+ *  Reset any stored keys in the user defaults.
+ */
+- (void)resetViewedState;
 
 @end

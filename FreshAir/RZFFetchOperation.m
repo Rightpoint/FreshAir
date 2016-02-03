@@ -72,7 +72,7 @@
 - (void)performDownload
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [self.session downloadTaskWithURL:self.fromURL completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionTask *task = [self.session downloadTaskWithURL:self.fromURL completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSUInteger responseCode = ((NSHTTPURLResponse *)response).statusCode;
         if ( responseCode == 200 ) {
             [self performCopyFromURL:location];
@@ -85,8 +85,8 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
+    [task resume];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
 }
 
 @end

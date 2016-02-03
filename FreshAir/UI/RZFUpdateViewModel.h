@@ -12,6 +12,8 @@
 
 @interface RZFUpdateViewModel : NSObject
 
+- (instancetype)initWithBundle:(NSBundle *)bundle;
+
 @property (copy, nonatomic) NSString *localizedTitle;
 @property (copy, nonatomic) NSString *localizedDescription;
 @property (strong, nonatomic) UIImage *image;

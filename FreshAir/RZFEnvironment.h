@@ -18,15 +18,9 @@ OBJC_EXTERN NSString *const RZFEnvironmentAppVersionKey;
 @interface RZFEnvironment : NSObject
 
 /**
- *  The variables that the conditions are evaluated against. By default, this dictionary
- *  contains:
- *
- *          platform:      iOS
- *          systemVersion: The value of UIDevice.currentDevice.systemVersion
- *          displayScale:  The value of UIScreen.mainScreen.scale
- *          appVersion:    The value of NSBundle.mainBundle.userInfo.CFBundleShortVersionString
+ *  Create an environment with the specified variables.
  */
-+ (NSMutableDictionary<NSString *, NSString *> *)defaultVariables;
+- (instancetype)initWithVariables:(NSDictionary *)variables;
 
 /**
  *  A dictionary of all variables configured in the environment.

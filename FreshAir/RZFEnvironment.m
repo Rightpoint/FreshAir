@@ -12,6 +12,7 @@
 #import "RZFRelease.h"
 
 #import "NSBundle+RZFreshAir.h"
+#import "NSURL+RZFManifest.h"
 #import "RZFManifest+Private.h"
 
 // Keys in the environment variables
@@ -26,21 +27,12 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 @implementation RZFEnvironment
 
-+ (NSMutableDictionary *)defaultVariables
-{
-    NSAssert([NSThread currentThread] == [NSThread mainThread], @"Can only mutate the default environment on the main thread.");
-    static NSMutableDictionary *defaultVariables = nil;
-    if (defaultVariables == nil) {
-        defaultVariables = [NSMutableDictionary dictionary];
-    }
-    return defaultVariables;
-}
-
-- (instancetype)init
+- (instancetype)initWithVariables:(NSDictionary *)variables
 {
     self = [super init];
     if (self) {
-        self.variables = [self.class defaultVariables];
+        self.variables = variables;
+        self.userDefaults = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -110,7 +102,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     return [results copy];
 }
 
-- (void)userDidViewContentOfReleaseNotesForVersion:(NSString *)version
+- (void)userDidViewUpdatePromptForVersion:(NSString *)version
 {
     [self.userDefaults setValue:version forKey:RZFLastVersionPromptedKey];
 }
@@ -123,10 +115,10 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (BOOL)isRemoteBundleLoaded:(NSBundle *)bundle
 {
-    RZFManifest *manifest = [bundle rzf_manifest];
+    RZFManifest *manifest = [[RZFManifest alloc] initWithBundle:bundle];
     BOOL result = NO;
     if ([manifest isManifestLoaded]) {
-        result = YES;
+        result = [manifest loadEntriesError:nil];
         for (RZFManifestEntry *entry in manifest.entries) {
             if ([entry isApplicableInEnvironment:self.variables] &&
                 [entry isLoadedInBundle:bundle] == NO) {

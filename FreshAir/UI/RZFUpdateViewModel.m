@@ -9,15 +9,25 @@
 #import "RZFUpdateViewModel.h"
 #import "RZFReleaseNotes.h"
 
-static NSString * const kRZFDefaultPromptTitleLabelText = @"New Version";
-static NSString * const kRZFDefaultPromptTitleLabelTextForce = @"Please Update";
-static NSString * const kRZFDefaultPromptMessageLabelText = @"Generic update notes";
-static NSString * const kRZFDefaultPromptMessageLabelTextForce = @"Generic forceful update message";
-static NSString * const kRZFDefaultDeclineButtonTitle = @"No Thanks";
-static NSString * const kRZFDefaultConfirmButtonTitle = @"Update";
-static NSString * const kRZFDefaultForceUpdateButtonTitle = @"Update Now";
+static NSString *RZFLocalizedValue(NSBundle *bundle, NSString *key) {
+    NSString *fullKey = [@"freshair.update." stringByAppendingString:key];
+    return [bundle localizedStringForKey:fullKey value:nil table:@"FreshAirUpdate"];
+}
 
 @implementation RZFUpdateViewModel
 
+- (instancetype)initWithBundle:(NSBundle *)bundle
+{
+    self = [super init];
+    if (self) {
+        self.image = [UIImage imageNamed:@"freshair_update" inBundle:bundle compatibleWithTraitCollection:nil];
+        self.localizedTitle = RZFLocalizedValue(bundle, @"title");
+        self.localizedDescription = RZFLocalizedValue(bundle, @"description");
+        self.localizedDismiss = RZFLocalizedValue(bundle, @"dismiss");
+        self.localizedConfirmation = RZFLocalizedValue(bundle, @"confirm");
+    }
+   
+    return self;
+}
 
 @end

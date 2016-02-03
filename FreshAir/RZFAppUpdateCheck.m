@@ -32,15 +32,39 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
     }
     return status;
 }
-
-- (instancetype)init
+- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL environment:(RZFEnvironment *)environment
 {
     self = [super init];
     if (self) {
-        self.session = [NSURLSession sharedSession];
-        self.environment = [[RZFEnvironment alloc] init];
+        _session = [NSURLSession sharedSession];
+        _releaseNoteURL = releaseNoteURL;
+        _environment = environment;
     }
     return self;
+}
+
+- (instancetype)initWithAppStoreID:(NSString *)appStoreID environment:(RZFEnvironment *)environment
+{
+    self = [super init];
+    if (self) {
+        _session = [NSURLSession sharedSession];
+        _appStoreID = [appStoreID copy];
+        _environment = environment;
+    }
+    return self;
+}
+
+- (void)performCheckWithCompletion:(RZFAppUpdateCheckCompletion)completion;
+{
+    if (self.appStoreID) {
+        [self checkAppStoreID:self.appStoreID completion:completion];
+    }
+    else if (self.releaseNoteURL) {
+        [self checkReleaseNotesURL:self.releaseNoteURL completion:completion];
+    }
+    else {
+        [NSException raise:NSInvalidArgumentException format:@"Must specify an appStoreID or a releaseNoteURL"];
+    }
 }
 
 - (void)checkAppStoreID:(NSString *)appStoreID
@@ -48,29 +72,32 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
 {
     completion = completion ?: ^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {};
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:RZFAppStoreURLFormat, appStoreID]];
-    [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        RZFAppUpdateStatus status = RZFAppUpdateStatusNoUpdate;
+        NSString *appStoreVersion = nil;
+        NSURL *upgradeURL = nil;
+
         if (data) {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *results = json[RZFAppStoreResultsKey];
             if (results.count > 0) {
                 NSDictionary *appInfo = results[0];
-                NSString *appStoreVersion = appInfo[RZFAppStoreVersionKey];
                 NSString *systemVersion = appInfo[RZFAppStoreMinimumOsVersionKey];
                 NSString *upgradeURLString = appInfo[RZFAppStoreUpgradeURLKey];
-                NSURL *upgradeURL = [NSURL URLWithString:upgradeURLString];
-
+                appStoreVersion = appInfo[RZFAppStoreVersionKey];
+                NSURLComponents *components = [[NSURLComponents alloc] initWithString:upgradeURLString];
+                components.query = nil;
+                upgradeURL = [components URL];
                 BOOL newVersion  = [self.environment shouldDisplayUpgradePromptForVersion:appStoreVersion];
                 BOOL deviceSupported = [self.environment isSystemVersionSupported:systemVersion];
-                RZFAppUpdateStatus status = [self.class statusForNewVersion:newVersion deviceSupported:deviceSupported];
-                completion(status, appStoreVersion, upgradeURL);
+                status = [self.class statusForNewVersion:newVersion deviceSupported:deviceSupported];
             }
-            else {
-                completion(RZFAppUpdateStatusNoUpdate, nil, nil);
-            }
-        } else {
-            completion(RZFAppUpdateStatusNoUpdate, nil, nil);
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(status, appStoreVersion, upgradeURL);
+        });
     }];
+    [task resume];
 }
 
 - (void)checkReleaseNotesURL:(NSURL *)URL
@@ -85,7 +112,7 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
         [self checkReleaseNotes:releaseNotes completion:completion];
     }
     else {
-        [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSURLSessionDataTask *task = [self.session dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             NSError *importError = nil;
             RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
             if (importError || error) {
@@ -93,6 +120,7 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
             }
             [self checkReleaseNotes:releaseNotes completion:completion];
         }];
+        [task resume];
     }
 }
 
@@ -112,7 +140,9 @@ static NSString *const RZFAppStoreUpgradeURLKey = @"trackViewUrl";
         BOOL deviceSupported = lastRelease == releaseNotes.releases.lastObject;
         status = [self.class statusForNewVersion:newVersion deviceSupported:deviceSupported];
     }
-    completion(status, lastVersion, upgradeURL);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completion(status, lastVersion, upgradeURL);
+    });
 }
 
 @end

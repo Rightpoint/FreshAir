@@ -1,0 +1,12 @@
+/* 
+  FreshAirUpdate.strings
+  FreshAir
+
+  Created by Brian King on 2/2/16.
+  Copyright © 2016 Raizlabs. All rights reserved.
+*/
+
+"freshair.update.title" = "New Version";
+"freshair.update.description" = "We think you'll like it!";
+"freshair.update.dismiss" = "No Thanks";
+"freshair.update.confirm" = "Update";

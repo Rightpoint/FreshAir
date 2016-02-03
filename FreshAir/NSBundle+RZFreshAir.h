@@ -14,22 +14,19 @@ OBJC_EXTERN NSString *const RZFreshAirRemoteURL;
 @interface NSBundle (RZFreshAir)
 
 /**
+ *  NSBundle.mainBundle is not very consistent, depending on the target configuration.
+ *  NSBundle.rzf_appBundle returns the bundle that the app delegate is a part of. This
+ *  should more consistently point to the application bundle.
+ *
+ *  @note This returns nil until the UIApplication.delegate is configured. In particular,
+ *        this method returns nil durrin +load.
+ */
++ (NSBundle *)rzf_appBundle;
+
+/**
  *  Return the remote URL for this bundle. If this is not a freshair bundle
  *  this will raise an exception.
  */
 - (NSURL *)rzf_remoteURL;
-
-/**
- *  Return a release notes object for the `release_notes.json` 
- *  file contained in this bundle. If the file does not exist, nil will be
- *  returned.
- */
-- (RZFReleaseNotes *)rzf_releaseNotes;
-
-/**
- *  Return the manifest object for the `manifest.json` file contained in
- *  the bundle. If the file does not exist, nil will be returned.
- */
-- (RZFManifest *)rzf_manifest;
 
 @end

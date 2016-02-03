@@ -10,9 +10,9 @@
 
 @protocol RZFInteractionDelegate <NSObject>
 
-- (void)rzf_intitiator:(id)initiator presentViewController:(UIViewController *)viewController;
-- (void)rzf_intitiator:(id)initiator dismissViewController:(UIViewController *)viewController;
-- (void)rzf_intitiator:(id)initiator openURL:(NSURL *)upgradeURL;
+- (void)rzf_interationDelegate:(id)initiator presentViewController:(UIViewController *)viewController;
+- (void)rzf_interationDelegate:(id)initiator dismissViewController:(UIViewController *)viewController;
+- (void)rzf_interationDelegate:(id)initiator openURL:(NSURL *)upgradeURL;
 
 @end
 

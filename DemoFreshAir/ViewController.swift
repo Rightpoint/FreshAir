@@ -11,11 +11,15 @@ import FreshAir
 
 class ViewController: UITableViewController {
     static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/TestFeature", withExtension: "freshair")
-    var upgradeManager = RZFUpgradeManager(remoteURL: freshairURL)
+    var upgradeManager: RZFUpgradeManager = {
+        let mgr = RZFUpgradeManager()
+        mgr.appStoreID = "944415329"
+        mgr.bundle = NSBundle(URL: freshairURL!)
+        return mgr
+    }()
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        upgradeManager.refreshUpgradeBundle()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,10 +34,7 @@ class ViewController: UITableViewController {
         case (0, 1):
             upgradeManager.showReleaseNotesIfDesired()
         case (0, 2):
-            upgradeManager.showReleaseNotes()
-        case (0, 3):
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(RZFLastVersionOfReleaseNotesDisplayedKey)
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(RZFLastVersionPromptedKey)
+            upgradeManager.resetViewedState()
         default:
             break
         }

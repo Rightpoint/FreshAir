@@ -118,7 +118,7 @@ static NSURL *localURL = nil;
 }
 
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
-                      environment:(RZFEnvironment * __nullable)environment
+                      environment:(RZFEnvironment *)environment
                        completion:(RZFBundleUpdateBlock)completion
 {
     NSAssert([[remoteURL pathExtension] isEqual:@"freshair"], @"Remote URL must point to a .freshair resource");
@@ -126,7 +126,7 @@ static NSURL *localURL = nil;
     self = [super init];
     if (self) {
         _completion = completion ? [completion copy] : [^(NSBundle *b, NSError *e) {} copy];
-        _environment = environment ?: [[RZFEnvironment alloc] init];
+        _environment = environment;
         _backgroundOperations = [[NSOperationQueue alloc] init];
         _session = [NSURLSession sharedSession];
 

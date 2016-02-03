@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol RZFBundleResourceRequestDelegate;
 @class RZFEnvironment;
@@ -31,11 +31,11 @@ typedef void(^RZFBundleUpdateBlock)(NSBundle *bundle, NSError *error);
  *  Create a new manifest manager that will obtain the manifest at the remote URL and store it in the localURL directory
  *
  *  @param remoteURL The remote URL to load. This should refer to the .freshair file, not the manifest file.
- *  @param environment The local path to store the root bundle. A directory will be appended to this URL to contain the root bundle.
+ *  @param environment The environment object to evaluate conditions against.
  *  @param delegate The delegate to be informed when a bundle is loaded.
  */
 - (instancetype)initWithRemoteURL:(NSURL *)remoteURL
-                      environment:(RZFEnvironment * __nullable)environment
+                      environment:(RZFEnvironment *)environment
                        completion:(RZFBundleUpdateBlock __nullable)completion;
 
 /**
@@ -61,5 +61,5 @@ typedef void(^RZFBundleUpdateBlock)(NSBundle *bundle, NSError *error);
 
 @end
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END
 

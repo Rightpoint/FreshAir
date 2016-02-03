@@ -21,14 +21,15 @@ typedef void(^RZFAppUpdateCheckCompletion)(RZFAppUpdateStatus status, NSString *
 
 @interface RZFAppUpdateCheck : NSObject
 
+- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL environment:(RZFEnvironment *)environment;
+- (instancetype)initWithAppStoreID:(NSString *)appStoreID environment:(RZFEnvironment *)environment;
+
 @property (strong, nonatomic) NSURLSession *session;
 
-@property (strong, nonatomic) RZFEnvironment *environment;
+@property (strong, nonatomic, readonly) RZFEnvironment *environment;
+@property (copy, nonatomic, readonly) NSString *appStoreID;
+@property (strong, nonatomic, readonly) NSURL *releaseNoteURL;
 
-- (void)checkAppStoreID:(NSString *)appStoreID
-             completion:(RZFAppUpdateCheckCompletion)completion;
-
-- (void)checkReleaseNotesURL:(NSURL *)URL
-                  completion:(RZFAppUpdateCheckCompletion)completion;
+- (void)performCheckWithCompletion:(RZFAppUpdateCheckCompletion)completion;
 
 @end

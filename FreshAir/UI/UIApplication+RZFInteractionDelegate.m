@@ -11,7 +11,7 @@
 
 @implementation UIApplication (RZFInteractionDelegate)
 
-- (void)rzf_intitiator:(id)initiator presentViewController:(UIViewController *)viewController
+- (void)rzf_interationDelegate:(id)initiator presentViewController:(UIViewController *)viewController
 {
     UIViewController *topViewController = self.delegate.window.rootViewController;
     while (topViewController.presentedViewController) {
@@ -20,12 +20,12 @@
     [topViewController presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)rzf_intitiator:(id)initiator dismissViewController:(UIViewController *)viewController
+- (void)rzf_interationDelegate:(id)initiator dismissViewController:(UIViewController *)viewController
 {
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)rzf_intitiator:(id)initiator openURL:(NSURL *)upgradeURL
+- (void)rzf_interationDelegate:(id)initiator openURL:(NSURL *)upgradeURL
 {
     [self openURL:upgradeURL];
 }
