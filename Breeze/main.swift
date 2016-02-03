@@ -142,6 +142,9 @@ do {
         "# Generate image paths for apple with @2x and @3x resolution with iPhone and iPad variation, but no language variance",
         "Breeze -i -p apple --resolution=2x 3x --device=iphone ipad -b $BUNDLE_PATH",
         "",
+        "# Generate localizable.strings files populated with the release note keys.",
+        "Breeze -l --languages=en fr -b $BUNDLE_PATH",
+        "",
     ]
     print("Examples\n\n  \(examples.joinWithSeparator("\n  "))")
     exit(EX_USAGE)
