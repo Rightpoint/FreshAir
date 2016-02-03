@@ -39,49 +39,75 @@ func updateManifestShaInBundle(path: String) throws {
     data.writeToURL(manifestURL, atomically: true)
 }
 
-func populateManifestForReleaseInBundle(path: String) throws {
+func populateManifestForReleaseInBundle(path: String, featureExpansions: [ExpansionSet]) throws {
     guard let bundleURL = NSURL(string: "file://\(path)") else {
         throw BreezeError.InvalidFilePath(path: path)
     }
-    let manifestURL = bundleURL.URLByAppendingPathComponent(NSURL.rzf_manifestFilename())
     let releaseURL  = bundleURL.URLByAppendingPathComponent(NSURL.rzf_releaseFilename())
 
     guard let releaseNotes = try RZFReleaseNotes.rzf_importURL(releaseURL) as? RZFReleaseNotes else {
         throw BreezeError.InvalidJSONFormat(path: releaseURL.path!)
     }
-    guard let entries = try RZFManifestEntry.rzf_importURL(manifestURL) as? [RZFManifestEntry] else {
-        throw BreezeError.InvalidJSONFormat(path: manifestURL.path!)
-    }
+
+    print("# Copy and Paste the following commands")
     for release in releaseNotes.releases {
         for feature in release.features {
-            // Check for key.png, key@2x.png, key@3x.png
-            // In Localization, check for key.title, key.description
+            let paths = performExpansions(featureExpansions, onPath: feature.key)
+            let commands = paths.map() { "touch \($0)" }
+            print(commands.joinWithSeparator("\n"))
         }
     }
 }
 
-
 let cli = CommandLine()
-let bundle = StringOption(shortFlag: "b", longFlag: "bundle", helpMessage: "Path to the freshair bundle.")
-let sha = BoolOption(shortFlag: "s", longFlag: "sha",  helpMessage: "Calculate all of the sha values in the manifest.")
-let release = BoolOption(shortFlag: "r", longFlag: "release",  helpMessage: "Update the manifest with the release file.")
+let bundleOpt = StringOption(shortFlag: "b", longFlag: "bundle", helpMessage: "Path to the freshair bundle.")
+let shaOpt = BoolOption(shortFlag: "s", longFlag: "sha",  helpMessage: "Calculate all of the sha values in the manifest.")
 
-cli.addOptions(bundle, sha, release)
+let releaseOpt = BoolOption(shortFlag: "i", longFlag: "images",  helpMessage: "Generate images for the flags 'languages', 'resolution', and 'device'")
+let platformOpt = EnumOption<Platform>(shortFlag: "p", longFlag: "platform",  helpMessage: "The platform to generate for. apple or android.")
+let languageOpt = MultiStringOption(longFlag: "languages",  helpMessage: "Generate files for all of the languages")
+let resolutionOpt = MultiStringOption(longFlag: "resolution",  helpMessage: "Generate files for all of the resolutions")
+let deviceOpt = MultiStringOption(longFlag: "device",  helpMessage: "Generate files for all of the devices")
+
+cli.addOptions(bundleOpt, shaOpt, releaseOpt, platformOpt, languageOpt, resolutionOpt, deviceOpt)
 
 do {
     try cli.parse()
-    let path = bundle.value ?? "./"
-    if release.wasSet {
-        try populateManifestForReleaseInBundle(path)
+    let path = bundleOpt.value ?? "./"
+    if releaseOpt.wasSet {
+        let platform = platformOpt.value ?? .Apple
+        let localeStrings = languageOpt.value ?? []
+        let resolutionStrings = resolutionOpt.value ?? []
+        let deviceStrings = deviceOpt.value ?? []
+
+        var expansions: [ExpansionSet] = Array()
+        expansions.append([AssetType.PNG])
+        expansions.append(localeStrings.map(platform.localeExpansion))
+        try expansions.append(resolutionStrings.map(platform.resolutionExpansion))
+        try expansions.append(deviceStrings.map(platform.deviceExpansion))
+
+        try populateManifestForReleaseInBundle(path, featureExpansions: expansions)
     }
-    if sha.wasSet {
+    if shaOpt.wasSet {
         try updateManifestShaInBundle(path)
     }
-    if !release.wasSet && !sha.wasSet {
-        throw CommandLine.ParseError.MissingRequiredOptions([sha, release])
+    if !releaseOpt.wasSet && !shaOpt.wasSet {
+        throw CommandLine.ParseError.MissingRequiredOptions([shaOpt, releaseOpt])
     }
 } catch {
     cli.printUsage(error)
+    let examples = [
+        "# Generate image paths for apple with @2x and @3x resolution with iPhone, iPad, and language variation",
+        "Breeze -i -p apple --languages=en fr --resolution=2x 3x --device=iphone ipad -b $BUNDLE_PATH",
+        "",
+        "# Generate image paths for apple with @2x and @3x resolution with language variation",
+        "Breeze -i -p apple --languages=en fr --resolution=2x 3x -b $BUNDLE_PATH",
+        "",
+        "# Generate image paths for apple with @2x and @3x resolution with iPhone and iPad variation, but no language variance",
+        "Breeze -i -p apple --resolution=2x 3x --device=iphone ipad -b $BUNDLE_PATH",
+        "",
+    ]
+    print("Examples\n\n  \(examples.joinWithSeparator("\n  "))")
     exit(EX_USAGE)
 }
 

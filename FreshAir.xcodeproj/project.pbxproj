@@ -12,6 +12,8 @@
 		AB07893D1C6151090089D510 /* FreshAirUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB07893C1C6151090089D510 /* FreshAirUpdate.strings */; };
 		AB0789411C62470A0089D510 /* RZFAppStoreUpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */; };
 		AB0789421C62470A0089D510 /* RZFAppStoreUpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */; };
+		AB0789441C6275F70089D510 /* Expansions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0789431C6275F70089D510 /* Expansions.swift */; };
+		AB0789471C62A4CA0089D510 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0789461C62A4CA0089D510 /* String+Helpers.swift */; };
 		AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968B1C58595D00EB00CC /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -179,6 +181,8 @@
 		AB07893C1C6151090089D510 /* FreshAirUpdate.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = FreshAirUpdate.strings; sourceTree = "<group>"; };
 		AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAppStoreUpdateCheck.h; sourceTree = "<group>"; };
 		AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAppStoreUpdateCheck.m; sourceTree = "<group>"; };
+		AB0789431C6275F70089D510 /* Expansions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expansions.swift; sourceTree = "<group>"; };
+		AB0789461C62A4CA0089D510 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
 		AB954BE61C56DC39003A050B /* release_notes_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_schema.json; sourceTree = "<group>"; };
 		AB954BEB1C56F539003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
@@ -367,6 +371,8 @@
 				AB954C491C585410003A050B /* Carthage */,
 				AB954C451C5853C2003A050B /* Info.plist */,
 				AB954C521C585533003A050B /* main.swift */,
+				AB0789431C6275F70089D510 /* Expansions.swift */,
+				AB0789461C62A4CA0089D510 /* String+Helpers.swift */,
 			);
 			path = Breeze;
 			sourceTree = "<group>";
@@ -768,6 +774,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB954C531C585533003A050B /* main.swift in Sources */,
+				AB0789441C6275F70089D510 /* Expansions.swift in Sources */,
+				AB0789471C62A4CA0089D510 /* String+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
