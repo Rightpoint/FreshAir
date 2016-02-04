@@ -39,6 +39,9 @@ func updateManifestShaInBundle(path: String) throws {
     data.writeToURL(manifestURL, atomically: true)
 }
 
+func createManifestForBundle(path: String) throws {
+}
+
 func releaseNotesAtPath(path: String) throws -> RZFReleaseNotes {
     guard let bundleURL = NSURL(string: "file://\(path)") else {
         throw BreezeError.InvalidFilePath(path: path)
@@ -51,46 +54,13 @@ func releaseNotesAtPath(path: String) throws -> RZFReleaseNotes {
     return releaseNotes
 }
 
-func populateImageFilesForReleaseInBundle(path: String, featureExpansions: [ExpansionSet]) throws {
-    let releaseNotes = try releaseNotesAtPath(path)
-    print("# Copy and Paste the following commands")
-    let paths = releaseNotes.features.map() {
-        return performExpansions(featureExpansions, onPath: $0.key)
-    }.flatten()
-
-    let commands = paths.map() { "touch \($0)" }
-    print(commands.joinWithSeparator("\n"))
-}
-
-func populateStringsFilesForReleaseInBundle(path: String, featureExpansions: [ExpansionSet]) throws {
-    let releaseNotes = try releaseNotesAtPath(path)
-    let paths = ["release_notes"].map() {
-        return performExpansions(featureExpansions, onPath: $0)
-    }.flatten()
-    func addLocalizableEntry(feature: RZFFeature) -> String {
-        return [
-            "\"\(feature.localizedTitleKey())\" = \"Title of Feature \(feature.key)\"",
-            "\"\(feature.localizedDescriptionKey())\" = \"Description of Feature \(feature.key)\"",
-            "",
-        ].joinWithSeparator("\n")
-    }
-    let commands: [String] = paths.map() {
-        var output = ["cat > \($0) << EOF"]
-        let content = releaseNotes.features.map(addLocalizableEntry)
-        output.appendContentsOf(content)
-        output.append("EOF")
-        return output.joinWithSeparator("\n")
-    }
-    print(commands.joinWithSeparator("\n"))
-
-}
 let cli = CommandLine()
 let bundleOpt = StringOption(shortFlag: "b", longFlag: "bundle", helpMessage: "Path to the freshair bundle.")
+
 let shaFlag = BoolOption(shortFlag: "s", longFlag: "sha",  helpMessage: "Calculate all of the sha values in the manifest.")
-
 let localizeFlag = BoolOption(shortFlag: "l", longFlag: "localize",  helpMessage: "Generate localization files for the features in the release")
-
 let imageFlag = BoolOption(shortFlag: "i", longFlag: "images",  helpMessage: "Generate images for the flags 'languages', 'resolution', and 'device'")
+
 let platformOpt = EnumOption<Platform>(shortFlag: "p", longFlag: "platform",  helpMessage: "The platform to generate for. apple or android.")
 let languageOpt = MultiStringOption(longFlag: "languages",  helpMessage: "Generate files for all of the languages")
 let resolutionOpt = MultiStringOption(longFlag: "resolution",  helpMessage: "Generate files for all of the resolutions")
@@ -107,22 +77,34 @@ do {
         let resolutionStrings = resolutionOpt.value ?? []
         let deviceStrings = deviceOpt.value ?? []
 
-        var expansions: [ExpansionSet] = Array()
-        expansions.append([AssetType.PNG])
-        expansions.append(localeStrings.map(platform.localeExpansion))
-        try expansions.append(resolutionStrings.map(platform.resolutionExpansion))
-        try expansions.append(deviceStrings.map(platform.deviceExpansion))
+        let expansions: [ExpansionSet] = [
+            [AssetType.PNG],
+            localeStrings.map(platform.localeExpansion),
+            try resolutionStrings.map(platform.resolutionExpansion),
+            try deviceStrings.map(platform.deviceExpansion),
+            [ShellCommand.Touch]
+        ]
 
-        try populateImageFilesForReleaseInBundle(path, featureExpansions: expansions)
+        let releaseNotes = try releaseNotesAtPath(path)
+        print("# Copy and Paste the following commands")
+        let output = releaseNotes.features.map() {
+            $0.key.performExpansions(expansions)
+            }.flatten()
+
+        print(output.joinWithSeparator("\n"))
     }
     if localizeFlag.wasSet {
         let platform = platformOpt.value ?? .Apple
         let localeStrings = languageOpt.value ?? []
 
-        var expansions: [ExpansionSet] = Array()
-        expansions.append([AssetType.Strings])
-        expansions.append(localeStrings.map(platform.localeExpansion))
-        try populateStringsFilesForReleaseInBundle(path, featureExpansions: expansions)
+        let releaseNotes = try releaseNotesAtPath(path)
+        let expansions: [ExpansionSet] = [
+            try [platform.localeFileType()],
+            localeStrings.map(platform.localeExpansion),
+            try releaseNotes.features.map(platform.featureExpansion)
+        ]
+        print("# Copy and Paste the following commands")
+        print("release_notes".performExpansions(expansions).joinWithSeparator("\n"))
     }
     if shaFlag.wasSet {
         try updateManifestShaInBundle(path)
