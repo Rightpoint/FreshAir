@@ -18,12 +18,12 @@
 
 - (void)testFeatureRange
 {
-    NSURL *releaseURL = [BUNDLE URLForResource:@"Examples/Test.releaseNotes/release_notes" withExtension:@"json"];
+    NSURL *releaseURL = [BUNDLE URLForResource:@"release_notes" withExtension:@"json"];
     RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:nil];
 
     NSArray *f1_12 = [releaseNotes featuresFromVersion:@"1.0" toVersion:@"1.2"];
     NSArray *f12_21 = [releaseNotes featuresFromVersion:@"1.2" toVersion:@"2.1"];
-    XCTAssert(f1_12.count == 4);
+    XCTAssert(f1_12.count == 1);
     XCTAssert(f12_21.count == 3);
 }
 
