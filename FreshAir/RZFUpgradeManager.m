@@ -11,7 +11,7 @@
 #import "NSObject+RZFImport.h"
 #import "UIApplication+RZFInteractionDelegate.h"
 #import "RZFUpdateViewModel.h"
-#import "RZFAppUpdateCheck.h"
+#import "RZFReleaseNotesCheck.h"
 #import "RZFAppStoreUpdateCheck.h"
 
 #import "RZFUpdatePromptViewController.h"
@@ -62,7 +62,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (void)showUpgradePromptIfDesired
 {
-    RZFAppUpdateCheck *check = nil;
+    RZFReleaseNotesCheck *check = nil;
     if (self.appStoreID) {
         // RZFAppStoreUpdateCheck has the same contract as RZFAppUpdateCheck.
         // RZFAppStoreUpdateCheck was written to be isolated from the rest of the
@@ -72,7 +72,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
         check = (id)[[RZFAppStoreUpdateCheck alloc] initWithAppStoreID:self.appStoreID];
     }
     else {
-        check = [[RZFAppUpdateCheck alloc] initWithReleaseNoteURL:self.releaseNoteURL
+        check = [[RZFReleaseNotesCheck alloc] initWithReleaseNoteURL:self.releaseNoteURL
                                                       appVersion:self.appVersion
                                                     systemVersion:self.systemVersion];
     }

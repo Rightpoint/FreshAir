@@ -13,7 +13,7 @@
  * Check the releaseNoteURL file to see if there is an update available. If this is a remote
  * file it will be downloaded, if it is a local file it will be checked immediately.
  */
-@interface RZFAppUpdateCheck : NSObject
+@interface RZFReleaseNotesCheck : NSObject
 
 - (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL appVersion:(NSString *)appVersion systemVersion:(NSString *)systemVersion;
 

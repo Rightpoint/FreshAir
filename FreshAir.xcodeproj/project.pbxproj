@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB07893A1C60363C0089D510 /* RZFAppUpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */; };
-		AB07893B1C60363C0089D510 /* RZFAppUpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */; };
+		AB07893A1C60363C0089D510 /* RZFReleaseNotesCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0789381C60363C0089D510 /* RZFReleaseNotesCheck.h */; };
+		AB07893B1C60363C0089D510 /* RZFReleaseNotesCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0789391C60363C0089D510 /* RZFReleaseNotesCheck.m */; };
 		AB07893D1C6151090089D510 /* FreshAirUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB07893C1C6151090089D510 /* FreshAirUpdate.strings */; };
 		AB0789411C62470A0089D510 /* RZFAppStoreUpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */; };
 		AB0789421C62470A0089D510 /* RZFAppStoreUpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */; };
@@ -132,8 +132,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAppUpdateCheck.h; sourceTree = "<group>"; };
-		AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAppUpdateCheck.m; sourceTree = "<group>"; };
+		AB0789381C60363C0089D510 /* RZFReleaseNotesCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNotesCheck.h; sourceTree = "<group>"; };
+		AB0789391C60363C0089D510 /* RZFReleaseNotesCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFReleaseNotesCheck.m; sourceTree = "<group>"; };
 		AB07893C1C6151090089D510 /* FreshAirUpdate.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = FreshAirUpdate.strings; sourceTree = "<group>"; };
 		AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAppStoreUpdateCheck.h; sourceTree = "<group>"; };
 		AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAppStoreUpdateCheck.m; sourceTree = "<group>"; };
@@ -246,9 +246,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB07893E1C6240B50089D510 /* Model */ = {
+		AB07893E1C6240B50089D510 /* ReleaseNotes */ = {
 			isa = PBXGroup;
 			children = (
+				AB0789381C60363C0089D510 /* RZFReleaseNotesCheck.h */,
+				AB0789391C60363C0089D510 /* RZFReleaseNotesCheck.m */,
 				AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */,
 				AB954BEF1C57A83A003A050B /* RZFReleaseNotes.m */,
 				AB954BFA1C57A89E003A050B /* RZFRelease.h */,
@@ -259,7 +261,7 @@
 				AB954C051C5824ED003A050B /* NSObject+RZFImport.m */,
 				AB954C0A1C582B4B003A050B /* RZFDefines.h */,
 			);
-			name = Model;
+			name = ReleaseNotes;
 			sourceTree = "<group>";
 		};
 		AB954BE41C56DC39003A050B /* Schema */ = {
@@ -328,9 +330,7 @@
 				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
 				AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */,
 				AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */,
-				AB0789381C60363C0089D510 /* RZFAppUpdateCheck.h */,
-				AB0789391C60363C0089D510 /* RZFAppUpdateCheck.m */,
-				AB07893E1C6240B50089D510 /* Model */,
+				AB07893E1C6240B50089D510 /* ReleaseNotes */,
 				ABF296061C594A490048F58B /* UI */,
 			);
 			path = FreshAir;
@@ -413,7 +413,7 @@
 				ABA483FB1C544C1F002CDCB2 /* FreshAir.h in Headers */,
 				ABF2962D1C594AE10048F58B /* UIColor+RZFStyle.h in Headers */,
 				ABF2963A1C59568D0048F58B /* RZFUpgradeManager.h in Headers */,
-				AB07893A1C60363C0089D510 /* RZFAppUpdateCheck.h in Headers */,
+				AB07893A1C60363C0089D510 /* RZFReleaseNotesCheck.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
 				ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */,
 				ABF296311C594BC90048F58B /* RZFFeatureViewModel.h in Headers */,
@@ -664,7 +664,7 @@
 			files = (
 				ABF2961A1C594A700048F58B /* RZFUpdatePromptViewController.m in Sources */,
 				AB954C081C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
-				AB07893B1C60363C0089D510 /* RZFAppUpdateCheck.m in Sources */,
+				AB07893B1C60363C0089D510 /* RZFReleaseNotesCheck.m in Sources */,
 				AB954BFD1C57A89E003A050B /* RZFRelease.m in Sources */,
 				ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */,
 				AB0789421C62470A0089D510 /* RZFAppStoreUpdateCheck.m in Sources */,

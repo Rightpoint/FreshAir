@@ -6,7 +6,7 @@
 //  Copyright © 2016 Raizlabs. All rights reserved.
 //
 
-#import "RZFAppUpdateCheck.h"
+#import "RZFReleaseNotesCheck.h"
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 
