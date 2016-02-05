@@ -9,11 +9,6 @@
 import Foundation
 import FreshAirUtility
 
-enum ExpansionError: ErrorType {
-    case UnsupportedValue(value: String)
-    case AndroidUnsupported
-}
-
 protocol StringExpansion {
     func expandString(path: String) -> String
 }
@@ -44,19 +39,13 @@ extension String {
     }
 }
 
-enum AssetType: String, StringExpansion {
-    case Strings = "strings"
-    case PNG = "png"
-
+extension AssetType: StringExpansion {
     func expandString(string: String) -> String {
         return string.stringByAppendingString(".\(self.rawValue)")
     }
 }
 
-enum Platform: String {
-    case Apple = "apple"
-    case Android = "android"
-
+extension Platform {
     func localeFileType() throws -> StringExpansion {
         switch self {
         case .Apple:
@@ -109,29 +98,20 @@ enum Platform: String {
     }
 }
 
-enum LocalizedFeatureContent : StringExpansion {
-    case Strings(feature: RZFFeature)
-
+extension LocalizedFeatureContent : StringExpansion {
     func expandString(path: String) -> String {
         switch self {
         case Strings(let feature):
             return ["cat >> \(path) << EOF",
-                "\"\(feature.localizedTitleKey())\" = \"Title of Feature \(feature.key)\"",
-                "\"\(feature.localizedDescriptionKey())\" = \"Description of Feature \(feature.key)\"",
-                "", ].joinWithSeparator("\n")
-
+                "\"\(feature.localizedTitleKey())\" = \"Title of Feature \(feature.key)\";",
+                "\"\(feature.localizedDescriptionKey())\" = \"Description of Feature \(feature.key)\";",
+                "",
+                "EOF", ].joinWithSeparator("\n")
         }
     }
-
 }
 
-
-enum AppleResolution: String, StringExpansion {
-    case Default = ""
-    case iOS1x = "1x"
-    case iOS2x = "2x"
-    case iOS3x = "3x"
-
+extension AppleResolution: StringExpansion {
     func expandString(string: String) -> String {
         switch self {
         case .Default:
@@ -142,23 +122,13 @@ enum AppleResolution: String, StringExpansion {
     }
 }
 
-enum AppleDevice: String, StringExpansion {
-    case iPhone = "iphone"
-    case iPad = "ipad"
-
+extension AppleDevice: StringExpansion {
     func expandString(string: String) -> String {
-        switch self {
-        case .iPad:
-            return string.stringByInsertingAfterPathExtension("~".stringByAppendingString(self.rawValue))
-        case .iPhone:
-            return string
-        }
+        return string.stringByInsertingAfterPathExtension("~".stringByAppendingString(self.rawValue))
     }
 }
 
-enum LocaleExpansion: StringExpansion {
-    case Apple(localeCode: String)
-    case Android(localeCode: String)
+extension LocaleExpansion: StringExpansion {
     func expandString(string: String) -> String {
         switch self {
         case .Apple(let localeCode):
@@ -169,19 +139,8 @@ enum LocaleExpansion: StringExpansion {
     }
 }
 
-enum ShellCommand: StringExpansion {
-    case Touch
-
+extension ShellCommand: StringExpansion {
     func expandString(string: String) -> String {
         return "touch \(string)"
     }
 }
-
-//enum AndroidResolutions: String {
-//    case AndroidLDPI = "ldpi"
-//    case AndroidMDPI = "mdpi"
-//    case AndroidHDPI = "hdpi"
-//    case AndroidXHDPI = "xhdpi"
-//    case AndroidXXHDPI = "xxhdpi"
-//    case AndroidXXXHDPI = "xxxhdpi"
-//}

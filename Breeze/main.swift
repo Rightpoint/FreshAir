@@ -39,7 +39,32 @@ func updateManifestShaInBundle(path: String) throws {
     data.writeToURL(manifestURL, atomically: true)
 }
 
-func createManifestForBundle(path: String) throws {
+func createManifestForBundle(path: String, conditionBuilders: [DetectCondition]) throws {
+    guard let bundleURL = NSURL(string: "file://\(path)"),
+        let bundle = NSBundle(URL: bundleURL) else {
+            throw BreezeError.InvalidFilePath(path: path)
+    }
+
+    let fm = NSFileManager.defaultManager()
+    for file in try fm.subpathsOfDirectoryAtPath(path as String) {
+        let filePath = (path as NSString).stringByAppendingPathComponent(file)
+        var isDir: ObjCBool = false
+        let exists = fm.fileExistsAtPath(filePath, isDirectory: &isDir)
+        guard exists && !isDir else {
+            continue
+        }
+        var conditions: [RZFCondition] = Array()
+        for conditionBuilder in conditionBuilders {
+            guard let condition = conditionBuilder(file) else {
+                continue
+            }
+            conditions.append(condition)
+        }
+        let entry = RZFManifestEntry()
+        entry.filename = file
+        entry.sha = entry.shaInBundle(bundle)
+        entry.conditions = conditions
+    }
 }
 
 func releaseNotesAtPath(path: String) throws -> RZFReleaseNotes {
@@ -58,6 +83,7 @@ let cli = CommandLine()
 let bundleOpt = StringOption(shortFlag: "b", longFlag: "bundle", helpMessage: "Path to the freshair bundle.")
 
 let shaFlag = BoolOption(shortFlag: "s", longFlag: "sha",  helpMessage: "Calculate all of the sha values in the manifest.")
+let manifestFlag = BoolOption(shortFlag: "m", longFlag: "manifest",  helpMessage: "Generate a manifest file based on the contents of the directory.")
 let localizeFlag = BoolOption(shortFlag: "l", longFlag: "localize",  helpMessage: "Generate localization files for the features in the release")
 let imageFlag = BoolOption(shortFlag: "i", longFlag: "images",  helpMessage: "Generate images for the flags 'languages', 'resolution', and 'device'")
 
@@ -66,7 +92,7 @@ let languageOpt = MultiStringOption(longFlag: "languages",  helpMessage: "Genera
 let resolutionOpt = MultiStringOption(longFlag: "resolution",  helpMessage: "Generate files for all of the resolutions")
 let deviceOpt = MultiStringOption(longFlag: "device",  helpMessage: "Generate files for all of the devices")
 
-cli.addOptions(bundleOpt, shaFlag, imageFlag, localizeFlag, platformOpt, languageOpt, resolutionOpt, deviceOpt)
+cli.addOptions(bundleOpt, shaFlag, manifestFlag, imageFlag, localizeFlag, platformOpt, languageOpt, resolutionOpt, deviceOpt)
 
 do {
     try cli.parse()
@@ -93,7 +119,7 @@ do {
 
         print(output.joinWithSeparator("\n"))
     }
-    if localizeFlag.wasSet {
+    else if localizeFlag.wasSet {
         let platform = platformOpt.value ?? .Apple
         let localeStrings = languageOpt.value ?? []
 
@@ -106,11 +132,20 @@ do {
         print("# Copy and Paste the following commands")
         print("release_notes".performExpansions(expansions).joinWithSeparator("\n"))
     }
-    if shaFlag.wasSet {
+    else if shaFlag.wasSet {
         try updateManifestShaInBundle(path)
     }
-    if !imageFlag.wasSet && !shaFlag.wasSet && !localizeFlag.wasSet {
-        throw CommandLine.ParseError.MissingRequiredOptions([shaFlag, imageFlag])
+    else if manifestFlag.wasSet {
+        let platform = platformOpt.value ?? .Apple
+
+        try createManifestForBundle(path, conditionBuilders:[
+            platform.localeCondition,
+            try platform.deviceCondition(),
+            try platform.resolutionCondition(),
+            ])
+    }
+    else {
+        throw CommandLine.ParseError.MissingRequiredOptions([shaFlag, manifestFlag, localizeFlag, imageFlag])
     }
 } catch {
     cli.printUsage(error)
