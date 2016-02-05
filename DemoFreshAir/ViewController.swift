@@ -12,7 +12,6 @@ import FreshAir
 class ViewController: UITableViewController {
     static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/Test", withExtension: "releaseNotes")
     let upgradeManager = RZFUpgradeManager(appStoreID:"944415329")
-    upgradeManager.checkForNewUpdate()
 
 
     override func viewWillAppear(animated: Bool) {
@@ -25,7 +24,7 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        upgradeManager.bundle = NSBundle(URL: freshairURL!)
+        upgradeManager.bundle = NSBundle(URL: self.dynamicType.freshairURL!)
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             upgradeManager.checkForNewUpdate()

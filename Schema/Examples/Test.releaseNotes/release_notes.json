@@ -1,0 +1,21 @@
+{
+	"releases": [{
+		"version": "1.1",
+        "minimumSystemVersion": "8.0",
+		"features": []
+	}, {
+		"version": "1.2",
+        "minimumSystemVersion": "8.2",
+		"features": ["Road1"]
+	}, {
+		"version": "2.0",
+        "minimumSystemVersion": "8.2",
+        "features": ["Road2", "Fog1"]
+	}, {
+		"version": "2.1",
+        "minimumSystemVersion": "9.0",
+		"features": ["Sea1"]
+	}],
+    "minimumVersion": "1.2",
+    "upgradeURL": "https://itunes.apple.com/us/app/invaluable-live-auction-bidding/id944415329?mt=8&uo=6&at=&ct="
+}

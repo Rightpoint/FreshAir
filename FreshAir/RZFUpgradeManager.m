@@ -68,7 +68,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (BOOL)isNewVersion:(NSString *)newVersion
 {
-    return [self.appVersion compare:newVersion options:NSNumericSearch] == NSOrderedAscending;
+    return newVersion == nil || [self.appVersion compare:newVersion options:NSNumericSearch] == NSOrderedAscending;
 }
 
 - (void)checkForNewUpdate
