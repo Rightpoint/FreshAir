@@ -40,9 +40,9 @@ static const CGFloat kRZFDoneButtonHeight = 64.0f;
 
 # pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithFeatures:(NSArray<RZFFeatureViewModel *> *)features
 {
-    self = [super init];
+    self = [self init];
     
     if ( self ) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -50,23 +50,14 @@ static const CGFloat kRZFDoneButtonHeight = 64.0f;
         self.layer.cornerRadius = kRZFReleaseNotesViewCornerRadius;
         self.clipsToBounds = YES;
         
+        self.features = features;
+        self.featurePageControl.numberOfPages = [features count];
+
         [self setupFeatureCollectionView];
         [self setupFeaturePageControl];
         [self setupDoneButton];
     }
-    
-    return self;
-}
 
-- (instancetype)initWithFeatures:(NSArray<RZFFeatureViewModel *> *)features
-{
-    self = [super init];
-    
-    if ( self ) {
-        self.features = features;
-        self.featurePageControl.numberOfPages = [features count];
-    }
-    
     return self;
 }
 

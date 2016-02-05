@@ -10,6 +10,7 @@
 #import "RZFReleaseNotesView.h"
 #import "UIView+RZFAutoLayout.h"
 #import "RZFFeatureViewModel.h"
+#import "RZFFeature.h"
 
 static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 
@@ -31,9 +32,9 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 
 # pragma mark - Lifecycle
 
-- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features bundle:(NSBundle *)bundle;
+- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features;
 {
-    self = [super initWithNibName:nil bundle:bundle];
+    self = [super initWithNibName:nil bundle:nil];
     
     if ( self ) {
         self.features = features;
@@ -57,7 +58,15 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 {
     NSMutableArray *featureViewModels = [NSMutableArray array];
     for (RZFFeature *feature in self.features) {
-        RZFFeatureViewModel *featureVM = [[RZFFeatureViewModel alloc] initWithFeature:feature bundle:self.nibBundle];
+        RZFFeatureViewModel *featureVM = [[RZFFeatureViewModel alloc] init];
+        featureVM.localizedTitle = [self.nibBundle localizedStringForKey:feature.localizedTitleKey value:nil table:nil];
+        featureVM.localizedDescription = [self.nibBundle localizedStringForKey:feature.localizedDescriptionKey value:nil table:nil];
+        featureVM.image = [UIImage imageNamed:feature.localizedImageKey];
+
+        // Grab the jpg image if there's no PNG with a matching name.
+        if (featureVM.image == nil) {
+            featureVM.image = [UIImage imageNamed:[feature.localizedImageKey stringByAppendingString:@".jpg"]];
+        }
         [featureViewModels addObject:featureVM];
     }
     self.releaseNotesView = [[RZFReleaseNotesView alloc] initWithFeatures:featureViewModels];

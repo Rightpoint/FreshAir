@@ -46,12 +46,6 @@
 - (instancetype)initWithAppStoreID:(NSString *)appStoreID;
 
 /**
- *  The bundle that contains resources for the release notes. If not set,
- *  NSBundle.mainBundle() will be used.
- */
-@property (strong, nonatomic) NSBundle *bundle;
-
-/**
  * Delegate to manage presentation. If not set, the delegate will perform modal
  * presentations on the top-most presented view controller of the UIApplication 
  * delegate window property, and call openURL directly on UIApplication.

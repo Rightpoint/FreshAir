@@ -62,7 +62,6 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
         id appObject = [[UIApplication sharedApplication] delegate];
         _appVersion = [NSBundle bundleForClass:[appObject class]].infoDictionary[@"CFBundleShortVersionString"];
         _userDefaults = [NSUserDefaults standardUserDefaults];
-        _bundle = [NSBundle mainBundle];
     }
     return self;
 }
@@ -113,7 +112,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (void)showNewReleaseNotes
 {
-    NSURL *releaseURL = [self.bundle.bundleURL URLByAppendingPathComponent:@"release_notes.json"];
+    NSURL *releaseURL = [[NSBundle mainBundle] URLForResource:@"release_notes" withExtension:@"json"];
     NSError *error = nil;
     RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
     if (error) {
@@ -122,7 +121,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
     if (lastVersion != nil && [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
-        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:self.bundle];
+        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
         vc.delegate = self;
        [self.delegate rzf_interationDelegate:self presentViewController:vc];
     }

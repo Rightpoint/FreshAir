@@ -25,7 +25,7 @@ static const CGFloat kRZFTintViewAlpha = 0.7f;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self ) {
         self.slideAnimationController = [[RZFSlideAnimationController alloc] init];
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;

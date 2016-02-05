@@ -11,10 +11,8 @@
 
 @interface RZFFeatureViewModel : NSObject
 
-- (instancetype)initWithFeature:(RZFFeature *)feature bundle:(NSBundle *)bundle;
-
-@property (strong, nonatomic, readonly) NSString *localizedTitle;
-@property (strong, nonatomic, readonly) NSString *localizedDescription;
-@property (strong, nonatomic, readonly) UIImage *image;
+@property (strong, nonatomic) NSString *localizedTitle;
+@property (strong, nonatomic) NSString *localizedDescription;
+@property (strong, nonatomic) UIImage *image;
 
 @end
