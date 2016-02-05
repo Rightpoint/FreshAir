@@ -59,16 +59,12 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     if (self) {
         _delegate = [UIApplication sharedApplication];
         _systemVersion = [[UIDevice currentDevice] systemVersion];
-        _appVersion = [NSBundle bundleForClass:self.delegate.class].infoDictionary[@"CFBundleShortVersionString"];
+        id appObject = [[UIApplication sharedApplication] delegate];
+        _appVersion = [NSBundle bundleForClass:[appObject class]].infoDictionary[@"CFBundleShortVersionString"];
         _userDefaults = [NSUserDefaults standardUserDefaults];
         _bundle = [NSBundle mainBundle];
     }
     return self;
-}
-
-- (BOOL)isNewVersion:(NSString *)newVersion
-{
-    return newVersion == nil || [self.appVersion compare:newVersion options:NSNumericSearch] == NSOrderedAscending;
 }
 
 - (void)checkForNewUpdate
@@ -91,7 +87,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
         NSString *lastDisplayed = [self.userDefaults stringForKey:RZFLastVersionPromptedKey];
-        BOOL newUnseenVersion = [self isNewVersion:lastDisplayed];
+        BOOL newUnseenVersion = [self.appVersion compare:lastDisplayed options:NSNumericSearch] == NSOrderedAscending;
         BOOL shouldDisplay = ((newVersion && newUnseenVersion) || isForced);
         if (shouldDisplay) {
             RZFUpdatePromptViewController *vc = nil;
@@ -124,11 +120,14 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
         NSLog(@"Error Loading release Notes: %@", error);
     }
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
-    if (lastVersion != nil && [self isNewVersion:lastVersion]) {
+    if (lastVersion != nil && [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
         RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:self.bundle];
         vc.delegate = self;
        [self.delegate rzf_interationDelegate:self presentViewController:vc];
+    }
+    else if (lastVersion == nil) {
+        [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
     }
 }
 
