@@ -18,7 +18,7 @@
 
 - (void)testFeatureRange
 {
-    NSURL *releaseURL = [BUNDLE URLForResource:@"Examples/TestReleaseNotes.freshair/release_notes" withExtension:@"json"];
+    NSURL *releaseURL = [BUNDLE URLForResource:@"Examples/Test.releaseNotes/release_notes" withExtension:@"json"];
     RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:nil];
 
     NSArray *f1_12 = [releaseNotes featuresFromVersion:@"1.0" toVersion:@"1.2"];

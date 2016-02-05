@@ -10,12 +10,10 @@ import UIKit
 import FreshAir
 
 class ViewController: UITableViewController {
-    static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/TestFeature", withExtension: "freshair")
-    var upgradeManager: RZFUpgradeManager = {
-        let mgr = RZFUpgradeManager(appStoreID:"944415329")
-        mgr.bundle = NSBundle(URL: freshairURL!)
-        return mgr
-    }()
+    static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/Test", withExtension: "releaseNotes")
+    let upgradeManager = RZFUpgradeManager(appStoreID:"944415329")
+    upgradeManager.checkForNewUpdate()
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,6 +25,7 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        upgradeManager.bundle = NSBundle(URL: freshairURL!)
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             upgradeManager.checkForNewUpdate()
