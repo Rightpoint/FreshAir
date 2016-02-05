@@ -149,7 +149,6 @@
 		AB954BFB1C57A89E003A050B /* RZFRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFRelease.m; sourceTree = "<group>"; };
 		AB954C041C5824ED003A050B /* NSObject+RZFImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RZFImport.h"; sourceTree = "<group>"; };
 		AB954C051C5824ED003A050B /* NSObject+RZFImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RZFImport.m"; sourceTree = "<group>"; };
-		AB954C0A1C582B4B003A050B /* RZFDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZFDefines.h; sourceTree = "<group>"; };
 		AB954C151C5850C7003A050B /* CommandLine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommandLine.framework; path = ../Carthage/Build/Mac/CommandLine.framework; sourceTree = "<group>"; };
 		AB954C161C5850C7003A050B /* CommandLine.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CommandLine.framework.dSYM; path = ../Carthage/Build/Mac/CommandLine.framework.dSYM; sourceTree = "<group>"; };
 		AB954C3C1C5853C2003A050B /* Breeze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breeze.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,7 +258,6 @@
 				AB954BF31C57A85E003A050B /* RZFFeature.m */,
 				AB954C041C5824ED003A050B /* NSObject+RZFImport.h */,
 				AB954C051C5824ED003A050B /* NSObject+RZFImport.m */,
-				AB954C0A1C582B4B003A050B /* RZFDefines.h */,
 			);
 			name = ReleaseNotes;
 			sourceTree = "<group>";

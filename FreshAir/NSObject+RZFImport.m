@@ -7,7 +7,12 @@
 //
 
 #import "NSObject+RZFImport.h"
-#import "RZFDefines.h"
+
+#define RZF_KP(Classname, keypath) ({\
+Classname *_rzf_keypath_obj; \
+__unused __typeof(_rzf_keypath_obj.keypath) _rzf_keypath_prop; \
+@#keypath; \
+})
 
 @implementation NSArray (RZFUtility)
 
