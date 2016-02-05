@@ -19,3 +19,11 @@ Fresh Air comes with english localization for the update prompt. This can be cus
 ## Release Notes
 The `release_notes.json` file is included that describe the version history of the application. Every release entry contains any number of keys to denote marketing features. There are [Examples](Schema/Examples/Test.releaseNotes/release_notes.json) of the manifest file and a [JSON Schema](Schema/release_notes_schema.json) file is included to validate your releases_notes.json file.
 
+## Installation
+To install using CocoaPods, include the 'FreshAir' cocoapod.
+
+    pod 'FreshAir'
+
+If you only want the remote app check, use:
+
+    pod 'FreshAir/AppStoreCheck'

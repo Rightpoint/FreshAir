@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.default_subspec = 'FreshAir'
 
-  s.subspec "AppCheck" do |ss|
+  s.subspec "AppStoreCheck" do |ss|
     ss.source_files = 'FreshAir/RZFAppStoreUpdateCheck.{h,m}'
   end
 
