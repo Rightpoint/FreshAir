@@ -12,8 +12,7 @@ import FreshAir
 class ViewController: UITableViewController {
     static let freshairURL = NSBundle.mainBundle().URLForResource("Examples/TestFeature", withExtension: "freshair")
     var upgradeManager: RZFUpgradeManager = {
-        let mgr = RZFUpgradeManager()
-        mgr.appStoreID = "944415329"
+        let mgr = RZFUpgradeManager(appStoreID:"944415329")
         mgr.bundle = NSBundle(URL: freshairURL!)
         return mgr
     }()
@@ -30,9 +29,9 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            upgradeManager.showUpgradePromptIfDesired()
+            upgradeManager.checkForNewUpdate()
         case (0, 1):
-            upgradeManager.showReleaseNotesIfDesired()
+            upgradeManager.showNewReleaseNotes()
         case (0, 2):
             upgradeManager.resetViewedState()
         default:

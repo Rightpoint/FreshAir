@@ -12,24 +12,45 @@
 
 @protocol RZFInteractionDelegate;
 
-OBJC_EXTERN NSString *const RZFLastVersionPromptedKey;
-OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
-
+/**
+ *  RZFUpgradeManager coordinates the remote release check, the presentation
+ *  of the upgrade prompt, and persists the state required to not show the same
+ *  prompt multiple times.
+ *
+ *  UI Presentation can be customized via the delegate. To customize the UI completely,
+ *  it is recommended to just use RZFAppStoreUpdateCheck or RZFReleaseNotesCheck 
+ *  directly
+ */
 @interface RZFUpgradeManager : NSObject
 
 /**
- *  App Store ID to check for updates using the iTunes API.
+ *  Initialize the upgrade manager pointing to a remotely hosted release note
+ *  file. This file will describe the releases and supported system versions
+ *  so the upgrade prompt will not be presented if the new release does not support
+ *  the current system version. The release notes also allow an upgrade to be
+ *  forced remotely.
  */
-@property (strong, nonatomic) NSString *appStoreID;
+- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL;
 
 /**
- *  URL pointing to release_notes.json to use to check for updates.
+ *  Initialize the upgrade manager pointing to the App Store API. This will support
+ *  notification of new versions, but the support for system version compatibility
+ *  is not as robust, and an upgrade can not be forced.
+ *
+ *  The following scenario describes the system compatibility limitations:
+ *
+ *        Given 3 app versions, 1.0, 1.1, and 2.0, and requiring iOS 8.0, 8.0, and 9.0, respectively.
+ *        When a user running 1.0 on iOS 8.0 starts the app.
+ *        Then they will not be notified that the 1.1 upgrade is available.
  */
-@property (strong, nonatomic) NSURL *releaseNoteURL;
+- (instancetype)initWithAppStoreID:(NSString *)appStoreID;
 
 /**
- *  The bundle that contains resources for the release notes. If this bundle contains
- *  a FreshAirUpdate.strings file, the bundle will also be used for the upgrade prompt.
+ *  The bundle that contains resources for the release notes. If not set,
+ *  NSBundle.mainBundle() will be used.
+ *
+ *  If this bundle contains a FreshAirUpdate.strings file, the bundle will 
+ *  also be used to configure the upgrade prompt.
  */
 @property (strong, nonatomic) NSBundle *bundle;
 
@@ -41,20 +62,18 @@ OBJC_EXTERN NSString *const RZFLastVersionOfReleaseNotesDisplayedKey;
 @property (weak, nonatomic) id<RZFInteractionDelegate> delegate;
 
 /**
- * Show the upgrade prompt if appropriate.
+ * Check for a new update and present the update view to the user. This should
+ * be called on application resume.
  *
- *  If there is a new version that has not been prompted display the upgrade prompt.
- *  Also, if the current version is below the minimum version, display the upgrade 
- *  prompt and do not allow it to be dismissed.
+ * Also, if the current version is below the minimum version, display the upgrade
+ * prompt and do not allow it to be dismissed.
  */
-- (void)showUpgradePromptIfDesired;
+- (void)checkForNewUpdate;
 
 /**
- * Present the release notes if appropriate.
- *
- * If there are release notes for the version running that have not been displayed, display them.
+ * Present the release notes if there are features that the current user has not seen.
  */
-- (void)showReleaseNotesIfDesired;
+- (void)showNewReleaseNotes;
 
 /**
  *  Reset any stored keys in the user defaults.

@@ -2,8 +2,10 @@
 Fresh Air is an application update library. It is designed check a remote location for application updates and if updates are available, prompt the user to upgrade the application. When the new version of the application is started, a dialog can be presented that show case the new features available to the user.
 
 ## Update Checks
+Fresh Air supports checking iTunes for a new version, and checking a remotely hosted `release_notes.json` file.
 
-## UI Elements
+## UI
+
 
 ### Update Confirmation Dialog
 ### Release Note Browser

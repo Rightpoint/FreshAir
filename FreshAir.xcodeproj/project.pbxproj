@@ -17,7 +17,6 @@
 		AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BFA1C57A89E003A050B /* RZFRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB8B968B1C58595D00EB00CC /* RZFFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BF21C57A85E003A050B /* RZFFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB954BE71C56DC39003A050B /* manifest_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE51C56DC39003A050B /* manifest_schema.json */; };
 		AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AB954BE61C56DC39003A050B /* release_notes_schema.json */; };
 		AB954BEC1C56F539003A050B /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = AB954BEB1C56F539003A050B /* Examples */; };
 		AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,7 +138,6 @@
 		AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAppStoreUpdateCheck.m; sourceTree = "<group>"; };
 		AB0789431C6275F70089D510 /* Expansions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expansions.swift; sourceTree = "<group>"; };
 		AB0789461C62A4CA0089D510 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
-		AB954BE51C56DC39003A050B /* manifest_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest_schema.json; sourceTree = "<group>"; };
 		AB954BE61C56DC39003A050B /* release_notes_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_schema.json; sourceTree = "<group>"; };
 		AB954BEB1C56F539003A050B /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
 		AB954BEE1C57A83A003A050B /* RZFReleaseNotes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFReleaseNotes.h; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				AB954BEB1C56F539003A050B /* Examples */,
-				AB954BE51C56DC39003A050B /* manifest_schema.json */,
 				AB954BE61C56DC39003A050B /* release_notes_schema.json */,
 			);
 			path = Schema;
@@ -345,37 +342,69 @@
 			path = FreshAirTests;
 			sourceTree = "<group>";
 		};
-		ABF296061C594A490048F58B /* UI */ = {
+		ABE73B0D1C64EFBD003620E0 /* Style */ = {
 			isa = PBXGroup;
 			children = (
-				ABF2962F1C594BC90048F58B /* RZFFeatureViewModel.h */,
-				ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */,
-				ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */,
-				ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */,
-				AB07893C1C6151090089D510 /* FreshAirUpdate.strings */,
-				ABF296231C594AD10048F58B /* UIView+RZFAutoLayout.h */,
-				ABF296241C594AD10048F58B /* UIView+RZFAutoLayout.m */,
 				ABF296271C594AE10048F58B /* UIFont+RZFStyle.h */,
 				ABF296281C594AE10048F58B /* UIFont+RZFStyle.m */,
 				ABF296291C594AE10048F58B /* UIColor+RZFStyle.h */,
 				ABF2962A1C594AE10048F58B /* UIColor+RZFStyle.m */,
-				ABF296071C594A700048F58B /* RZFViewController.h */,
-				ABF296081C594A700048F58B /* RZFViewController.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		ABE73B0E1C64EFD0003620E0 /* UpdatePrompt */ = {
+			isa = PBXGroup;
+			children = (
+				ABF296331C594D7D0048F58B /* RZFUpdateViewModel.h */,
+				ABF296341C594D7D0048F58B /* RZFUpdateViewModel.m */,
 				ABF296091C594A700048F58B /* RZFUpdatePromptView.h */,
 				ABF2960A1C594A700048F58B /* RZFUpdatePromptView.m */,
 				ABF2960B1C594A700048F58B /* RZFUpdatePromptViewController.h */,
 				ABF2960C1C594A700048F58B /* RZFUpdatePromptViewController.m */,
+			);
+			name = UpdatePrompt;
+			sourceTree = "<group>";
+		};
+		ABE73B0F1C64EFE0003620E0 /* ReleaseNotes */ = {
+			isa = PBXGroup;
+			children = (
+				ABF2962F1C594BC90048F58B /* RZFFeatureViewModel.h */,
+				ABF296301C594BC90048F58B /* RZFFeatureViewModel.m */,
 				ABF2960D1C594A700048F58B /* RZFReleaseNotesView.h */,
 				ABF2960E1C594A700048F58B /* RZFReleaseNotesView.m */,
 				ABF2960F1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.h */,
 				ABF296101C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m */,
 				ABF296111C594A700048F58B /* RZFReleaseNotesViewController.h */,
 				ABF296121C594A700048F58B /* RZFReleaseNotesViewController.m */,
+			);
+			name = ReleaseNotes;
+			sourceTree = "<group>";
+		};
+		ABE73B101C64F00C003620E0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				ABF296231C594AD10048F58B /* UIView+RZFAutoLayout.h */,
+				ABF296241C594AD10048F58B /* UIView+RZFAutoLayout.m */,
+				ABF296071C594A700048F58B /* RZFViewController.h */,
+				ABF296081C594A700048F58B /* RZFViewController.m */,
 				ABF296131C594A700048F58B /* RZFSlideAnimationController.h */,
 				ABF296141C594A700048F58B /* RZFSlideAnimationController.m */,
 				ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */,
 				ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */,
 				ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		ABF296061C594A490048F58B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ABE73B101C64F00C003620E0 /* Utility */,
+				ABE73B0F1C64EFE0003620E0 /* ReleaseNotes */,
+				ABE73B0E1C64EFD0003620E0 /* UpdatePrompt */,
+				ABE73B0D1C64EFBD003620E0 /* Style */,
+				AB07893C1C6151090089D510 /* FreshAirUpdate.strings */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -603,7 +632,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */,
-				AB954BE71C56DC39003A050B /* manifest_schema.json in Resources */,
 				AB954BEC1C56F539003A050B /* Examples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

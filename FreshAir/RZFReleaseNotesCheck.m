@@ -10,7 +10,7 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 
-@implementation RZFAppUpdateCheck
+@implementation RZFReleaseNotesCheck
 
 - (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL appVersion:(NSString *)appVersion systemVersion:(NSString *)systemVersion
 {

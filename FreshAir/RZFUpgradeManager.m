@@ -24,9 +24,10 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 @interface RZFUpgradeManager ()
 <RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
 
-@property (assign, nonatomic) NSString *appVersion;
-@property (assign, nonatomic) NSString *systemVersion;
-@property (strong, nonatomic) NSBundle *updateBundle;
+@property (strong, nonatomic, readonly) NSURL *releaseNoteURL;
+@property (strong, nonatomic, readonly) NSString *appStoreID;
+@property (assign, nonatomic, readonly) NSString *appVersion;
+@property (assign, nonatomic, readonly) NSString *systemVersion;
 
 @property (strong, nonatomic) NSUserDefaults *userDefaults;
 
@@ -34,25 +35,35 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 @implementation RZFUpgradeManager
 
-- (instancetype)init
+- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL;
 {
-    self = [super init];
+    self = [self init];
     if (self) {
-        self.delegate = [UIApplication sharedApplication];
-        self.updateBundle = [NSBundle bundleForClass:self.class];
-        self.systemVersion = [[UIDevice currentDevice] systemVersion];
-        self.appVersion = [NSBundle bundleForClass:self.delegate.class].infoDictionary[@"CFBundleShortVersionString"];
-        self.userDefaults = [NSUserDefaults standardUserDefaults];
+        _releaseNoteURL = releaseNoteURL;
     }
     return self;
 }
 
-- (void)setBundle:(NSBundle *)bundle
+- (instancetype)initWithAppStoreID:(NSString *)appStoreID
 {
-    _bundle = bundle;
-    if ([bundle URLForResource:@"FreshAirUpdate" withExtension:@"strings"]) {
-        self.updateBundle = bundle;
+    self = [self init];
+    if (self) {
+        _appStoreID = appStoreID;
     }
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _delegate = [UIApplication sharedApplication];
+        _systemVersion = [[UIDevice currentDevice] systemVersion];
+        _appVersion = [NSBundle bundleForClass:self.delegate.class].infoDictionary[@"CFBundleShortVersionString"];
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+        _bundle = [NSBundle mainBundle];
+    }
+    return self;
 }
 
 - (BOOL)isNewVersion:(NSString *)newVersion
@@ -60,7 +71,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     return [self.appVersion compare:newVersion options:NSNumericSearch] == NSOrderedAscending;
 }
 
-- (void)showUpgradePromptIfDesired
+- (void)checkForNewUpdate
 {
     RZFReleaseNotesCheck *check = nil;
     if (self.appStoreID) {
@@ -76,6 +87,11 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
                                                       appVersion:self.appVersion
                                                     systemVersion:self.systemVersion];
     }
+    NSBundle *updateBundle = [NSBundle bundleForClass:self.class];
+    if ([self.bundle URLForResource:@"FreshAirUpdate" withExtension:@"strings"]) {
+        updateBundle = self.bundle;
+    }
+
     [check performCheckWithCompletion:^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
@@ -87,7 +103,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
             vc = [[RZFUpdatePromptViewController alloc] initWithUpgradeURL:upgradeURL
                                                                    version:version
                                                                   isForced:isForced
-                                                                    bundle:self.updateBundle];
+                                                                    bundle:updateBundle];
             vc.delegate = self;
             [self.delegate rzf_interationDelegate:self presentViewController:vc];
         }
@@ -105,13 +121,9 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     [self.delegate rzf_interationDelegate:self dismissViewController:updatePromptViewController];
 }
 
-- (void)showReleaseNotesIfDesired
+- (void)showNewReleaseNotes
 {
-    NSBundle *bundle = self.bundle;
-    if (bundle == nil) {
-        [NSException raise:NSInvalidArgumentException format:@"Must configure the bundle"];
-    }
-    NSURL *releaseURL = [bundle.bundleURL URLByAppendingPathComponent:@"release_notes.json"];
+    NSURL *releaseURL = [self.bundle.bundleURL URLByAppendingPathComponent:@"release_notes.json"];
     NSError *error = nil;
     RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
     if (error) {
@@ -120,7 +132,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
     if (lastVersion != nil && [self isNewVersion:lastVersion]) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
-        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:bundle];
+        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features bundle:self.bundle];
         vc.delegate = self;
        [self.delegate rzf_interationDelegate:self presentViewController:vc];
     }
