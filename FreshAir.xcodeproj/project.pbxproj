@@ -52,6 +52,7 @@
 		ABE73B301C65217A003620E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABE73B2D1C65217A003620E0 /* Localizable.strings */; };
 		ABE73B331C6524CA003620E0 /* release_notes.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE73B321C6524CA003620E0 /* release_notes.json */; };
 		ABE73B341C6524DE003620E0 /* release_notes.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE73B321C6524CA003620E0 /* release_notes.json */; };
+		ABE73B361C652902003620E0 /* FreshAir.podspec in Resources */ = {isa = PBXBuildFile; fileRef = ABE73B351C652902003620E0 /* FreshAir.podspec */; };
 		ABF296151C594A700048F58B /* RZFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296071C594A700048F58B /* RZFViewController.h */; };
 		ABF296161C594A700048F58B /* RZFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296081C594A700048F58B /* RZFViewController.m */; };
 		ABF296171C594A700048F58B /* RZFUpdatePromptView.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296091C594A700048F58B /* RZFUpdatePromptView.h */; };
@@ -182,6 +183,7 @@
 		ABE73B2E1C65217A003620E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABE73B2F1C65217A003620E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABE73B321C6524CA003620E0 /* release_notes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes.json; sourceTree = "<group>"; };
+		ABE73B351C652902003620E0 /* FreshAir.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FreshAir.podspec; sourceTree = "<group>"; };
 		ABF296071C594A700048F58B /* RZFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFViewController.h; sourceTree = "<group>"; };
 		ABF296081C594A700048F58B /* RZFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFViewController.m; sourceTree = "<group>"; };
 		ABF296091C594A700048F58B /* RZFUpdatePromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdatePromptView.h; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				ABF296371C5956660048F58B /* README.md */,
+				ABE73B351C652902003620E0 /* FreshAir.podspec */,
 				AB954BE41C56DC39003A050B /* Schema */,
 				ABA483F91C544C1F002CDCB2 /* FreshAir */,
 				ABA484051C544C1F002CDCB2 /* FreshAirTests */,
@@ -696,6 +699,7 @@
 				ABF296611C59B41C0048F58B /* LaunchScreen.storyboard in Resources */,
 				ABF2965E1C59B41C0048F58B /* Assets.xcassets in Resources */,
 				ABE73B301C65217A003620E0 /* Localizable.strings in Resources */,
+				ABE73B361C652902003620E0 /* FreshAir.podspec in Resources */,
 				ABE73B2B1C652154003620E0 /* Sea1@2x.jpg in Resources */,
 				ABF2965C1C59B41C0048F58B /* Main.storyboard in Resources */,
 				ABE73B2C1C652154003620E0 /* Sea1@3x.jpg in Resources */,
