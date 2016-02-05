@@ -48,9 +48,6 @@
 /**
  *  The bundle that contains resources for the release notes. If not set,
  *  NSBundle.mainBundle() will be used.
- *
- *  If this bundle contains a FreshAirUpdate.strings file, the bundle will 
- *  also be used to configure the upgrade prompt.
  */
 @property (strong, nonatomic) NSBundle *bundle;
 

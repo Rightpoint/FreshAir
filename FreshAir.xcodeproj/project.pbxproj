@@ -41,6 +41,7 @@
 		ABA484021C544C1F002CDCB2 /* FreshAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA483F71C544C1F002CDCB2 /* FreshAir.framework */; };
 		ABA484071C544C1F002CDCB2 /* FreshAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA484061C544C1F002CDCB2 /* FreshAirTests.m */; };
 		ABBE3DDD1C55AD1F006A738A /* FreshAirUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = ABBE3DDB1C55ACB9006A738A /* FreshAirUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABE73B121C650F8C003620E0 /* freshair_update.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE73B111C650F8C003620E0 /* freshair_update.png */; };
 		ABF296151C594A700048F58B /* RZFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296071C594A700048F58B /* RZFViewController.h */; };
 		ABF296161C594A700048F58B /* RZFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296081C594A700048F58B /* RZFViewController.m */; };
 		ABF296171C594A700048F58B /* RZFUpdatePromptView.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296091C594A700048F58B /* RZFUpdatePromptView.h */; };
@@ -162,6 +163,7 @@
 		ABA484081C544C1F002CDCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABA4844B1C55A111002CDCB2 /* FreshAirUtility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreshAirUtility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABBE3DDB1C55ACB9006A738A /* FreshAirUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshAirUtility.h; sourceTree = "<group>"; };
+		ABE73B111C650F8C003620E0 /* freshair_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freshair_update.png; sourceTree = "<group>"; };
 		ABF296071C594A700048F58B /* RZFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFViewController.h; sourceTree = "<group>"; };
 		ABF296081C594A700048F58B /* RZFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFViewController.m; sourceTree = "<group>"; };
 		ABF296091C594A700048F58B /* RZFUpdatePromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUpdatePromptView.h; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 			children = (
 				ABF296561C59B41C0048F58B /* AppDelegate.swift */,
 				ABF296581C59B41C0048F58B /* ViewController.swift */,
+				ABE73B111C650F8C003620E0 /* freshair_update.png */,
 				ABF2965A1C59B41C0048F58B /* Main.storyboard */,
 				ABF2965D1C59B41C0048F58B /* Assets.xcassets */,
 				ABF2965F1C59B41C0048F58B /* LaunchScreen.storyboard */,
@@ -647,6 +650,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE73B121C650F8C003620E0 /* freshair_update.png in Resources */,
 				ABF296611C59B41C0048F58B /* LaunchScreen.storyboard in Resources */,
 				ABF2965E1C59B41C0048F58B /* Assets.xcassets in Resources */,
 				ABF2965C1C59B41C0048F58B /* Main.storyboard in Resources */,

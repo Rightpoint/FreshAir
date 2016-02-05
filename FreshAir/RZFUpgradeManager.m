@@ -87,11 +87,6 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
                                                       appVersion:self.appVersion
                                                     systemVersion:self.systemVersion];
     }
-    NSBundle *updateBundle = [NSBundle bundleForClass:self.class];
-    if ([self.bundle URLForResource:@"FreshAirUpdate" withExtension:@"strings"]) {
-        updateBundle = self.bundle;
-    }
-
     [check performCheckWithCompletion:^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
@@ -102,8 +97,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
             RZFUpdatePromptViewController *vc = nil;
             vc = [[RZFUpdatePromptViewController alloc] initWithUpgradeURL:upgradeURL
                                                                    version:version
-                                                                  isForced:isForced
-                                                                    bundle:updateBundle];
+                                                                  isForced:isForced];
             vc.delegate = self;
             [self.delegate rzf_interationDelegate:self presentViewController:vc];
         }

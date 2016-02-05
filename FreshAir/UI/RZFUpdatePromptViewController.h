@@ -21,7 +21,7 @@
 
 @interface RZFUpdatePromptViewController : RZFViewController
 
-- (instancetype)initWithUpgradeURL:(NSURL *)upgradeURL version:(NSString *)version isForced:(BOOL)isForced bundle:(NSBundle *)bundle;
+- (instancetype)initWithUpgradeURL:(NSURL *)upgradeURL version:(NSString *)version isForced:(BOOL)isForced;
 
 @property (strong, nonatomic, readonly) NSURL *upgradeURL;
 @property (strong, nonatomic, readonly) NSString *version;

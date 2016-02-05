@@ -13,7 +13,7 @@ This will check the iTunes for an app with the specified ID, and present a dialo
 Fresh Air also supports presenting release notes as a series of paging images with a title and description. This can be used to introduce users to the new features in the app. This is managed by a set of feature keys specified in `release_notes.json` which are used to expanded into an image, a title, and a description. This is supported via `[UIImage imageNamed:$key]`, and the localization keys `$key.title` and `$key.description`. The usual asset lookup rules apply, so if different images are desired on iPhone vs iPad, use the `~iphone` and `~ipad` suffix and if localized images are desired, make sure that the images are only placed in the `.lproj` directories, and not in the top level directory.
 
 ## Update Prompt Customization
-Fresh Air comes with english localization for the update prompt. This can be customized by adding the localized keys from `FreshAirUpdate.strings` to your application's main bundle.
+Fresh Air comes with english localization for the update prompt. This can be customized by adding the localized keys from `FreshAirUpdate.strings` to your application's main bundle's `Localized.strings` file. To configure an image, add an image named `freshair_update` to the bundle.
 
 
 ## Release Notes

@@ -12,7 +12,7 @@
 
 @interface RZFUpdateViewModel : NSObject
 
-- (instancetype)initWithBundle:(NSBundle *)bundle;
+- (instancetype)init;
 
 @property (copy, nonatomic) NSString *localizedTitle;
 @property (copy, nonatomic) NSString *localizedDescription;

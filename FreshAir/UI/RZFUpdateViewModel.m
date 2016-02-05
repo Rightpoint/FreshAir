@@ -11,20 +11,31 @@
 
 static NSString *RZFLocalizedValue(NSBundle *bundle, NSString *key) {
     NSString *fullKey = [@"freshair.update." stringByAppendingString:key];
-    return [bundle localizedStringForKey:fullKey value:nil table:@"FreshAirUpdate"];
+    NSString *value = [[NSBundle mainBundle] localizedStringForKey:fullKey value:nil table:@"FreshAirUpdate"];
+    if ([value isEqual:fullKey]) {
+        value = [[NSBundle mainBundle] localizedStringForKey:fullKey value:nil table:nil];
+    }
+    if ([value isEqual:fullKey]) {
+        value = [bundle localizedStringForKey:fullKey value:nil table:@"FreshAirUpdate"];
+    }
+    return value;
 }
 
 @implementation RZFUpdateViewModel
 
-- (instancetype)initWithBundle:(NSBundle *)bundle
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.image = [UIImage imageNamed:@"freshair_update" inBundle:bundle compatibleWithTraitCollection:nil];
-        self.localizedTitle = RZFLocalizedValue(bundle, @"title");
-        self.localizedDescription = RZFLocalizedValue(bundle, @"description");
-        self.localizedDismiss = RZFLocalizedValue(bundle, @"dismiss");
-        self.localizedConfirmation = RZFLocalizedValue(bundle, @"confirm");
+        NSBundle *fallbackBundle = [NSBundle bundleForClass:self.class];
+        self.image = [UIImage imageNamed:@"freshair_update" inBundle:fallbackBundle compatibleWithTraitCollection:nil];
+        if (self.image == nil) {
+            self.image = [UIImage imageNamed:@"freshair_update"];
+        }
+        self.localizedTitle = RZFLocalizedValue(fallbackBundle, @"title");
+        self.localizedDescription = RZFLocalizedValue(fallbackBundle, @"description");
+        self.localizedDismiss = RZFLocalizedValue(fallbackBundle, @"dismiss");
+        self.localizedConfirmation = RZFLocalizedValue(fallbackBundle, @"confirm");
     }
    
     return self;
