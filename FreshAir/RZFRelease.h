@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RZFRelease : NSObject
 
 @property (copy, nonatomic) NSString *version;
-@property (copy, nonatomic) NSArray<RZFCondition *> *conditions;
+@property (copy, nonatomic) NSString *systemVersion;
 @property (strong, nonatomic) NSArray<RZFFeature *> *features;
 
 @end

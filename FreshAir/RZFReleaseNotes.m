@@ -39,6 +39,17 @@
     return [features copy];
 }
 
+- (NSArray<RZFRelease *> *)releasesSupportingSystemVersion:(NSString *)systemVersion
+{
+    NSMutableArray *results = [NSMutableArray array];
+    for (RZFRelease *release in self.releases) {
+        if ([systemVersion compare:release.systemVersion options:NSNumericSearch] != NSOrderedAscending) {
+            [results addObject:release];
+        }
+    }
+    return [results copy];
+}
+
 - (NSArray<RZFFeature *> *)featuresFromVersion:(NSString *)lastVersion toVersion:(NSString *)currentVersion;
 {
     NSMutableArray *features = [NSMutableArray array];

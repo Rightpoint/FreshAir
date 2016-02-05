@@ -9,7 +9,6 @@
 #import "RZFReleaseNotesViewController.h"
 #import "RZFReleaseNotesView.h"
 #import "UIView+RZFAutoLayout.h"
-#import "NSObject+RZFUtility.h"
 #import "RZFFeatureViewModel.h"
 
 static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
@@ -56,9 +55,11 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 
 - (void)setupReleaseNotesView
 {
-    NSArray *featureViewModels = [self.features map:^RZFFeatureViewModel *(RZFFeature *feature) {
-        return [[RZFFeatureViewModel alloc] initWithFeature:feature bundle:self.nibBundle];
-    }];
+    NSMutableArray *featureViewModels = [NSMutableArray array];
+    for (RZFFeature *feature in self.features) {
+        RZFFeatureViewModel *featureVM = [[RZFFeatureViewModel alloc] initWithFeature:feature bundle:self.nibBundle];
+        [featureViewModels addObject:featureVM];
+    }
     self.releaseNotesView = [[RZFReleaseNotesView alloc] initWithFeatures:featureViewModels];
     self.releaseNotesView.delegate = self;
     [self.view addSubview:self.releaseNotesView];

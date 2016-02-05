@@ -10,9 +10,6 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 #import "RZFFeature.h"
-#import "RZFCondition.h"
-#import "RZFManifest.h"
-#import "RZFManifestEntry.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,12 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface RZFFeature (RZFImport) <RZFImporting>
-@end
-
-@interface RZFCondition (RZFImport) <RZFImporting>
-@end
-
-@interface RZFManifestEntry (RZFImport) <RZFImporting>
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,30 +7,19 @@
 //
 
 #import "RZFAppUpdateCheck.h"
-#import "RZFEnvironment.h"
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 
 @implementation RZFAppUpdateCheck
 
-+ (RZFAppUpdateStatus)statusForNewVersion:(BOOL)newVersion deviceSupported:(BOOL)deviceSupported
-{
-    RZFAppUpdateStatus status = RZFAppUpdateStatusNoUpdate;
-    if (newVersion && deviceSupported) {
-        status = RZFAppUpdateStatusNewVersion;
-    }
-    else if (newVersion && deviceSupported == NO) {
-        status = RZFAppUpdateStatusNewVersionUnsupportedOnDevice;
-    }
-    return status;
-}
-- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL environment:(RZFEnvironment *)environment
+- (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL appVersion:(NSString *)appVersion systemVersion:(NSString *)systemVersion
 {
     self = [super init];
     if (self) {
         _session = [NSURLSession sharedSession];
         _releaseNoteURL = releaseNoteURL;
-        _environment = environment;
+        _appVersion = appVersion;
+        _systemVersion = systemVersion;
     }
     return self;
 }
@@ -65,14 +54,19 @@
     NSURL *upgradeURL = nil;
     NSString *lastVersion = nil;
     if (releaseNotes) {
-        NSArray<RZFRelease *> *supportedReleases = [self.environment supportedReleasesInReleaseNotes:releaseNotes];
+        NSArray<RZFRelease *> *supportedReleases = [releaseNotes releasesSupportingSystemVersion:self.systemVersion];
         RZFRelease *lastRelease = [supportedReleases lastObject];
         lastVersion = [lastRelease version];
         upgradeURL = releaseNotes.upgradeURL;
 
-        BOOL newVersion  = [self.environment shouldDisplayUpgradePromptForVersion:lastVersion];
-        BOOL deviceSupported = lastRelease == releaseNotes.releases.lastObject;
-        status = [self.class statusForNewVersion:newVersion deviceSupported:deviceSupported];
+        BOOL newVersion  = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
+        BOOL deviceSupported = lastVersion != nil;
+        if (newVersion && deviceSupported) {
+            status = RZFAppUpdateStatusNewVersion;
+        }
+        else if (newVersion && deviceSupported == NO) {
+            status = RZFAppUpdateStatusNewVersionUnsupportedOnDevice;
+        }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         completion(status, lastVersion, upgradeURL);

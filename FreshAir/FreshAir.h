@@ -15,11 +15,6 @@ FOUNDATION_EXPORT double FreshAirVersionNumber;
 FOUNDATION_EXPORT const unsigned char FreshAirVersionString[];
 
 #import <FreshAir/RZFUpgradeManager.h>
-#import <FreshAir/RZFBundleResourceRequest.h>
 #import <FreshAir/RZFReleaseNotes.h>
 #import <FreshAir/RZFRelease.h>
 #import <FreshAir/RZFFeature.h>
-#import <FreshAir/RZFError.h>
-#import <FreshAir/NSBundle+RZFreshAir.h>
-#import <FreshAir/RZFManifest.h>
-#import <FreshAir/RZFEnvironment.h>

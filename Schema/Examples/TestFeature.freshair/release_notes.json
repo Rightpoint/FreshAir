@@ -1,19 +1,19 @@
 {
 	"releases": [{
 		"version": "1.1",
-        "conditions": [{"key": "systemVersion", "value": "8.0"}],
+        "minimumSystemVersion": "8.0",
 		"features": ["apple_pay", "calendar_integration","twitters_integration"]
 	}, {
 		"version": "1.2",
-        "conditions": [{"key": "systemVersion", "value": "8.2"}],
+        "minimumSystemVersion": "8.2",
 		"features": ["facebook_integration"]
 	}, {
 		"version": "2.0",
-        "conditions": [{"key": "systemVersion", "value": "8.2"}],
-		"features": ["new_major_feature", "new_major_feature_2"]
+        "minimumSystemVersion": "8.2",
+        "features": ["new_major_feature", "new_major_feature_2"]
 	}, {
 		"version": "2.1",
-        "conditions": [{"key": "systemVersion", "value": "8.0"}],
+        "minimumSystemVersion": "9.0",
 		"features": ["peek_pop"]
 	}],
     "minimumVersion": "1.2",

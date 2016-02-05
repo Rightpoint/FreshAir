@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FreshAirUtility
+import FreshAir
 import CommandLine
 
 enum BreezeError : ErrorType {
@@ -16,62 +16,11 @@ enum BreezeError : ErrorType {
     case ManifestFileMissing(filename: String)
 }
 
-func updateManifestShaInBundle(path: String) throws {
-    guard let bundleURL = NSURL(string: "file://\(path)"),
-        let bundle = NSBundle(URL: bundleURL) else {
-            throw BreezeError.InvalidFilePath(path: path)
-    }
-    let manifestURL = bundleURL.URLByAppendingPathComponent(NSURL.rzf_manifestFilename())
-    guard let entries = try RZFManifestEntry.rzf_importURL(manifestURL) as? [RZFManifestEntry] else {
-        throw BreezeError.InvalidJSONFormat(path: path)
-    }
-
-    let JSON: [AnyObject] = try entries.map { entry in
-        entry.sha = entry.shaInBundle(bundle)
-        if entry.sha == nil {
-            throw BreezeError.ManifestFileMissing(filename: entry.filename)
-        }
-        let result = entry.jsonRepresentation()
-        return result
-    }
-
-    let data = try NSJSONSerialization.dataWithJSONObject(JSON, options: [.PrettyPrinted])
-    data.writeToURL(manifestURL, atomically: true)
-}
-
-func createManifestForBundle(path: String, conditionBuilders: [DetectCondition]) throws {
-    guard let bundleURL = NSURL(string: "file://\(path)"),
-        let bundle = NSBundle(URL: bundleURL) else {
-            throw BreezeError.InvalidFilePath(path: path)
-    }
-
-    let fm = NSFileManager.defaultManager()
-    for file in try fm.subpathsOfDirectoryAtPath(path as String) {
-        let filePath = (path as NSString).stringByAppendingPathComponent(file)
-        var isDir: ObjCBool = false
-        let exists = fm.fileExistsAtPath(filePath, isDirectory: &isDir)
-        guard exists && !isDir else {
-            continue
-        }
-        var conditions: [RZFCondition] = Array()
-        for conditionBuilder in conditionBuilders {
-            guard let condition = conditionBuilder(file) else {
-                continue
-            }
-            conditions.append(condition)
-        }
-        let entry = RZFManifestEntry()
-        entry.filename = file
-        entry.sha = entry.shaInBundle(bundle)
-        entry.conditions = conditions
-    }
-}
-
 func releaseNotesAtPath(path: String) throws -> RZFReleaseNotes {
     guard let bundleURL = NSURL(string: "file://\(path)") else {
         throw BreezeError.InvalidFilePath(path: path)
     }
-    let releaseURL  = bundleURL.URLByAppendingPathComponent(NSURL.rzf_releaseFilename())
+    let releaseURL  = bundleURL.URLByAppendingPathComponent("release.json")
 
     guard let releaseNotes = try RZFReleaseNotes.rzf_importURL(releaseURL) as? RZFReleaseNotes else {
         throw BreezeError.InvalidJSONFormat(path: releaseURL.path!)
