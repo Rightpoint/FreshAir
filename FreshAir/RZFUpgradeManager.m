@@ -62,6 +62,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
         id appObject = [[UIApplication sharedApplication] delegate];
         _appVersion = [NSBundle bundleForClass:[appObject class]].infoDictionary[@"CFBundleShortVersionString"];
         _userDefaults = [NSUserDefaults standardUserDefaults];
+        _releaseNoteBundle = [NSBundle mainBundle];
     }
     return self;
 }
@@ -112,7 +113,7 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (void)showNewReleaseNotes
 {
-    NSURL *releaseURL = [[NSBundle mainBundle] URLForResource:@"release_notes" withExtension:@"json"];
+    NSURL *releaseURL = [self.releaseNoteBundle URLForResource:@"release_notes" withExtension:@"json"];
     NSError *error = nil;
     RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
     if (error) {

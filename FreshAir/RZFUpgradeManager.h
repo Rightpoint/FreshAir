@@ -46,6 +46,12 @@
 - (instancetype)initWithAppStoreID:(NSString *)appStoreID;
 
 /**
+ *  The bundle that contains the release_notes.json file and all of the assets to present the release notes
+ *  UI. The default value is [NSBundle mainBundle].
+ */
+@property (strong, nonatomic) NSBundle *releaseNoteBundle;
+
+/**
  * Delegate to manage presentation. If not set, the delegate will perform modal
  * presentations on the top-most presented view controller of the UIApplication 
  * delegate window property, and call openURL directly on UIApplication.
