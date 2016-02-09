@@ -26,7 +26,7 @@
 
 - (void)performCheckWithCompletion:(RZFAppUpdateCheckCompletion)completion;
 {
-    if ([self.releaseNoteURL.scheme isEqual:@"file"]) {
+    if ([self.releaseNoteURL isFileURL]) {
         NSError *error = nil;
         RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:self.releaseNoteURL error:&error];
         if (error) {
