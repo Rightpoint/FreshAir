@@ -18,13 +18,12 @@
 #import "RZFReleaseNotesViewController.h"
 
 // Keys for tracking state in NSUserDefaults
-NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
-NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
+static NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
+static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
 static NSString *const RZFReleaseNotesResourceName = @"release_notes";
 static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
-@interface RZFUpgradeManager ()
-<RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
+@interface RZFUpgradeManager () <RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
 
 @property (strong, nonatomic, readonly) NSURL *releaseNoteURL;
 @property (strong, nonatomic, readonly) NSString *appStoreID;
@@ -72,6 +71,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 - (void)checkForNewUpdate
 {
     RZFReleaseNotesCheck *check = nil;
+
     if (self.appStoreID) {
         // RZFAppStoreUpdateCheck has the same contract as RZFAppUpdateCheck.
         // RZFAppStoreUpdateCheck was written to be isolated from the rest of the
@@ -82,9 +82,10 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
     }
     else {
         check = [[RZFReleaseNotesCheck alloc] initWithReleaseNoteURL:self.releaseNoteURL
-                                                      appVersion:self.appVersion
-                                                    systemVersion:self.systemVersion];
+                                                          appVersion:self.appVersion
+                                                       systemVersion:self.systemVersion];
     }
+
     [check performCheckWithCompletion:^(RZFAppUpdateStatus status, NSString *version, NSURL *upgradeURL) {
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);

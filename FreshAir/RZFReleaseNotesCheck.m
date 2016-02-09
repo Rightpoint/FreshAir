@@ -28,10 +28,12 @@
 {
     if ([self.releaseNoteURL isFileURL]) {
         NSError *error = nil;
+
         RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:self.releaseNoteURL error:&error];
         if (error) {
             NSLog(@"%@", error);
         }
+
         [self checkReleaseNotes:releaseNotes completion:completion];
     }
     else {
@@ -65,7 +67,7 @@
         lastVersion = [lastRelease version];
         upgradeURL = releaseNotes.upgradeURL;
 
-        BOOL newVersion  = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
+        BOOL newVersion = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
         BOOL deviceSupported = lastVersion != nil;
         if (newVersion && deviceSupported) {
             status = RZFAppUpdateStatusNewVersion;
