@@ -35,12 +35,18 @@
         [self checkReleaseNotes:releaseNotes completion:completion];
     }
     else {
-        NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.releaseNoteURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSError *importError = nil;
-            RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
-            if (importError || error) {
-                NSLog(@"%@", importError ?: error);
+        NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.releaseNoteURL completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+            NSError *importError;
+            RZFReleaseNotes *releaseNotes;
+
+            if (data) {
+                releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
             }
+
+            if (importError || !releaseNotes) {
+                NSLog(@"request for version history failed: %@", importError ?: error);
+            }
+
             [self checkReleaseNotes:releaseNotes completion:completion];
         }];
         [task resume];
