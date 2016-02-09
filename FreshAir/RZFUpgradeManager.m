@@ -131,12 +131,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
     }
 
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
-    
-    // If this is our first run through and we haven't shown any release notes yet,
-    //  show all the notes from the first version on.
-    lastVersion = lastVersion ?: releaseNotes.releases.firstObject.version;
-
-    if ([self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending) {
+    if ((lastVersion != nil) && ([self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending)) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
 
         RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
