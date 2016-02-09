@@ -89,7 +89,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         BOOL newVersion = (status == RZFAppUpdateStatusNewVersion);
         BOOL isForced = (status == RZFAppUpdateStatusNewVersionForced);
         NSString *lastDisplayed = [self.userDefaults stringForKey:RZFLastVersionPromptedKey];
-        BOOL newUnseenVersion = [self.appVersion compare:lastDisplayed options:NSNumericSearch] == NSOrderedAscending;
+        BOOL newUnseenVersion = ((lastDisplayed == nil) || ([self.appVersion compare:lastDisplayed options:NSNumericSearch] == NSOrderedAscending));
         BOOL shouldDisplay = ((newVersion && newUnseenVersion) || isForced);
         if (shouldDisplay) {
             RZFUpdatePromptViewController *vc = nil;
@@ -98,6 +98,8 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
                                                                   isForced:isForced];
             vc.delegate = self;
             [self.delegate rzf_interationDelegate:self presentViewController:vc];
+
+            [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionPromptedKey];
         }
     }];
 }
@@ -109,7 +111,6 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController
 {
-    [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionPromptedKey];
     [self.delegate rzf_interationDelegate:self dismissViewController:updatePromptViewController];
 }
 
