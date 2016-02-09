@@ -20,6 +20,8 @@
 // Keys for tracking state in NSUserDefaults
 NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
 NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
+static NSString *const RZFReleaseNotesResourceName = @"release_notes";
+static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 @interface RZFUpgradeManager ()
 <RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
@@ -113,27 +115,38 @@ NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfRel
 
 - (void)showNewReleaseNotes
 {
-    NSURL *releaseURL = [self.releaseNoteBundle URLForResource:@"release_notes" withExtension:@"json"];
-    NSError *error = nil;
-    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
-    if (error) {
-        NSLog(@"Error Loading release Notes: %@", error);
+    NSURL *releaseURL = [self.releaseNoteBundle URLForResource:RZFReleaseNotesResourceName withExtension:RZFReleaseNotesResourceExtension];
+    if (!releaseURL) {
+        NSLog(@"failed to load the '%@.%@' from bundle %@", RZFReleaseNotesResourceName, RZFReleaseNotesResourceExtension, self.releaseNoteBundle.bundleIdentifier);
+        return;
     }
+
+    NSError *error;
+    RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:releaseURL error:&error];
+    if (!releaseNotes) {
+        NSLog(@"Error Loading release Notes: %@", error);
+        return;
+    }
+
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
-    if (lastVersion != nil && [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending) {
+    
+    // If this is our first run through and we haven't shown any release notes yet,
+    //  show all the notes from the first version on.
+    lastVersion = lastVersion ?: releaseNotes.releases.firstObject.version;
+
+    if ([self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
+
         RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
         vc.delegate = self;
-       [self.delegate rzf_interationDelegate:self presentViewController:vc];
+        [self.delegate rzf_interationDelegate:self presentViewController:vc];
     }
-    else if (lastVersion == nil) {
-        [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
-    }
+
+    [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
 }
 
 - (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)releaseNotesViewController
 {
-    [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
     [self.delegate rzf_interationDelegate:self dismissViewController:releaseNotesViewController];
 }
 
