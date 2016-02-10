@@ -29,6 +29,13 @@
             [self.minimumVersion compare:version options:NSNumericSearch] == NSOrderedDescending);
 }
 
+- (void)setReleases:(NSArray<RZFRelease *> *)releases
+{
+    _releases = [releases sortedArrayUsingComparator:^NSComparisonResult(RZFRelease *release1, RZFRelease *release2) {
+        return [release1.version compare:release2.version options:NSNumericSearch];
+    }];
+}
+
 - (NSArray *)features
 {
     NSMutableArray *features = [NSMutableArray array];

@@ -26,21 +26,29 @@
 
 - (void)performCheckWithCompletion:(RZFAppUpdateCheckCompletion)completion;
 {
-    if ([self.releaseNoteURL.scheme isEqual:@"file"]) {
+    if ([self.releaseNoteURL isFileURL]) {
         NSError *error = nil;
+
         RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithURL:self.releaseNoteURL error:&error];
         if (error) {
             NSLog(@"%@", error);
         }
+
         [self checkReleaseNotes:releaseNotes completion:completion];
     }
     else {
-        NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.releaseNoteURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSError *importError = nil;
-            RZFReleaseNotes *releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
-            if (importError || error) {
-                NSLog(@"%@", importError ?: error);
+        NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.releaseNoteURL completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+            NSError *importError;
+            RZFReleaseNotes *releaseNotes;
+
+            if (data) {
+                releaseNotes = [RZFReleaseNotes releaseNotesWithData:data error:&importError];
             }
+
+            if (importError || !releaseNotes) {
+                NSLog(@"request for version history failed: %@", importError ?: error);
+            }
+
             [self checkReleaseNotes:releaseNotes completion:completion];
         }];
         [task resume];
@@ -59,7 +67,7 @@
         lastVersion = [lastRelease version];
         upgradeURL = releaseNotes.upgradeURL;
 
-        BOOL newVersion  = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
+        BOOL newVersion = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
         BOOL deviceSupported = lastVersion != nil;
         if (newVersion && deviceSupported) {
             status = RZFAppUpdateStatusNewVersion;
