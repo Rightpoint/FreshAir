@@ -69,8 +69,22 @@
 
 /**
  * Present the release notes if there are features that the current user has not seen.
+ * This should be called when the app finishes launching. If the app is being launched
+ * for the first time, the release notes will not be displayed.
  */
 - (void)showNewReleaseNotes;
+
+/**
+ * Present the release notes if there are features that the current user has not seen.
+ * This should be called when the app finishes launching.
+ *
+ * The default behavior is to skip the display of the release notes on the first launch.
+ * Passing YES allows that behavior to be overridden. If the initial display is forced,
+ * all release notes from the first version up to the current app version will be displayed.
+ *
+ * @param forceInitialDisplay YES if the release notes should be displayed on initial launch
+ */
+- (void)showNewReleaseNotes:(BOOL)forceInitialDisplay;
 
 /**
  *  Reset any stored keys in the user defaults.
