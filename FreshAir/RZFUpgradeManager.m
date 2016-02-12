@@ -117,9 +117,14 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)showNewReleaseNotes
 {
+    [self showNewReleaseNotes:NO];
+}
+
+- (void)showNewReleaseNotes:(BOOL)forceInitialDisplay
+{
     NSURL *releaseURL = [self.releaseNoteBundle URLForResource:RZFReleaseNotesResourceName withExtension:RZFReleaseNotesResourceExtension];
     if (!releaseURL) {
-        NSLog(@"failed to load the '%@.%@' from bundle %@", RZFReleaseNotesResourceName, RZFReleaseNotesResourceExtension, self.releaseNoteBundle.bundleIdentifier);
+        NSLog(@"failed to load '%@.%@' from bundle %@", RZFReleaseNotesResourceName, RZFReleaseNotesResourceExtension, self.releaseNoteBundle.bundleIdentifier);
         return;
     }
 
@@ -131,6 +136,10 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
     }
 
     NSString *lastVersion = [self.userDefaults stringForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
+    if (forceInitialDisplay && (lastVersion == nil)) {
+        lastVersion = releaseNotes.releases.firstObject.version;
+    }
+
     if ((lastVersion != nil) && ([self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending)) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
 

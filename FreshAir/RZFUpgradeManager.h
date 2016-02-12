@@ -69,11 +69,32 @@
 
 /**
  * Present the release notes if there are features that the current user has not seen.
+ * This should be called when the app finishes launching. If the app is being launched
+ * for the first time, the release notes will not be displayed. When this method is called,
+ * the current app version will be saved to the user defaults.
+ *
+ * @see showNewReleaseNotes:
  */
 - (void)showNewReleaseNotes;
 
 /**
- *  Reset any stored keys in the user defaults.
+ * Present the release notes if there are features that the current user has not seen.
+ * This should be called when the app finishes launching. When this method is called,
+ * the current app version will be saved to the user defaults.
+ *
+ * The default behavior is to display release notes if the last saved version is
+ * less than the current version. If this method has never been called, there will be no
+ * saved version, and the release notes will not be displayed. This behavior can be
+ * changed to display the release notes if there is no saved version by setting
+ * forceInitialDisplay to YES.
+ *
+ * @param forceInitialDisplay YES if the release notes should be displayed on initial launch
+ */
+- (void)showNewReleaseNotes:(BOOL)forceInitialDisplay;
+
+/**
+ *  Reset any saved keys in the user defaults.
+ *
  */
 - (void)resetViewedState;
 
