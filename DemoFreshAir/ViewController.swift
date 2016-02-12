@@ -26,7 +26,7 @@ class ViewController: UITableViewController {
         case (0, 0):
             upgradeManager.checkForNewUpdate()
         case (0, 1):
-            upgradeManager.showNewReleaseNotes()
+            upgradeManager.showNewReleaseNotes(true)
         case (0, 2):
             upgradeManager.resetViewedState()
         default:

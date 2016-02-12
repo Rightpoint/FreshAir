@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "FreshAir"
-  s.version          = "0.2"
+  s.version          = "0.3"
   s.summary          = "An application update library."
   s.homepage         = "https://github.com/Raizlabs/FreshAir"
   s.license          = { :type => "MIT", :file => "LICENSE" }
