@@ -29,6 +29,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 @property (strong, nonatomic, readonly) NSString *appStoreID;
 @property (assign, nonatomic, readonly) NSString *appVersion;
 @property (assign, nonatomic, readonly) NSString *systemVersion;
+@property (weak, nonatomic) UIViewController *presentedViewController;
 
 @property (strong, nonatomic) NSUserDefaults *userDefaults;
 
@@ -70,7 +71,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)checkForNewUpdate
 {
-    RZFReleaseNotesCheck *check = nil;
+    RZFReleaseNotesCheck *check;
 
     if (self.appStoreID) {
         // RZFAppStoreUpdateCheck has the same contract as RZFAppUpdateCheck.
@@ -93,12 +94,23 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         BOOL newUnseenVersion = ((lastDisplayed == nil) || ([self.appVersion compare:lastDisplayed options:NSNumericSearch] == NSOrderedAscending));
         BOOL shouldDisplay = ((newVersion && newUnseenVersion) || isForced);
         if (shouldDisplay) {
+            // Check to see if something other than the update prompt is being presented at the moment.
+            if ([self.presentedViewController isKindOfClass:[RZFUpdatePromptViewController class]]) {
+                // If we are already showing an update prompt, bail. There's nothing left to do.
+                return;
+            }
+            else if (self.presentedViewController) {
+                // If any other view controller is being presented (at this moment, only
+                // other option is the release notes), kill it and continue on!
+                [self dismissViewController:self.presentedViewController];
+            }
+
             RZFUpdatePromptViewController *vc = nil;
             vc = [[RZFUpdatePromptViewController alloc] initWithUpgradeURL:upgradeURL
                                                                    version:version
                                                                   isForced:isForced];
             vc.delegate = self;
-            [self.delegate rzf_interationDelegate:self presentViewController:vc];
+            [self presentViewController:vc];
 
             [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionPromptedKey];
         }
@@ -112,7 +124,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)dismissUpdatePromptViewController:(RZFUpdatePromptViewController *)updatePromptViewController
 {
-    [self.delegate rzf_interationDelegate:self dismissViewController:updatePromptViewController];
+    [self dismissViewController:updatePromptViewController];
 }
 
 - (void)showNewReleaseNotes
@@ -122,6 +134,12 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)showNewReleaseNotes:(BOOL)forceInitialDisplay
 {
+    // If something is already being presented it is either a set of release notes,
+    // or an update notification. In either case, bail and don't do anything.
+    if (self.presentedViewController) {
+        return;
+    }
+
     NSURL *releaseURL = [self.releaseNoteBundle URLForResource:RZFReleaseNotesResourceName withExtension:RZFReleaseNotesResourceExtension];
     if (!releaseURL) {
         NSLog(@"failed to load '%@.%@' from bundle %@", RZFReleaseNotesResourceName, RZFReleaseNotesResourceExtension, self.releaseNoteBundle.bundleIdentifier);
@@ -145,7 +163,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
         RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
         vc.delegate = self;
-        [self.delegate rzf_interationDelegate:self presentViewController:vc];
+        [self presentViewController:vc];
     }
 
     [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
@@ -153,13 +171,49 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (void)didSelectDoneForReleaseNotesViewController:(RZFReleaseNotesViewController *)releaseNotesViewController
 {
-    [self.delegate rzf_interationDelegate:self dismissViewController:releaseNotesViewController];
+    [self dismissViewController:releaseNotesViewController];
 }
 
 - (void)resetViewedState
 {
     [self.userDefaults removeObjectForKey:RZFLastVersionPromptedKey];
     [self.userDefaults removeObjectForKey:RZFLastVersionOfReleaseNotesDisplayedKey];
+}
+
+#pragma mark - Delegation Helpers
+
+- (void)presentViewController:(nonnull UIViewController *)viewControllerToPresent
+{
+    // Sanity check the parameter to make sure we aren't being fed with a nil
+    NSParameterAssert(viewControllerToPresent);
+
+    // Ensure the same thing isn't being re-presented.
+    // This may need a check at some point to make sure the `presentedViewController`
+    // was actually presented but, for the moment, assume a perfect world
+    // and it was.
+    if (self.presentedViewController == viewControllerToPresent) {
+        return;
+    }
+
+    // If a VC is already being presented, get rid of it. Let
+    // the caller figure out if they should be presenting something or not,
+    // that's not a decision we should be making here
+    if (self.presentedViewController != nil) {
+        [self dismissViewController:self.presentedViewController];
+    }
+
+    // Store the new presented VC then tell our delegate to do it's thing
+    self.presentedViewController = viewControllerToPresent;
+    [self.delegate rzf_interationDelegate:self presentViewController:viewControllerToPresent];
+}
+
+- (void)dismissViewController:(nonnull UIViewController *)viewControllerToDismiss
+{
+    NSParameterAssert(viewControllerToDismiss);
+    NSAssert(self.presentedViewController == viewControllerToDismiss, @"attempting to dismiss view controller %@, but presented view controller is %@", viewControllerToDismiss, self.presentedViewController);
+
+    [self.delegate rzf_interationDelegate:self dismissViewController:viewControllerToDismiss];
+    self.presentedViewController = nil;
 }
 
 @end
