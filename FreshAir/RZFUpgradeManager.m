@@ -93,6 +93,11 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         NSString *lastDisplayed = [self.userDefaults stringForKey:RZFLastVersionPromptedKey];
         BOOL newUnseenVersion = ((lastDisplayed == nil) || ([self.appVersion compare:lastDisplayed options:NSNumericSearch] == NSOrderedAscending));
         BOOL shouldDisplay = ((newVersion && newUnseenVersion) || isForced);
+
+        // The handling of the RZFAppUpdateStatusNewVersionUnsupportedOnDevice state is implicit here.
+        // If the update is forced, we show the user the forced update screen no matter what (ignoring
+        // if the device is supported or not). If there is an update, but it's not supported, we ignore
+        // state and just don't show the user anything.
         if (shouldDisplay) {
             // Check to see if something other than the update prompt is being presented at the moment.
             if ([self.presentedViewController isKindOfClass:[RZFUpdatePromptViewController class]]) {
