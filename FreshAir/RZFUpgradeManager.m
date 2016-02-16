@@ -100,6 +100,10 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         // state and just don't show the user anything.
         if (shouldDisplay) {
             // Check to see if something other than the update prompt is being presented at the moment.
+            // This introduces some oddities into the RZFInteractionDelegate contract which needs to be
+            // resolved at some point in the future. This logic should be moved into the default
+            // implementation and not exist here in case the consumer's delegate wants a differing
+            // presentation method.
             if ([self.presentedViewController isKindOfClass:[RZFUpdatePromptViewController class]]) {
                 // If we are already showing an update prompt, bail. There's nothing left to do.
                 return;
