@@ -69,9 +69,13 @@
 
         BOOL newVersion = [self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedAscending;
         BOOL deviceSupported = lastVersion != nil;
-        if (newVersion && deviceSupported) {
-            BOOL updateIsForced = [self.appVersion compare:releaseNotes.minimumVersion options:NSNumericSearch] == NSOrderedAscending;
-            status = updateIsForced ? RZFAppUpdateStatusNewVersionForced : RZFAppUpdateStatusNewVersion;
+        BOOL updateIsForced = [self.appVersion compare:releaseNotes.minimumVersion options:NSNumericSearch] == NSOrderedAscending;
+
+        if (updateIsForced) {
+            status = RZFAppUpdateStatusNewVersionForced;
+        }
+        else if (newVersion && deviceSupported) {
+            status = RZFAppUpdateStatusNewVersion;
         }
         else if (newVersion && deviceSupported == NO) {
             status = RZFAppUpdateStatusNewVersionUnsupportedOnDevice;
