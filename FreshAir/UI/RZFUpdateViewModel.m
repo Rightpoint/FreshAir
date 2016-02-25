@@ -19,23 +19,23 @@ static NSString * const RZFUpdateViewModelLocalizedKeyDescription = @"descriptio
 static NSString * const RZFUpdateViewModelLocalizedKeyConfirm = @"confirm";
 static NSString * const RZFUpdateViewModelLocalizedKeyDismiss = @"dismiss";
 
-static NSString *RZFLocalizedValue(NSString * _Nonnull prefix, NSString * _Nonnull key, NSBundle * _Nullable fallbackBundle, NSString * _Nullable fallbackTableName) {
-    NSString *notFoundToken = @"RZFKeyNotFound";
+static NSString *RZFLocalizedValue(NSString * _Nonnull prefix, NSString * _Nonnull key, NSBundle * _Nullable fallbackBundle) {
+    static NSString * const notFoundToken = @"RZFKeyNotFound";
+    
     NSString *fullKey = [@[prefix,key] componentsJoinedByString:@"."];
     NSBundle *mainBundle = [NSBundle mainBundle];
-    BOOL hasFallbackTableName = (fallbackTableName.length > 0);
     
     NSString *localizedValue = [mainBundle localizedStringForKey:fullKey value:notFoundToken table:nil];
     
-    if ([localizedValue isEqualToString:notFoundToken] && hasFallbackTableName) {
-        localizedValue = [mainBundle localizedStringForKey:fullKey value:notFoundToken table:fallbackTableName];
+    if ([localizedValue isEqualToString:notFoundToken]) {
+        localizedValue = [mainBundle localizedStringForKey:fullKey value:notFoundToken table:RZFUpdateViewModelStringTableName];
     }
     
     if ([localizedValue isEqualToString:notFoundToken] && fallbackBundle) {
         NSString *fallbackLocalizedValue = [fallbackBundle localizedStringForKey:fullKey value:notFoundToken table:nil];
         
-        if ([fallbackLocalizedValue isEqualToString:notFoundToken] && hasFallbackTableName) {
-            fallbackLocalizedValue = [fallbackBundle localizedStringForKey:fullKey value:notFoundToken table:fallbackTableName];
+        if ([fallbackLocalizedValue isEqualToString:notFoundToken]) {
+            fallbackLocalizedValue = [fallbackBundle localizedStringForKey:fullKey value:notFoundToken table:RZFUpdateViewModelStringTableName];
         }
         
         localizedValue = fallbackLocalizedValue;
@@ -55,7 +55,7 @@ static NSString *RZFLocalizedValue(NSString * _Nonnull prefix, NSString * _Nonnu
 {
     self = [super init];
     if (self) {
-        
+        /* Do Nothing */
     }
    
     return self;
@@ -95,22 +95,17 @@ static NSString *RZFLocalizedValue(NSString * _Nonnull prefix, NSString * _Nonnu
 
 #pragma  mark - Private
 
-- (NSString*)localizedKeyPrefix
-{
-    return self.isForced ? RZFUpdateViewModelForcedUpdatePrefix : RZFUpdateViewModelUpdatePrefix;
-}
-
 - (NSString*)localizedValueForKey:(NSString*)key
 {
     NSString *localizedValue = nil;
     NSBundle *fallbackBundle = [NSBundle bundleForClass:self.class];
     
     if (self.isForced) {
-        localizedValue = RZFLocalizedValue(RZFUpdateViewModelForcedUpdatePrefix, key, fallbackBundle, RZFUpdateViewModelStringTableName);
+        localizedValue = RZFLocalizedValue(RZFUpdateViewModelForcedUpdatePrefix, key, fallbackBundle);
     }
     
     if (!localizedValue) {
-        localizedValue = RZFLocalizedValue(RZFUpdateViewModelUpdatePrefix, key, fallbackBundle, RZFUpdateViewModelStringTableName);
+        localizedValue = RZFLocalizedValue(RZFUpdateViewModelUpdatePrefix, key, fallbackBundle);
     }
     
     return localizedValue;
