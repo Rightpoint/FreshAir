@@ -10,3 +10,6 @@
 "freshair.update.description" = "We think you'll like it!";
 "freshair.update.dismiss" = "No Thanks";
 "freshair.update.confirm" = "Update";
+"freshair.update.forced.title" = "New Version";
+"freshair.update.forced.description" = "You *must* see it!";
+"freshair.update.forced.confirm" = "Update";
