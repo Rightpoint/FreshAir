@@ -170,9 +170,11 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
     if ((lastVersion != nil) && ([self.appVersion compare:lastVersion options:NSNumericSearch] == NSOrderedDescending)) {
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
 
-        RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
-        vc.delegate = self;
-        [self presentViewController:vc];
+        if (features.count > 0) {
+            RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
+            vc.delegate = self;
+            [self presentViewController:vc];
+        }
     }
 
     [self.userDefaults setObject:self.appVersion forKey:RZFLastVersionOfReleaseNotesDisplayedKey];
