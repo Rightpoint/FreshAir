@@ -12,6 +12,7 @@
 
 @class RZFReleaseNotesViewController;
 @class RZFFeature;
+@class RZFReleaseNotes;
 
 @protocol RZFReleaseNotesViewControllerDelegate <NSObject>
 
@@ -21,7 +22,7 @@
 
 @interface RZFReleaseNotesViewController : RZFViewController
 
-- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features;
+- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features releaseNotes:(RZFReleaseNotes *)releaseNotes;
 
 @property (weak, nonatomic, readwrite) id <RZFReleaseNotesViewControllerDelegate> delegate;
 

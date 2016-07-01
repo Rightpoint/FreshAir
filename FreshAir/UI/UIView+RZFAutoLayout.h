@@ -5,7 +5,7 @@
 
 // Copyright 2014 Raizlabs and other contributors
 // http://raizlabs.com/
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -149,6 +149,16 @@
 - (NSLayoutConstraint *)rzf_pinHeightTo:(CGFloat)height;
 
 /**
+ *  Pin the receiver's width to a constant.
+ *
+ *  @param width Deisred height.
+ *  @param relation NSLayoutRelation mode
+ *
+ *  @return The pinned height constraint that was added.
+ */
+- (NSLayoutConstraint *)rzf_pinHeightTo:(CGFloat)height withRelation:(NSLayoutRelation)relation;
+
+/**
  *  Pin the receiver's height to the height of another view.
  *
  *  @param view The view to pin height to.
@@ -168,6 +178,15 @@
  *  @return The pinned height constraint that was added.
  */
 - (NSLayoutConstraint *)rzf_pinHeightToView:(UIView *)view multiplier:(CGFloat)multiplier;
+
+/**
+ *  Pin the receivers aspect ratio to the ratio provided
+ *
+ *  @param aspectRatio Aspect ratio width / height
+ *
+ *  @return The constraint that was added
+ */
+- (NSLayoutConstraint *)rzf_pinAspectRatio:(CGFloat)aspectRatio;
 
 /**
  *  Pin the receiver's size to a particular value.
@@ -244,6 +263,32 @@
  *  @return The constraints that were added: [left, right]
  */
 - (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding;
+
+/**
+ *  Make the receiver fill its superview horizontally with a fixed amount of padding.
+ *  Equivalent to pinning left and right sides to superview.
+ *
+ *  @param padding The horizontal padding between the receiver and it superview.
+ *  @param relation The type of relation for the constraints
+ *
+ *  @warning The receiver must have a superview when this method is called.
+ *
+ *  @return The constraints that were added: [left, right]
+ */
+- (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding withRelation:(NSLayoutRelation)relation;
+/**
+ *  Make the receiver fill its superview horizontally with a fixed amount of padding.
+ *  Equivalent to pinning left and right sides to superview.
+ *
+ *  @param padding The horizontal padding between the receiver and it superview.
+ *  @param relation The type of relation for the constraints
+ *  @param priority The priority for the relation
+ *
+ *  @warning The receiver must have a superview when this method is called.
+ *
+ *  @return The constraints that were added: [left, right]
+ */
+- (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding withRelation:(NSLayoutRelation)relation priority:(UILayoutPriority)priority;
 
 /**
  *  Make the receiver fill its superview horizontally with a minimum amount of padding.
@@ -325,7 +370,7 @@
 /** @name Batch Alignment */
 
 /**
- *  Create a vertical or horizontal minimum space constraint between each adjacent pair of views in an array. 
+ *  Create a vertical or horizontal minimum space constraint between each adjacent pair of views in an array.
  *
  *  @warning This method is deprecated in favor of @c rzf_spaceSubViews:vertically:itemSpacing:relation:
  *

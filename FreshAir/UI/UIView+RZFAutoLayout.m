@@ -5,7 +5,7 @@
 
 // Copyright 2014 Raizlabs and other contributors
 // http://raizlabs.com/
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -121,7 +121,7 @@
 - (NSLayoutConstraint*)rzf_pinnedTopConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ([self rzf_constraintIsWithSuperview:c] &&
@@ -139,7 +139,7 @@
 - (NSLayoutConstraint*)rzf_pinnedLeftConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ([self rzf_constraintIsWithSuperview:c] &&
@@ -157,7 +157,7 @@
 - (NSLayoutConstraint*)rzf_pinnedRightConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ([self rzf_constraintIsWithSuperview:c] &&
@@ -175,7 +175,7 @@
 - (NSLayoutConstraint*)rzf_pinnedBottomConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ([self rzf_constraintIsWithSuperview:c] &&
@@ -193,7 +193,7 @@
 - (NSLayoutConstraint*)rzf_pinnedCenterXConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ((c.firstItem == self && c.firstAttribute == NSLayoutAttributeCenterX) ||
@@ -209,7 +209,7 @@
 - (NSLayoutConstraint*)rzf_pinnedCenterYConstraint
 {
     if (self.superview == nil) return nil;
-    
+
     __block NSLayoutConstraint *constraint = nil;
     [[[self superview] constraints] enumerateObjectsUsingBlock:^(NSLayoutConstraint *c, NSUInteger idx, BOOL *stop) {
         if ((c.firstItem == self && c.firstAttribute == NSLayoutAttributeCenterY) ||
@@ -265,9 +265,14 @@
 
 - (NSLayoutConstraint *)rzf_pinHeightTo:(CGFloat)height
 {
+    return [self rzf_pinHeightTo:height withRelation:NSLayoutRelationEqual];
+}
+
+- (NSLayoutConstraint *)rzf_pinHeightTo:(CGFloat)height withRelation:(NSLayoutRelation)relation
+{
     NSLayoutConstraint *h = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationEqual
+                                                         relatedBy:relation
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                         multiplier:1.0f
@@ -303,6 +308,22 @@
     return h;
 }
 
+- (NSLayoutConstraint *)rzf_pinAspectRatio:(CGFloat)aspectRatio
+{
+    //Given a childView...
+    NSLayoutConstraint *constraint =[NSLayoutConstraint
+                                     constraintWithItem:self
+                                     attribute:NSLayoutAttributeWidth
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:self
+                                     attribute:NSLayoutAttributeHeight
+                                     multiplier:aspectRatio
+                                     constant:0.0f];
+    [self addConstraint:constraint];
+
+    return constraint;
+}
+
 - (NSArray *)rzf_pinSizeTo:(CGSize)size
 {
     NSLayoutConstraint *w = [self rzf_pinWidthTo:size.width];
@@ -313,24 +334,35 @@
 
 - (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding
 {
+    return [self rzf_fillContainerHorizontallyWithPadding:padding withRelation:NSLayoutRelationEqual];
+}
+
+- (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding withRelation:(NSLayoutRelation)relation {
+    return [self rzf_fillContainerHorizontallyWithPadding:padding withRelation:relation priority:UILayoutPriorityRequired];
+}
+
+- (NSArray *)rzf_fillContainerHorizontallyWithPadding:(CGFloat)padding withRelation:(NSLayoutRelation)relation priority:(UILayoutPriority)priority
+{
     NSAssert(self.superview != nil, @"Must have superview");
 
     NSLayoutConstraint *l = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeLeft
-                                                         relatedBy:NSLayoutRelationEqual
+                                                         relatedBy:relation
                                                             toItem:self.superview
                                                          attribute:NSLayoutAttributeLeft
                                                         multiplier:1.0f
                                                           constant:padding];
+    l.priority = priority;
     [self.superview addConstraint:l];
 
     NSLayoutConstraint *r = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeRight
-                                                         relatedBy:NSLayoutRelationEqual
+                                                         relatedBy:relation
                                                             toItem:self.superview
                                                          attribute:NSLayoutAttributeRight
                                                         multiplier:1.0f
                                                           constant:-padding];
+    r.priority = priority;
     [self.superview addConstraint:r];
 
     return @[l, r];
@@ -427,7 +459,6 @@
     return c;
 }
 
-
 - (NSLayoutConstraint *)rzf_pinLeftSpaceToSuperviewWithPadding:(CGFloat)padding
 {
     NSAssert(self.superview != nil, @"Must have superview");
@@ -485,7 +516,7 @@
 - (NSLayoutConstraint *)rzf_centerHorizontallyInContainerWithOffset:(CGFloat)offset
 {
     NSAssert(self.superview != nil, @"Must have superview");
-    
+
     NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeCenterX
                                                          relatedBy:NSLayoutRelationEqual
@@ -494,7 +525,7 @@
                                                         multiplier:1.0f
                                                           constant:offset];
     [self.superview addConstraint:c];
-    
+
     return c;
 }
 
@@ -506,7 +537,7 @@
 - (NSLayoutConstraint *)rzf_centerVerticallyInContainerWithOffset:(CGFloat)offset
 {
     NSAssert(self.superview != nil, @"Must have superview");
-    
+
     NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeCenterY
                                                          relatedBy:NSLayoutRelationEqual
@@ -522,7 +553,7 @@
 - (NSArray *)rzf_fillContainerWithInsets:(UIEdgeInsets)insets
 {
     NSAssert(self.superview != nil, @"Must have superview");
-    
+
     NSLayoutConstraint *top     = [self rzf_pinTopSpaceToSuperviewWithPadding:insets.top];
     NSLayoutConstraint *left    = [self rzf_pinLeftSpaceToSuperviewWithPadding:insets.left];
     NSLayoutConstraint *bottom  = [self rzf_pinBottomSpaceToSuperviewWithPadding:insets.bottom];
@@ -543,32 +574,32 @@
 - (NSArray *)rzf_spaceSubviews:(NSArray *)subviews vertically:(BOOL)vertically itemSpacing:(CGFloat)itemSpacing relation:(NSLayoutRelation)relation
 {
     NSAssert(subviews.count > 1, @"Must provide at least two items");
-    
+
     NSMutableArray *constraints = [NSMutableArray array];
 
     NSLayoutAttribute a1 = vertically ? NSLayoutAttributeTop : NSLayoutAttributeLeft;
     NSLayoutAttribute a2 = vertically ? NSLayoutAttributeBottom : NSLayoutAttributeRight;
-    
+
     [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop)
-    {
+     {
 
-        UIView *nextView = (idx == subviews.count - 1) ? nil : subviews[idx + 1];
+         UIView *nextView = (idx == subviews.count - 1) ? nil : subviews[idx + 1];
 
-        if (nextView)
-        {
-            NSLayoutConstraint *s = [NSLayoutConstraint constraintWithItem:nextView
-                                                                 attribute:a1
-                                                                 relatedBy:relation
-                                                                    toItem:view
-                                                                 attribute:a2
-                                                                multiplier:1.0f
-                                                                  constant:itemSpacing];
+         if (nextView)
+         {
+             NSLayoutConstraint *s = [NSLayoutConstraint constraintWithItem:nextView
+                                                                  attribute:a1
+                                                                  relatedBy:relation
+                                                                     toItem:view
+                                                                  attribute:a2
+                                                                 multiplier:1.0f
+                                                                   constant:itemSpacing];
 
-            [constraints addObject:s];
-        }
+             [constraints addObject:s];
+         }
 
-    }];
-    
+     }];
+
     [self addConstraints:constraints];
 
     return constraints;
@@ -577,20 +608,20 @@
 - (NSArray *)rzf_distributeSubviews:(NSArray *)subviews vertically:(BOOL)vertically
 {
     NSAssert(subviews.count > 1, @"Must provide at least two items");
-    
+
     NSMutableArray *constraints = [NSMutableArray array];
-    
+
     NSLayoutAttribute centerAlongAxisAttribute = vertically ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY;
     NSLayoutAttribute distributeAlongAxisAttribute = vertically ? NSLayoutAttributeCenterY : NSLayoutAttributeCenterX;
-    
+
     // Calculate the incremental offset of each view as proportion of the container's center point: 1/((n + 1) / 2)
     CGFloat distributionMultiplierIncrement = 1.0f / ((subviews.count + 1) / 2.0f);
-    
+
     [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop)
-    {
+     {
          // Calculate the actual multiplier for this view index.
          CGFloat distributionMultiplier = distributionMultiplierIncrement * (idx + 1);
-         
+
          // Create a constraint representing distribution along the given axis using this multiplier.
          NSLayoutConstraint *distributeConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                                  attribute:distributeAlongAxisAttribute
@@ -599,7 +630,7 @@
                                                                                  attribute:distributeAlongAxisAttribute
                                                                                 multiplier:distributionMultiplier
                                                                                   constant:0.0f];
-         
+
          // Create a constraint to center the view along the other axis.
          NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                              attribute:centerAlongAxisAttribute
@@ -612,7 +643,7 @@
          [constraints addObject:distributeConstraint];
          [constraints addObject:centerConstraint];
      }];
-    
+
     [self addConstraints:constraints];
 
     return constraints;
@@ -623,27 +654,27 @@
     NSAssert(subviews.count > 1, @"Must provide at least two items");
 
     NSMutableArray *constraints = [NSMutableArray array];
-    
+
     [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop)
-    {
+     {
 
-        UIView *nextView = (idx == subviews.count - 1) ? nil : subviews[idx + 1];
-        if (nextView)
-        {
-            NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:nextView
-                                                                 attribute:attribute
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:view
-                                                                 attribute:attribute
-                                                                multiplier:1.0f
-                                                                  constant:0.0f];
-            [constraints addObject:c];
-        }
-
-    }];
+         UIView *nextView = (idx == subviews.count - 1) ? nil : subviews[idx + 1];
+         if (nextView)
+         {
+             NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:nextView
+                                                                  attribute:attribute
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:view
+                                                                  attribute:attribute
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f];
+             [constraints addObject:c];
+         }
+         
+     }];
     
     [self addConstraints:constraints];
-
+    
     return constraints;
 }
 

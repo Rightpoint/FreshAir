@@ -20,6 +20,21 @@
     return [self.key stringByAppendingString:@".description"];
 }
 
+- (NSString *)localizedAttributedDescriptionPrefixKey
+{
+    return [self.key stringByAppendingString:@".attributedDescription"];
+}
+
+- (NSString *)localizedFontNamePrefixKey
+{
+    return [self.key stringByAppendingString:@".fontName"];
+}
+
+- (NSString *)localizedFontSizePrefixKey
+{
+    return [self.key stringByAppendingString:@".fontSize"];
+}
+
 - (NSString *)localizedImageKey
 {
     return self.key;

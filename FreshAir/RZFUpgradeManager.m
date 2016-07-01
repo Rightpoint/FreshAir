@@ -20,7 +20,9 @@
 // Keys for tracking state in NSUserDefaults
 static NSString *const RZFLastVersionPromptedKey = @"RZFLastVersionPromptedKey";
 static NSString *const RZFLastVersionOfReleaseNotesDisplayedKey = @"RZFLastVersionOfReleaseNotesDisplayedKey";
+// Uncomment _fullscreen to experience the fullscreen version
 static NSString *const RZFReleaseNotesResourceName = @"release_notes";
+//static NSString *const RZFReleaseNotesResourceName = @"release_notes_fullscreen";
 static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 @interface RZFUpgradeManager () <RZFUpdatePromptViewControllerDelegate, RZFReleaseNotesViewControllerDelegate>
@@ -171,7 +173,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
 
         if (features.count > 0) {
-            RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
+            RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features releaseNotes:releaseNotes];
             vc.delegate = self;
             [self presentViewController:vc];
         }

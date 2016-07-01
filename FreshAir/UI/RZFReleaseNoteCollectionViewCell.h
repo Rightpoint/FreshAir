@@ -8,13 +8,13 @@
 
 @import UIKit;
 
-@class RZFFeatureViewModel;
+@class RZFFeatureViewModel, RZFReleaseNotes;
 
 @interface RZFReleaseNoteCollectionViewCell : UICollectionViewCell
 
-+ (NSString *)rzf_resuseIdentifier;
++ (NSString *)rzf_reuseIdentifierFullScreen:(BOOL)fullscreen;
 + (CGSize)rzf_sizeWithWidth:(CGFloat)width;
 
-- (void)setupWithFeature:(RZFFeatureViewModel *)feature;
+- (void)setupWithFeature:(RZFFeatureViewModel *)feature releaseNotes:(RZFReleaseNotes *)releaseNotes;
 
 @end

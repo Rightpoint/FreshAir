@@ -1,8 +1,22 @@
 "Road1.title" = "Check out this Road";
 "Road1.description" = "It is really fantastic";
+
+"Road1.attributedDescription.1" = "Exclusive feature for passholders only.";
+"Road1.fontName.1" = "AvenirNext-DemiBoldItalic";
+"Road1.fontSize.1" = "14";
+
+"Road1.attributedDescription.2" = "Plan your fun with access to Ride Wait Times in-park after 12 pm daily!";
+"Road1.fontName.2" = "AvenirNext-Regular";
+"Road1.fontSize.2" = "16";
+
+"Road1.attributedDescription.3" = "*make sure to have location services turned on";
+"Road1.fontName.3" = "AvenirNext-Regular";
+"Road1.fontSize.3" = "14";
+
 "Road2.title" = "Or Maybe?";
 "Road2.description" = "Some people like this road too!";
 "Fog1.title" = "Fog is nice";
 "Fog1.description" = "Our users agree";
 "Sea1.title" = "Surfs Up!";
 "Sea1.description" = "But you don't surf, do you?";
+

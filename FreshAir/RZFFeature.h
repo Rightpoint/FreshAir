@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)localizedTitleKey;
 - (NSString *)localizedDescriptionKey;
+- (NSString *)localizedAttributedDescriptionPrefixKey;
 - (NSString *)localizedImageKey;
-
+- (NSString *)localizedFontNamePrefixKey;
+- (NSString *)localizedFontSizePrefixKey;
 @end
 
 NS_ASSUME_NONNULL_END

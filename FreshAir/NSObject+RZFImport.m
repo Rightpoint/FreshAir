@@ -75,6 +75,22 @@ __unused __typeof(_rzf_keypath_obj.keypath) _rzf_keypath_prop; \
     releaseNotes.releases = [releasesJSON map:^id(id value) {
         return [RZFRelease instanceFromJSON:value];
     }];
+
+
+    NSDictionary *styling = value[@"style"];
+    releaseNotes.fullScreen = [styling[RZF_KP(RZFReleaseNotes, fullScreen)] boolValue];
+    releaseNotes.titleFontName = styling[RZF_KP(RZFReleaseNotes, titleFontName)];
+    releaseNotes.titleFontSize = styling[RZF_KP(RZFReleaseNotes, titleFontSize)];
+
+    NSDictionary *doneConfigurationJSON = styling[RZF_KP(RZFReleaseNotes, doneConfiguration)] ?: @{};
+    if ( doneConfigurationJSON ) {
+        releaseNotes.doneConfiguration = [RZFDoneButtonConfiguration instanceFromJSON: doneConfigurationJSON];
+    }
+
+    NSDictionary *accentColor = styling[RZF_KP(RZFReleaseNotes, accentColor)];
+    if ( accentColor ) {
+        releaseNotes.accentColor = [RZFAlphaColor instanceFromJSON:accentColor];
+    }
     return releaseNotes;
 }
 
@@ -92,6 +108,63 @@ __unused __typeof(_rzf_keypath_obj.keypath) _rzf_keypath_prop; \
     return [representation copy];
 }
 
+@end
+
+@implementation RZFAlphaColor (RZFImport)
+
++ (instancetype)instanceFromJSON:(id)value
+{
+    NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
+    RZFAlphaColor *color = [[RZFAlphaColor alloc] init];
+    color.red = value[RZF_KP(RZFAlphaColor, red)] ?: @"255.0";
+    color.green = value[RZF_KP(RZFAlphaColor, green)] ?: @"255.0";
+    color.blue = value[RZF_KP(RZFAlphaColor, blue)] ?: @"255.0";
+    color.alpha = value[RZF_KP(RZFAlphaColor, alpha)] ?: @"255.0";
+    return color;
+}
+
+- (id)jsonRepresentation
+{
+    NSMutableDictionary *representation = [@{
+                                             RZF_KP(RZFAlphaColor, red): self.red,
+                                             RZF_KP(RZFAlphaColor, green): self.green,
+                                             RZF_KP(RZFAlphaColor, blue): self.blue,
+                                             RZF_KP(RZFAlphaColor, alpha): self.alpha,
+                                             } mutableCopy];
+    return [representation copy];
+}
+@end
+
+@implementation RZFDoneButtonConfiguration (RZFImport)
+
++ (instancetype)instanceFromJSON:(id)value
+{
+    NSParameterAssert([value isKindOfClass:[NSDictionary class]]);
+    RZFDoneButtonConfiguration *doneConfiguration = [[RZFDoneButtonConfiguration alloc] init];
+    doneConfiguration = [[RZFDoneButtonConfiguration alloc] init];
+    doneConfiguration.title = value[RZF_KP(RZFDoneButtonConfiguration, title)];
+    doneConfiguration.fontName = value[RZF_KP(RZFDoneButtonConfiguration, fontName)];
+    doneConfiguration.fontSize = value[RZF_KP(RZFDoneButtonConfiguration, fontSize)];
+    doneConfiguration.cornerRadius = value[RZF_KP(RZFDoneButtonConfiguration, cornerRadius)];
+    doneConfiguration.highlightAlpha = value[RZF_KP(RZFDoneButtonConfiguration, highlightAlpha)];
+    NSDictionary *backgroundColor = value[RZF_KP(RZFDoneButtonConfiguration, backgroundColor)];
+    if ( backgroundColor ) {
+        doneConfiguration.backgroundColor = [RZFAlphaColor instanceFromJSON:backgroundColor];
+    }
+    return doneConfiguration;
+}
+
+- (id)jsonRepresentation
+{
+    NSMutableDictionary *representation = [@{
+                                             RZF_KP(RZFDoneButtonConfiguration, title): self.title,
+                                             RZF_KP(RZFDoneButtonConfiguration, fontName): self.fontName,
+                                             RZF_KP(RZFDoneButtonConfiguration, fontSize): self.fontSize,
+                                             RZF_KP(RZFDoneButtonConfiguration, cornerRadius): self.cornerRadius,
+                                             RZF_KP(RZFDoneButtonConfiguration, highlightAlpha): self.highlightAlpha
+                                             } mutableCopy];
+    return [representation copy];
+}
 @end
 
 @implementation RZFRelease (RZFImport)
