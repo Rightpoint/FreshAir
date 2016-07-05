@@ -25,6 +25,7 @@
 @property (strong, nonatomic, readwrite) RZFReleaseNotesView *releaseNotesView;
 @property (strong, nonatomic) NSArray<RZFFeature *> *features;
 @property (strong, nonatomic) RZFReleaseNotes *releaseNotes;
+@property (assign, nonatomic) BOOL initialStatusBarStatus;
 
 @end
 
@@ -49,8 +50,14 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-    
+    self.initialStatusBarStatus = [UIApplication sharedApplication].statusBarHidden;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self setupReleaseNotesView];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:self.initialStatusBarStatus];
 }
 
 - (BOOL)prefersStatusBarHidden {
