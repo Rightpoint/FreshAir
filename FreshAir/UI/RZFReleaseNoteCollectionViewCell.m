@@ -77,16 +77,13 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
 # pragma mark - Setup
 
 - (void)prepareForReuse {
-    [self.releaseNoteTitleLabel removeConstraints:self.releaseNoteTitleLabel.constraints];
+    [super prepareForReuse];
     [self.releaseNoteTitleLabel removeFromSuperview];
     self.releaseNoteTitleLabel = nil;
-    [self.releaseNoteMessageLabel removeConstraints:self.releaseNoteMessageLabel.constraints];
     [self.releaseNoteMessageLabel removeFromSuperview];
     self.releaseNoteMessageLabel = nil;
-    [self.infoContainerView removeConstraints:self.infoContainerView.constraints];
     [self.infoContainerView removeFromSuperview];
     self.infoContainerView = nil;
-    [self.screenshotImageView removeConstraints:self.screenshotImageView.constraints];
     [self.screenshotImageView removeFromSuperview];
     self.screenshotImageView = nil;
 }
