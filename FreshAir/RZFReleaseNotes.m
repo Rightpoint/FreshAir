@@ -9,7 +9,6 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 #import "RZFFeature.h"
-#import "RZFAlphaColor.h"
 #import "NSObject+RZFImport.h"
 
 @implementation RZFReleaseNotes

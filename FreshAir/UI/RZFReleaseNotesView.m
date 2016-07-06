@@ -13,8 +13,7 @@
 #import "UIFont+RZFStyle.h"
 #import "RZFFeatureViewModel.h"
 #import "RZFReleaseNotes.h"
-#import "RZFAlphaColor.h"
-#import "RZFDoneButtonConfiguration.h"
+#import "RZFUpgradeManager-Private.h"
 
 static NSString * const kRZFDefaultDoneButtonTitle = @"Check it out";
 
@@ -61,18 +60,14 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
         self.releaseNotes = releaseNotes;
 
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        if ( self.releaseNotes.accentColor ) {
-            RZFAlphaColor *color = self.releaseNotes.accentColor;
-            self.accentColor = [UIColor colorWithRed:color.red.floatValue/255.0f
-                                               green:color.green.floatValue/255.0f
-                                                blue:color.blue.floatValue/255.0f
-                                               alpha:color.alpha.floatValue];
+        if ( RZFUpgradeManager.sharedInstance.releaseNotesAccentColor ) {
+            self.accentColor = RZFUpgradeManager.sharedInstance.releaseNotesAccentColor;
         }
         else {
             self.accentColor = [UIColor whiteColor];
         }
         self.backgroundColor = self.accentColor;
-        if ( !self.releaseNotes.fullScreen ) {
+        if ( !RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
             self.layer.cornerRadius = kRZFReleaseNotesViewCornerRadius;
         }
         self.clipsToBounds = YES;
@@ -91,7 +86,7 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
     [super layoutSubviews];
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.featureCollectionView.collectionViewLayout;
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         flowLayout.itemSize = self.featureCollectionView.frame.size;
     }
     else {
@@ -117,8 +112,8 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
     
     [self.featureCollectionView rzf_fillContainerHorizontallyWithPadding:kRZFFeatureCollectionViewHorizontalPadding];
     [self.featureCollectionView rzf_pinTopSpaceToSuperviewWithPadding:kRZFFeatureCollectionViewTopPadding];
-    if ( self.releaseNotes.accentColor ) {
-        self.featureCollectionView.backgroundColor = self.accentColor;
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesAccentColor ) {
+        self.featureCollectionView.backgroundColor = RZFUpgradeManager.sharedInstance.releaseNotesAccentColor;
     }
     else {
         self.featureCollectionView.backgroundColor = [UIColor rzf_defaultReleaseNoteTintColor];
@@ -141,7 +136,7 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
     
     [self.featurePageControl rzf_centerHorizontallyInContainer];
 
-    if ( !self.releaseNotes.fullScreen ) {
+    if ( !RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self.featurePageControl rzf_pinTopSpaceToSuperviewWithPadding:kRZFFeaturePageControlTopPadding];
     }
     self.featurePageControl.backgroundColor = [UIColor clearColor];
@@ -158,7 +153,7 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
     self.doneButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.doneButton];
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self.doneButton rzf_fillContainerHorizontallyWithPadding:kRZFDoneButtonFullScreenHorizontalPadding];
         [self.doneButton rzf_pinBottomSpaceToSuperviewWithPadding:kRZFDoneButtonFullScreenBottomPadding];
         [self.doneButton rzf_pinHeightTo:kRZFDoneButtonFullScreenHeight];
@@ -184,45 +179,41 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
                                                           constant:kRZFDoneButtonTopPadding]];
     }
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self rzf_spaceSubviews:@[self.featurePageControl,self.doneButton] vertically:YES itemSpacing:-4.0f relation:NSLayoutRelationEqual];
     }
 
-    RZFDoneButtonConfiguration *doneConfiguration = self.releaseNotes.doneConfiguration;
 
-    RZFAlphaColor *color = doneConfiguration.backgroundColor;
-    if ( color ) {
-        self.doneButton.backgroundColor = [UIColor colorWithRed:color.red.floatValue/255.0f
-                                                          green:color.green.floatValue/255.0f
-                                                           blue:color.blue.floatValue/255.0f
-                                                          alpha:color.alpha.floatValue];
+
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesDoneBackgroundColor ) {
+        self.doneButton.backgroundColor = RZFUpgradeManager.sharedInstance.releaseNotesDoneBackgroundColor;
     }
     else {
         self.doneButton.backgroundColor = [UIColor rzf_defaultReleaseNoteTintColor];
     }
 
     
-    if ( doneConfiguration.fontName && doneConfiguration.fontSize ) {
-        self.doneButton.titleLabel.font = [UIFont fontWithName:doneConfiguration.fontName size:doneConfiguration.fontSize.floatValue];
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesDoneFont ) {
+        self.doneButton.titleLabel.font = RZFUpgradeManager.sharedInstance.releaseNotesDoneFont;
     }
     else {
         self.doneButton.titleLabel.font = [UIFont rzf_defaultReleaseNoteButtonFont];
     }
 
-    if ( self.releaseNotes.accentColor ) {
-        [self.doneButton setTitleColor:self.accentColor forState:UIControlStateNormal];
-        [self.doneButton setTitleColor:[self.accentColor colorWithAlphaComponent:doneConfiguration.highlightAlpha.floatValue] forState:UIControlStateHighlighted];
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesAccentColor ) {
+        [self.doneButton setTitleColor:RZFUpgradeManager.sharedInstance.releaseNotesAccentColor forState:UIControlStateNormal];
+        [self.doneButton setTitleColor:[RZFUpgradeManager.sharedInstance.releaseNotesAccentColor colorWithAlphaComponent:RZFUpgradeManager.sharedInstance.releaseNotesDoneHighlightAlpha] forState:UIControlStateHighlighted];
     }
     else {
         [self.doneButton setTitleColor:[UIColor rzf_defaultReleaseNoteButtonTitleColorNormal] forState:UIControlStateNormal];
         [self.doneButton setTitleColor:[UIColor rzf_defaultReleaseNoteButtonTitleColorPressed] forState:UIControlStateHighlighted];
     }
 
-    if ( doneConfiguration.cornerRadius ) {
-        self.doneButton.layer.cornerRadius = doneConfiguration.cornerRadius.floatValue;
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesDoneCornerRadius ) {
+        self.doneButton.layer.cornerRadius = RZFUpgradeManager.sharedInstance.releaseNotesDoneCornerRadius;
     }
 
-    [self.doneButton setTitle:(doneConfiguration.title ?: kRZFDefaultDoneButtonTitle) forState:UIControlStateNormal];
+    [self.doneButton setTitle:(RZFUpgradeManager.sharedInstance.releaseNotesDoneTitle ?: kRZFDefaultDoneButtonTitle) forState:UIControlStateNormal];
 
     [self.doneButton addTarget:self
                         action:@selector(doneButtonTapped)
@@ -247,12 +238,12 @@ static const CGFloat kRZFDoneButtonFullScreenTopPadding = 6.0f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    RZFReleaseNoteCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[RZFReleaseNoteCollectionViewCell rzf_reuseIdentifierFullScreen:self.releaseNotes.fullScreen]
+    RZFReleaseNoteCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[RZFReleaseNoteCollectionViewCell rzf_reuseIdentifierFullScreen:RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes]
                                                                                        forIndexPath:indexPath];
     RZFFeatureViewModel *feature = self.features[indexPath.item];
     [cell setupWithFeature:feature releaseNotes:self.releaseNotes];
-    if ( self.releaseNotes.accentColor ) {
-        cell.backgroundColor = self.accentColor;
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesAccentColor ) {
+        cell.backgroundColor = RZFUpgradeManager.sharedInstance.releaseNotesAccentColor;
     }
     return cell;
 }

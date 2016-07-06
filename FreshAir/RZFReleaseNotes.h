@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RZFRelease, RZFFeature, RZFDoneButtonConfiguration, RZFAlphaColor;
+@class RZFRelease, RZFFeature;
 
 @interface RZFReleaseNotes : NSObject
 
@@ -22,12 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString *minimumVersion;
 @property (strong, nonatomic, readonly) NSArray<RZFFeature *> *features;
 
-@property (assign, nonatomic) BOOL fullScreen;
-@property (strong, nonatomic) RZFAlphaColor *accentColor;
-@property (strong, nonatomic, nullable) RZFDoneButtonConfiguration *doneConfiguration;
-
-@property (strong, nonatomic, nullable) NSString *titleFontName;
-@property (strong, nonatomic, nullable) NSString *titleFontSize;
 
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version;
 

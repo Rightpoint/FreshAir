@@ -13,7 +13,7 @@
 #import "UIFont+RZFStyle.h"
 #import "RZFFeatureViewModel.h"
 #import "RZFReleaseNotes.h"
-#import "RZFAlphaColor.h"
+#import "RZFUpgradeManager-Private.h"
 
 static const CGFloat kRZFScreenshotImageViewHorizontalPadding = 0.0f;
 static const CGFloat kRZFScreenshotImageViewTopPadding = 0.0f;
@@ -97,7 +97,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.screenshotImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.screenshotImageView];
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self.screenshotImageView rzf_fillContainerHorizontallyWithPadding:kRZFScreenshotImageViewFullScreenHorizontalPadding withRelation:NSLayoutRelationLessThanOrEqual priority:UILayoutPriorityDefaultHigh];
         [self.screenshotImageView rzf_centerHorizontallyInContainer];
         [self.screenshotImageView rzf_pinAspectRatio:kRZFScreenshotImageViewFullScreenAspectRatio];
@@ -134,12 +134,8 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
                                                     multiplier:1.0f
                                                       constant:kRZFInfoContainerViewTopPadding]];
 
-    if ( self.releaseNotes.accentColor ) {
-        RZFAlphaColor *color = self.releaseNotes.accentColor;
-        self.infoContainerView.backgroundColor = [UIColor colorWithRed:color.red.floatValue/255.0f
-                                                                 green:color.green.floatValue/255.0f
-                                                                  blue:color.blue.floatValue/255.0f
-                                                                 alpha:color.alpha.floatValue];
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesAccentColor ) {
+        self.infoContainerView.backgroundColor = RZFUpgradeManager.sharedInstance.releaseNotesAccentColor;
     }
     else {
         self.infoContainerView.backgroundColor = [UIColor rzf_defaultReleaseNoteTintColor];
@@ -155,7 +151,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.releaseNoteTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.infoContainerView addSubview:self.releaseNoteTitleLabel];
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self.releaseNoteTitleLabel rzf_fillContainerHorizontallyWithPadding:kRZFReleaseNoteTitleLabelFullScreenHorizontalPadding];
     }
     else {
@@ -167,7 +163,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.releaseNoteTitleLabel.textAlignment = NSTextAlignmentCenter;
     self.releaseNoteTitleLabel.numberOfLines = kRZFReleaseNoteTitleLabelNumberOfLines;
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self.screenshotImageView
                                                          attribute:NSLayoutAttributeBottom
                                                          relatedBy:NSLayoutRelationEqual
@@ -185,8 +181,8 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     }
 
 
-    if ( self.releaseNotes.titleFontSize && self.releaseNotes.titleFontName ) {
-        self.releaseNoteTitleLabel.font = [UIFont fontWithName:self.releaseNotes.titleFontName size:self.releaseNotes.titleFontSize.floatValue];
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesTitleFont ) {
+        self.releaseNoteTitleLabel.font = RZFUpgradeManager.sharedInstance.releaseNotesTitleFont;
     }
     else {
         self.releaseNoteTitleLabel.font = [UIFont rzf_defaultReleaseNoteTitleFont];
@@ -202,7 +198,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.releaseNoteMessageLabel = [[UILabel alloc] init];
     self.releaseNoteMessageLabel.translatesAutoresizingMaskIntoConstraints = NO;
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         self.notesContainer = [[UIView alloc] init];
         self.notesContainer.translatesAutoresizingMaskIntoConstraints = NO;
 
@@ -252,8 +248,8 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     }
 
     self.releaseNoteMessageLabel.backgroundColor = [UIColor clearColor];
-    if ( self.releaseNotes.titleFontSize && self.releaseNotes.titleFontName ) {
-        self.releaseNoteMessageLabel.font = [UIFont fontWithName:self.releaseNotes.titleFontName size:self.releaseNotes.titleFontSize.doubleValue];
+    if ( RZFUpgradeManager.sharedInstance.releaseNotesTitleFont ) {
+        self.releaseNoteMessageLabel.font = RZFUpgradeManager.sharedInstance.releaseNotesTitleFont;
     }
     else {
         self.releaseNoteMessageLabel.font = [UIFont rzf_defaultReleaseNoteMessageFont];
@@ -261,9 +257,9 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.releaseNoteMessageLabel.textColor = [UIColor rzf_defaultReleaseNoteMessageColor];
     self.releaseNoteMessageLabel.textAlignment = NSTextAlignmentCenter;
     self.releaseNoteMessageLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.releaseNoteMessageLabel.numberOfLines = (self.releaseNotes.fullScreen ? kRZFReleaseNoteMessageLabelFullScreenNumberOfLines : kRZFReleaseNoteMessageLabelNumberOfLines);
+    self.releaseNoteMessageLabel.numberOfLines = (RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ? kRZFReleaseNoteMessageLabelFullScreenNumberOfLines : kRZFReleaseNoteMessageLabelNumberOfLines);
 
-    if ( self.releaseNotes.fullScreen ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         self.releaseNoteMessageHeightConstraint = [self.notesContainer rzf_pinHeightTo:kRZFReleaseNoteMessageLabelHeight withRelation:NSLayoutRelationGreaterThanOrEqual];
     }
     else {
@@ -275,13 +271,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
 - (void)setupWithFeature:(RZFFeatureViewModel *)feature releaseNotes:(RZFReleaseNotes *)releaseNotes
 {
     self.releaseNotes = releaseNotes;
-    if ( self.releaseNotes.accentColor ) {
-        RZFAlphaColor *color = self.releaseNotes.accentColor;
-        self.accentColor = [UIColor colorWithRed:color.red.floatValue/255.0f
-                                           green:color.green.floatValue/255.0f
-                                            blue:color.blue.floatValue/255.0f
-                                           alpha:color.alpha.floatValue];
-    }
+    self.accentColor = [RZFUpgradeManager sharedInstance].releaseNotesAccentColor;
     [self setupScreenshotImageView];
     [self setupInfoContainerView];
 

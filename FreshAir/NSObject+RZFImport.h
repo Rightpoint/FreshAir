@@ -10,8 +10,6 @@
 #import "RZFReleaseNotes.h"
 #import "RZFRelease.h"
 #import "RZFFeature.h"
-#import "RZFDoneButtonConfiguration.h"
-#import "RZFAlphaColor.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,12 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface RZFReleaseNotes (RZFImport) <RZFImporting>
-@end
-
-@interface RZFDoneButtonConfiguration (RZFImport) <RZFImporting>
-@end
-
-@interface RZFAlphaColor (RZFImport) <RZFImporting>
 @end
 
 @interface RZFRelease (RZFImport) <RZFImporting>

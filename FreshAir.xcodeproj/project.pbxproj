@@ -89,16 +89,8 @@
 		ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */; };
 		ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */; };
 		ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */; };
-		BE2897531D26B1C200DAA21F /* RZFDoneButtonConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897511D26B1C200DAA21F /* RZFDoneButtonConfiguration.h */; };
-		BE2897541D26B1C200DAA21F /* RZFDoneButtonConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897511D26B1C200DAA21F /* RZFDoneButtonConfiguration.h */; };
-		BE2897551D26B1C200DAA21F /* RZFDoneButtonConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2897521D26B1C200DAA21F /* RZFDoneButtonConfiguration.m */; };
-		BE2897561D26B1C200DAA21F /* RZFDoneButtonConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2897521D26B1C200DAA21F /* RZFDoneButtonConfiguration.m */; };
-		BE2897591D26D45900DAA21F /* RZFAlphaColor.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897571D26D45900DAA21F /* RZFAlphaColor.h */; };
-		BE28975A1D26D45900DAA21F /* RZFAlphaColor.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897571D26D45900DAA21F /* RZFAlphaColor.h */; };
-		BE28975B1D26D45900DAA21F /* RZFAlphaColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2897581D26D45900DAA21F /* RZFAlphaColor.m */; };
-		BE28975C1D26D45900DAA21F /* RZFAlphaColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2897581D26D45900DAA21F /* RZFAlphaColor.m */; };
-		BE2897601D26FC0000DAA21F /* release_notes_fullscreen.json in Resources */ = {isa = PBXBuildFile; fileRef = BE28975D1D26F2D700DAA21F /* release_notes_fullscreen.json */; };
-		BE2897611D26FC0200DAA21F /* release_notes_fullscreen.json in Resources */ = {isa = PBXBuildFile; fileRef = BE28975D1D26F2D700DAA21F /* release_notes_fullscreen.json */; };
+		BE2897631D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */; };
+		BE2897641D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,11 +223,7 @@
 		ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUIInteractionDelegate.h; sourceTree = "<group>"; };
 		ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RZFInteractionDelegate.h"; sourceTree = "<group>"; };
 		ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RZFInteractionDelegate.m"; sourceTree = "<group>"; };
-		BE2897511D26B1C200DAA21F /* RZFDoneButtonConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFDoneButtonConfiguration.h; sourceTree = "<group>"; };
-		BE2897521D26B1C200DAA21F /* RZFDoneButtonConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFDoneButtonConfiguration.m; sourceTree = "<group>"; };
-		BE2897571D26D45900DAA21F /* RZFAlphaColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFAlphaColor.h; sourceTree = "<group>"; };
-		BE2897581D26D45900DAA21F /* RZFAlphaColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZFAlphaColor.m; sourceTree = "<group>"; };
-		BE28975D1D26F2D700DAA21F /* release_notes_fullscreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = release_notes_fullscreen.json; sourceTree = "<group>"; };
+		BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFUpgradeManager-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,10 +280,6 @@
 				AB954BFB1C57A89E003A050B /* RZFRelease.m */,
 				AB954BF21C57A85E003A050B /* RZFFeature.h */,
 				AB954BF31C57A85E003A050B /* RZFFeature.m */,
-				BE2897511D26B1C200DAA21F /* RZFDoneButtonConfiguration.h */,
-				BE2897521D26B1C200DAA21F /* RZFDoneButtonConfiguration.m */,
-				BE2897571D26D45900DAA21F /* RZFAlphaColor.h */,
-				BE2897581D26D45900DAA21F /* RZFAlphaColor.m */,
 				AB954C041C5824ED003A050B /* NSObject+RZFImport.h */,
 				AB954C051C5824ED003A050B /* NSObject+RZFImport.m */,
 			);
@@ -306,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				ABE73B321C6524CA003620E0 /* release_notes.json */,
-				BE28975D1D26F2D700DAA21F /* release_notes_fullscreen.json */,
 				AB954BE61C56DC39003A050B /* release_notes_schema.json */,
 			);
 			path = Schema;
@@ -366,6 +349,7 @@
 				ABBE3DDB1C55ACB9006A738A /* FreshAirUtility.h */,
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
 				ABF296381C59568D0048F58B /* RZFUpgradeManager.h */,
+				BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */,
 				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
 				AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */,
 				AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */,
@@ -491,9 +475,9 @@
 			files = (
 				ABF2961B1C594A700048F58B /* RZFReleaseNotesView.h in Headers */,
 				AB0789411C62470A0089D510 /* RZFAppStoreUpdateCheck.h in Headers */,
+				BE2897631D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */,
 				ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */,
 				ABF296251C594AD10048F58B /* UIView+RZFAutoLayout.h in Headers */,
-				BE2897591D26D45900DAA21F /* RZFAlphaColor.h in Headers */,
 				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
 				AB954BFC1C57A89E003A050B /* RZFRelease.h in Headers */,
 				ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */,
@@ -505,7 +489,6 @@
 				ABF2963A1C59568D0048F58B /* RZFUpgradeManager.h in Headers */,
 				AB07893A1C60363C0089D510 /* RZFReleaseNotesCheck.h in Headers */,
 				AB954BF01C57A83A003A050B /* RZFReleaseNotes.h in Headers */,
-				BE2897531D26B1C200DAA21F /* RZFDoneButtonConfiguration.h in Headers */,
 				ABF296351C594D7D0048F58B /* RZFUpdateViewModel.h in Headers */,
 				ABF296311C594BC90048F58B /* RZFFeatureViewModel.h in Headers */,
 				ABF296151C594A700048F58B /* RZFViewController.h in Headers */,
@@ -522,10 +505,9 @@
 			files = (
 				AB8B968B1C58595D00EB00CC /* RZFFeature.h in Headers */,
 				AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */,
-				BE28975A1D26D45900DAA21F /* RZFAlphaColor.h in Headers */,
-				BE2897541D26B1C200DAA21F /* RZFDoneButtonConfiguration.h in Headers */,
 				AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */,
 				ABBE3DDD1C55AD1F006A738A /* FreshAirUtility.h in Headers */,
+				BE2897641D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */,
 				AB954C071C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,7 +680,6 @@
 			files = (
 				AB954BE91C56DC39003A050B /* release_notes_schema.json in Resources */,
 				ABE73B341C6524DE003620E0 /* release_notes.json in Resources */,
-				BE2897601D26FC0000DAA21F /* release_notes_fullscreen.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +694,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2897611D26FC0200DAA21F /* release_notes_fullscreen.json in Resources */,
 				ABE73B2A1C652154003620E0 /* Road2@3x.jpg in Resources */,
 				ABE73B121C650F8C003620E0 /* freshair_update.png in Resources */,
 				ABE73B281C652154003620E0 /* Road1@3x.jpg in Resources */,
@@ -775,7 +755,6 @@
 				ABF2961C1C594A700048F58B /* RZFReleaseNotesView.m in Sources */,
 				AB0789421C62470A0089D510 /* RZFAppStoreUpdateCheck.m in Sources */,
 				AB954BF11C57A83A003A050B /* RZFReleaseNotes.m in Sources */,
-				BE28975B1D26D45900DAA21F /* RZFAlphaColor.m in Sources */,
 				ABF2963B1C59568D0048F58B /* RZFUpgradeManager.m in Sources */,
 				ABF2962E1C594AE10048F58B /* UIColor+RZFStyle.m in Sources */,
 				ABF296361C594D7D0048F58B /* RZFUpdateViewModel.m in Sources */,
@@ -787,7 +766,6 @@
 				ABF296161C594A700048F58B /* RZFViewController.m in Sources */,
 				ABF2962C1C594AE10048F58B /* UIFont+RZFStyle.m in Sources */,
 				ABF296261C594AD10048F58B /* UIView+RZFAutoLayout.m in Sources */,
-				BE2897551D26B1C200DAA21F /* RZFDoneButtonConfiguration.m in Sources */,
 				AB954BF51C57A85E003A050B /* RZFFeature.m in Sources */,
 				ABF2961E1C594A700048F58B /* RZFReleaseNoteCollectionViewCell.m in Sources */,
 			);
@@ -806,11 +784,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB954C361C5850F6003A050B /* RZFRelease.m in Sources */,
-				BE28975C1D26D45900DAA21F /* RZFAlphaColor.m in Sources */,
 				AB954C091C5824ED003A050B /* NSObject+RZFImport.m in Sources */,
 				AB954C351C5850F6003A050B /* RZFReleaseNotes.m in Sources */,
 				AB954C371C5850F6003A050B /* RZFFeature.m in Sources */,
-				BE2897561D26B1C200DAA21F /* RZFDoneButtonConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "RZFFeatureViewModel.h"
 #import "RZFFeature.h"
 #import "RZFReleaseNotes.h"
+#import "RZFUpgradeManager-Private.h"
 
 @interface RZFViewController ()
 
@@ -51,23 +52,30 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     self.initialStatusBarStatus = [UIApplication sharedApplication].statusBarHidden;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
+        self.initialStatusBarStatus = [UIApplication sharedApplication].statusBarHidden;
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+    else {
+        [[UIApplication sharedApplication] setStatusBarHidden:self.initialStatusBarStatus];
+    }
     [self setupReleaseNotesView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+
     [[UIApplication sharedApplication] setStatusBarHidden:self.initialStatusBarStatus];
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    return RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes;
 }
 
 # pragma mark - Setup
 
 - (CGFloat)horizontalPadding {
-    if ( self.releaseNotes.fullScreen == YES ) {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes == YES ) {
         return 0.0f;
     }
     else {
@@ -139,7 +147,7 @@
     [self.releaseNotesView rzf_fillContainerHorizontallyWithPadding:padding];
     [self.releaseNotesView rzf_fillContainerVerticallyWithPadding:padding];
 
-    if ( !self.releaseNotes.fullScreen ) {
+    if ( !RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self.releaseNotesView rzf_centerVerticallyInContainer];
     }
 }
