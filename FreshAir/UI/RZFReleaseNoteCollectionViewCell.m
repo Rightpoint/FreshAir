@@ -162,6 +162,7 @@ static const NSInteger kRZFReleaseNoteMessageLabelFullScreenNumberOfLines = 0;
     self.releaseNoteTitleLabel.textColor = [UIColor rzf_defaultReleaseNoteTitleColor];
     self.releaseNoteTitleLabel.textAlignment = NSTextAlignmentCenter;
     self.releaseNoteTitleLabel.numberOfLines = kRZFReleaseNoteTitleLabelNumberOfLines;
+    self.releaseNoteTitleLabel.adjustsFontSizeToFitWidth = YES;
 
     if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self.screenshotImageView
