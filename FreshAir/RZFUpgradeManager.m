@@ -39,7 +39,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (instancetype)initWithReleaseNoteURL:(NSURL *)releaseNoteURL;
 {
-    self = [self init];
+    self = [self.class sharedInstance];
     if (self) {
         _releaseNoteURL = releaseNoteURL;
     }
@@ -48,7 +48,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
 
 - (instancetype)initWithAppStoreID:(NSString *)appStoreID
 {
-    self = [self init];
+    self = [self.class sharedInstance];
     if (self) {
         _appStoreID = appStoreID;
     }
@@ -67,6 +67,16 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         _releaseNoteBundle = [NSBundle mainBundle];
     }
     return self;
+}
+
++ (instancetype)sharedInstance
+{
+    static RZFUpgradeManager *s_manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_manager = [[RZFUpgradeManager alloc] init];
+    });
+    return s_manager;
 }
 
 - (void)checkForNewUpdate
@@ -171,7 +181,7 @@ static NSString *const RZFReleaseNotesResourceExtension = @"json";
         NSArray *features = [releaseNotes featuresFromVersion:lastVersion toVersion:self.appVersion];
 
         if (features.count > 0) {
-            RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features];
+            RZFReleaseNotesViewController *vc = [[RZFReleaseNotesViewController alloc] initWithFeatures:features releaseNotes:releaseNotes];
             vc.delegate = self;
             [self presentViewController:vc];
         }

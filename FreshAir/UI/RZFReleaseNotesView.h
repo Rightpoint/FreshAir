@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@class RZFFeatureViewModel, RZFReleaseNotesView;
+@class RZFFeatureViewModel, RZFReleaseNotesView, RZFReleaseNotes;
 
 @protocol RZFReleaseNotesViewDelegate <NSObject>
 
@@ -18,7 +18,7 @@
 
 @interface RZFReleaseNotesView : UIView
 
-- (instancetype)initWithFeatures:(NSArray<RZFFeatureViewModel *> *)features;
+- (instancetype)initWithFeatures:(NSArray<RZFFeatureViewModel *> *)features releaseNotes:(RZFReleaseNotes *)releaseNotes;
 
 @property (weak, nonatomic, readwrite) id <RZFReleaseNotesViewDelegate> delegate;
 

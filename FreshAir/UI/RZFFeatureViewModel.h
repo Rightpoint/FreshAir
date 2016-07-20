@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSString *localizedTitle;
 @property (strong, nonatomic) NSString *localizedDescription;
+@property (strong, nonatomic) NSAttributedString *localizedAttributedDescription;
 @property (strong, nonatomic) UIImage *image;
 
 @end

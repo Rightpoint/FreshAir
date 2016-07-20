@@ -89,6 +89,8 @@
 		ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */; };
 		ABF296721C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */; };
 		ABF296731C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */; };
+		BE2897631D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */; };
+		BE2897641D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,7 @@
 		ABF2966C1C5A7CE70048F58B /* RZFUIInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZFUIInteractionDelegate.h; sourceTree = "<group>"; };
 		ABF296701C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RZFInteractionDelegate.h"; sourceTree = "<group>"; };
 		ABF296711C5A7E700048F58B /* UIApplication+RZFInteractionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RZFInteractionDelegate.m"; sourceTree = "<group>"; };
+		BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZFUpgradeManager-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,7 @@
 				ABBE3DDB1C55ACB9006A738A /* FreshAirUtility.h */,
 				ABA483FC1C544C1F002CDCB2 /* Info.plist */,
 				ABF296381C59568D0048F58B /* RZFUpgradeManager.h */,
+				BE2897621D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h */,
 				ABF296391C59568D0048F58B /* RZFUpgradeManager.m */,
 				AB07893F1C62470A0089D510 /* RZFAppStoreUpdateCheck.h */,
 				AB0789401C62470A0089D510 /* RZFAppStoreUpdateCheck.m */,
@@ -471,6 +475,7 @@
 			files = (
 				ABF2961B1C594A700048F58B /* RZFReleaseNotesView.h in Headers */,
 				AB0789411C62470A0089D510 /* RZFAppStoreUpdateCheck.h in Headers */,
+				BE2897631D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */,
 				ABF2966E1C5A7CE70048F58B /* RZFUIInteractionDelegate.h in Headers */,
 				ABF296251C594AD10048F58B /* UIView+RZFAutoLayout.h in Headers */,
 				AB954BF41C57A85E003A050B /* RZFFeature.h in Headers */,
@@ -502,6 +507,7 @@
 				AB8B96891C58595400EB00CC /* RZFReleaseNotes.h in Headers */,
 				AB8B968A1C58595D00EB00CC /* RZFRelease.h in Headers */,
 				ABBE3DDD1C55AD1F006A738A /* FreshAirUtility.h in Headers */,
+				BE2897641D2C5D1E00DAA21F /* RZFUpgradeManager-Private.h in Headers */,
 				AB954C071C5824ED003A050B /* NSObject+RZFImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

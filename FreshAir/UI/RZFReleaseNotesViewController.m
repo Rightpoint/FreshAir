@@ -11,8 +11,8 @@
 #import "UIView+RZFAutoLayout.h"
 #import "RZFFeatureViewModel.h"
 #import "RZFFeature.h"
-
-static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
+#import "RZFReleaseNotes.h"
+#import "RZFUpgradeManager-Private.h"
 
 @interface RZFViewController ()
 
@@ -25,6 +25,8 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 
 @property (strong, nonatomic, readwrite) RZFReleaseNotesView *releaseNotesView;
 @property (strong, nonatomic) NSArray<RZFFeature *> *features;
+@property (strong, nonatomic) RZFReleaseNotes *releaseNotes;
+@property (assign, nonatomic) BOOL initialStatusBarStatus;
 
 @end
 
@@ -32,12 +34,13 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
 
 # pragma mark - Lifecycle
 
-- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features;
+- (instancetype)initWithFeatures:(NSArray<RZFFeature *> *)features releaseNotes:(RZFReleaseNotes *)releaseNotes;
 {
     self = [super initWithNibName:nil bundle:nil];
     
     if ( self ) {
         self.features = features;
+        self.releaseNotes = releaseNotes;
     }
     
     return self;
@@ -48,11 +51,57 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-    
+    self.initialStatusBarStatus = [UIApplication sharedApplication].statusBarHidden;
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
+        self.initialStatusBarStatus = [UIApplication sharedApplication].statusBarHidden;
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+    else {
+        [[UIApplication sharedApplication] setStatusBarHidden:self.initialStatusBarStatus];
+    }
     [self setupReleaseNotesView];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
+    [[UIApplication sharedApplication] setStatusBarHidden:self.initialStatusBarStatus];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes;
+}
+
 # pragma mark - Setup
+
+- (CGFloat)horizontalPadding {
+    if ( RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes == YES ) {
+        return 0.0f;
+    }
+    else {
+        return 20.0f;
+    }
+}
+
+- (NSArray *)attributedItemsForPrefix:(NSString *)prefix {
+    NSInteger descriptionIndex = 1;
+
+    NSString *currentKeyForIndex;
+    NSString *currentValueForIndex;
+    NSMutableArray *attributedDescriptions = [NSMutableArray array];
+
+    do {
+        currentKeyForIndex = [NSString stringWithFormat:@"%@.%d", prefix, descriptionIndex];
+
+        currentValueForIndex = [self.nibBundle localizedStringForKey:currentKeyForIndex value:nil table:nil];
+
+        if (currentValueForIndex != nil && currentValueForIndex != currentKeyForIndex) {
+            [attributedDescriptions addObject:currentValueForIndex];
+            descriptionIndex += 1;
+        }
+    } while (currentValueForIndex != nil && currentValueForIndex != currentKeyForIndex);
+    return attributedDescriptions;
+}
 
 - (void)setupReleaseNotesView
 {
@@ -60,7 +109,20 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
     for (RZFFeature *feature in self.features) {
         RZFFeatureViewModel *featureVM = [[RZFFeatureViewModel alloc] init];
         featureVM.localizedTitle = [self.nibBundle localizedStringForKey:feature.localizedTitleKey value:nil table:nil];
-        featureVM.localizedDescription = [self.nibBundle localizedStringForKey:feature.localizedDescriptionKey value:nil table:nil];
+        NSArray *descriptionStrings = [self attributedItemsForPrefix:feature.localizedAttributedDescriptionPrefixKey];
+        NSArray *fontNames = [self attributedItemsForPrefix:feature.localizedFontNamePrefixKey];
+        NSArray *fontSizes = [self attributedItemsForPrefix:feature.localizedFontSizePrefixKey];
+        featureVM.localizedDescription = [descriptionStrings componentsJoinedByString:@"\n\n"];
+
+        if ( descriptionStrings.count > 0 && fontNames.count == descriptionStrings.count && fontSizes.count == descriptionStrings.count ) {
+
+            NSAttributedString *descriptionAttributedString = [self.class attributedStringFromStringArray:descriptionStrings fontArray:fontNames sizeArray:fontSizes];
+            featureVM.localizedAttributedDescription = descriptionAttributedString;
+        }
+        else {
+            featureVM.localizedDescription = [self.nibBundle localizedStringForKey:feature.localizedDescriptionKey value:nil table:nil];
+        }
+
         featureVM.image = [UIImage imageNamed:feature.localizedImageKey];
 
         // Grab the jpg image if there's no PNG with a matching name.
@@ -69,7 +131,7 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
         }
         [featureViewModels addObject:featureVM];
     }
-    self.releaseNotesView = [[RZFReleaseNotesView alloc] initWithFeatures:featureViewModels];
+    self.releaseNotesView = [[RZFReleaseNotesView alloc] initWithFeatures:featureViewModels releaseNotes:self.releaseNotes];
     self.releaseNotesView.delegate = self;
     [self.view addSubview:self.releaseNotesView];
     self.contentView = self.releaseNotesView;
@@ -79,11 +141,15 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
         padding = CGRectGetWidth([UIScreen mainScreen].bounds) / 5.0f;
     }
     else {
-        padding = kRZFReleaseNotesViewHorizontalPadding;
+        padding = [self horizontalPadding];
     }
     
     [self.releaseNotesView rzf_fillContainerHorizontallyWithPadding:padding];
-    [self.releaseNotesView rzf_centerVerticallyInContainer];
+    [self.releaseNotesView rzf_fillContainerVerticallyWithPadding:padding];
+
+    if ( !RZFUpgradeManager.sharedInstance.fullScreenReleaseNotes ) {
+        [self.releaseNotesView rzf_centerVerticallyInContainer];
+    }
 }
 
 # pragma mark - Release Notes View Delegate
@@ -93,6 +159,27 @@ static const CGFloat kRZFReleaseNotesViewHorizontalPadding = 20.0f;
     if ( [self.delegate respondsToSelector:@selector(didSelectDoneForReleaseNotesViewController:)] ) {
         [self.delegate didSelectDoneForReleaseNotesViewController:self];
     }
+}
+
++ (NSAttributedString *)attributedStringFromStringArray:(NSArray *)stringArray fontArray:(NSArray *)fontArray sizeArray:(NSArray *)sizeArray {
+
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+
+    for ( int currentStringIndex = 0; currentStringIndex < stringArray.count; currentStringIndex++ ) {
+        NSString *currentString = stringArray[currentStringIndex];
+        NSString *fontName = fontArray[currentStringIndex];
+        NSString *fontSize = sizeArray[currentStringIndex];
+
+        NSString *adjustedString = ( currentStringIndex < stringArray.count -1 ? [NSString stringWithFormat:@"%@\n", currentString ] : currentString );
+
+        NSDictionary *extractedAttributes = @{
+                                              NSFontAttributeName: [UIFont fontWithName:fontName size:fontSize.floatValue],
+                                              };
+
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:adjustedString attributes:extractedAttributes]];
+    }
+    
+    return attributedString;
 }
 
 @end

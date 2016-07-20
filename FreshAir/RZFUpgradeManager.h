@@ -98,4 +98,47 @@
  */
 - (void)resetViewedState;
 
+#pragma mark - Styling
+
+/**
+ *  Accent color for release notes view, default if nil
+ */
+@property (strong, nonatomic, nullable) UIColor *releaseNotesAccentColor;
+
+/**
+ *  If YES will present the release notes in full screen, defaults to NO.
+ */
+@property (assign, nonatomic) BOOL fullScreenReleaseNotes;
+
+/**
+ *  The font to use for the title on release notes cells, default if nil.
+ */
+@property (strong, nonatomic, nullable) UIFont *releaseNotesTitleFont;
+
+/**
+ *  Title to show on done button, default if nil.
+ */
+@property (strong, nonatomic, nullable) NSString *releaseNotesDoneTitle;
+
+/**
+ *  Font for done button title, default if nil.
+ */
+@property (strong, nonatomic, nullable) UIFont *releaseNotesDoneFont;
+
+/**
+ *  Background color for done button, default if nil.
+ */
+@property (strong, nonatomic, nullable) UIColor *releaseNotesDoneBackgroundColor;
+
+/**
+ *  Corner radius for done button, 0.0 if nil
+ */
+@property (assign, nonatomic) CGFloat releaseNotesDoneCornerRadius;
+
+/**
+ *  Alpha value to apply to done button to indicate highlight. Defaults to 1.0
+ */
+@property (assign, nonatomic) CGFloat releaseNotesDoneHighlightAlpha;
+
+
 @end

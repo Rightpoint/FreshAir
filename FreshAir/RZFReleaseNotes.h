@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString *minimumVersion;
 @property (strong, nonatomic, readonly) NSArray<RZFFeature *> *features;
 
+
 - (BOOL)isUpgradeRequiredForVersion:(NSString *)version;
 
 - (NSArray<RZFRelease *> *)releasesSupportingSystemVersion:(NSString *)systemVersion;
